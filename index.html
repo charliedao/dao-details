@@ -1745,7 +1745,7 @@ footer::before{
     <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.09 1.18 2 2 0 012.07 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
     (202) 699-0209
   </a>
-  <div class="footer-copy">&copy; 2025 Dao Detailing &middot; All Rights Reserved &middot; DMV Area</div>
+  <div class="footer-copy">&copy; 2025 Dao Detailing &middot; All Rights Reserved &middot; DMV Area &middot; <a href="privacy.html" style="color:rgba(255,255,255,0.3);transition:color .15s;" onmouseover="this.style.color='#6fd952'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Privacy Policy</a></div>
 </footer>
 
 <!-- Inquiry success overlay -->
@@ -1761,35 +1761,11 @@ footer::before{
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     FIREBASE — paste your config from Firebase Console
-     Project Settings → Your Apps → web app → Config
-════════════════════════════════════════════════════ -->
-<script type="module">
-import { initializeApp }
-  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getFirestore, collection, addDoc, serverTimestamp }
-  from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-
-/* ────────────────────────────────────────────────────
-   PASTE YOUR FIREBASE CONFIG HERE
-   Replace every value below with your real values
-   from Firebase Console → Project Settings → Your Apps
-──────────────────────────────────────────────────── */
-const firebaseConfig = {
-  apiKey: "AIzaSyA3g_pV21ioPvTDmz4pHYn6YzmQvDSISuY",
-  authDomain: "dao-detailing.firebaseapp.com",
-  projectId: "dao-detailing",
-  storageBucket: "dao-detailing.firebasestorage.app",
-  messagingSenderId: "240582526007",
-  appId: "1:240582526007:web:f60c79fd405cbbf539abb2",
-  measurementId: "G-PMHZ7BG0EK"
-};
-/* ────────────────────────────────────────────────── */
-
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
-
+<!-- ═══════════════════════════════════════════════
+     NO Firebase keys here — all handled server-side
+     via Netlify Function in netlify/functions/submit-inquiry.js
+════════════════════════════════════════════════ -->
+<script>
 /* ── LAYOUT ── */
 function layout(){
   const mob  = document.querySelector('.svc-mob');
@@ -1821,84 +1797,95 @@ setActive();
 /* ── SERVICE SELECT ── */
 let inqSvc = null, inqPrice = null;
 
-window.selectInqSvc = function(el){
+function selectInqSvc(el){
   document.querySelectorAll('#inq-svc-grid .svc-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
   inqSvc   = el.dataset.svc;
   inqPrice = el.dataset.price;
-};
+  /* Clear red outline if it was shown */
+  const grid = document.getElementById('inq-svc-grid');
+  if(grid) grid.style.outline = '';
+}
 
-window.openInquiry = function(svc){
+function openInquiry(svc){
   document.getElementById('booking').scrollIntoView({behavior:'smooth'});
   setTimeout(() => {
     document.querySelectorAll('#inq-svc-grid .svc-opt').forEach(o => {
-      if(o.dataset.svc === svc) window.selectInqSvc(o);
+      if(o.dataset.svc === svc) selectInqSvc(o);
     });
   }, 400);
-};
+}
 
-/* ── INLINE VALIDATION HELPER ── */
-function showFieldError(id, msg){
+/* ── FIELD VALIDATION HELPER ── */
+function markError(id, msg){
   const el = document.getElementById(id);
   if(!el) return;
   el.style.borderColor = '#e8364a';
   el.style.background  = 'rgba(232,54,74,0.06)';
-  el.setAttribute('placeholder', msg);
+  if(!el.dataset.ph) el.dataset.ph = el.placeholder;
+  el.placeholder = msg;
   el.addEventListener('focus', () => {
     el.style.borderColor = '';
     el.style.background  = '';
-    el.setAttribute('placeholder', el.dataset.ph || '');
+    el.placeholder = el.dataset.ph || '';
   }, {once: true});
 }
 
-/* ── SUBMIT INQUIRY → Firestore ── */
-window.submitInquiry = async function(){
+function showErr(msg){
+  const box = document.getElementById('inq-firebase-err');
+  if(!box) return;
+  box.textContent = msg;
+  box.style.display = 'block';
+  setTimeout(() => { box.style.display = 'none'; }, 7000);
+}
+
+/* ── SUBMIT INQUIRY → Netlify Function → Firestore ── */
+async function submitInquiry(){
   const first   = document.getElementById('iq-first').value.trim();
   const last    = document.getElementById('iq-last').value.trim();
   const phone   = document.getElementById('iq-phone').value.trim();
   const vehicle = document.getElementById('iq-vehicle').value.trim();
 
-  /* Save placeholders for restoration on focus */
-  ['iq-first','iq-last','iq-phone','iq-vehicle'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el && !el.dataset.ph) el.dataset.ph = el.placeholder;
-  });
-
   let valid = true;
-  if(!inqSvc){ 
+  if(!inqSvc){
     const grid = document.getElementById('inq-svc-grid');
     if(grid){ grid.style.outline = '1.5px solid #e8364a'; grid.style.borderRadius = '8px'; }
     valid = false;
   }
-  if(!first){ showFieldError('iq-first', 'Required'); valid = false; }
-  if(!last){  showFieldError('iq-last',  'Required'); valid = false; }
-  if(!phone){ showFieldError('iq-phone', 'Required'); valid = false; }
-  if(!vehicle){ showFieldError('iq-vehicle', 'Required'); valid = false; }
+  if(!first)   { markError('iq-first',   'Required'); valid = false; }
+  if(!last)    { markError('iq-last',    'Required'); valid = false; }
+  if(!phone)   { markError('iq-phone',   'Required'); valid = false; }
+  if(!vehicle) { markError('iq-vehicle', 'Required'); valid = false; }
   if(!valid) return;
-
-  /* Reset service grid outline */
-  const grid = document.getElementById('inq-svc-grid');
-  if(grid){ grid.style.outline = ''; }
 
   const btn = document.querySelector('.book-confirm-btn');
   if(btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
 
   try {
-    await addDoc(collection(db, 'inquiries'), {
-      status:    'new',
-      service:   inqSvc,
-      price:     inqPrice,
-      name:      `${first} ${last}`,
-      phone,
-      email:     document.getElementById('iq-email').value.trim(),
-      area:      document.getElementById('iq-area').value.trim(),
-      vehicle,
-      prefDate:  document.getElementById('iq-date').value.trim(),
-      notes:     document.getElementById('iq-notes').value.trim(),
-      submitted: serverTimestamp(),
+    const res = await fetch('/.netlify/functions/submit-inquiry', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service:  inqSvc,
+        price:    inqPrice,
+        name:     `${first} ${last}`,
+        phone,
+        email:    document.getElementById('iq-email').value.trim(),
+        area:     document.getElementById('iq-area').value.trim(),
+        vehicle,
+        prefDate: document.getElementById('iq-date').value.trim(),
+        notes:    document.getElementById('iq-notes').value.trim(),
+      }),
     });
 
-    /* Show success */
+    const json = await res.json();
+
+    if(!res.ok || !json.success){
+      showErr(json.error || 'Something went wrong. Please call (202) 699-0209.');
+      return;
+    }
+
+    /* Success */
     document.getElementById('inq-detail').innerHTML = `
       <div><strong>Service:</strong> ${inqSvc} &mdash; ${inqPrice}</div>
       <div><strong>Name:</strong> ${first} ${last}</div>
@@ -1908,25 +1895,20 @@ window.submitInquiry = async function(){
     document.getElementById('inq-overlay').classList.add('show');
 
   } catch(err){
-    console.error('Firestore error:', err);
-    /* Show inline error instead of alert */
-    const errBox = document.getElementById('inq-firebase-err');
-    if(errBox){
-      errBox.style.display = 'block';
-      setTimeout(() => { errBox.style.display = 'none'; }, 6000);
-    }
+    console.error('Submit error:', err);
+    showErr('Could not connect. Please call us at (202) 699-0209.');
   } finally {
     if(btn){ btn.disabled = false; btn.textContent = 'Send Inquiry'; }
   }
-};
+}
 
-window.closeInquiry = function(){
+function closeInquiry(){
   document.getElementById('inq-overlay').classList.remove('show');
   ['iq-first','iq-last','iq-phone','iq-email','iq-area','iq-vehicle','iq-date','iq-notes']
     .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
   document.querySelectorAll('#inq-svc-grid .svc-opt').forEach(o => o.classList.remove('selected'));
   inqSvc = null; inqPrice = null;
-};
+}
 </script>
 </body>
 </html>

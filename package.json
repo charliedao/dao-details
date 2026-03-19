@@ -1,0 +1,8 @@
+{
+  "name": "dao-detailing",
+  "version": "1.0.0",
+  "description": "Dao Detailing serverless functions",
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

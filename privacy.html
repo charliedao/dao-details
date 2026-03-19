@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy – Dao Detailing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#2a7a18;--gl:#48b82b;--gg:#6fd952;
+  --w:#ffffff;--ow:#f1f3f0;
+  --dk:#0b0b0b;--d2:#141414;
+  --mu:#5a5a5a;
+  --r:10px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Barlow',sans-serif;background:var(--w);color:#2a2a2a;line-height:1.7;}
+a{color:var(--g);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ── NAV ── */
+.nav{
+  background:var(--dk);
+  padding:18px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:2px solid rgba(72,184,43,0.2);
+  position:sticky;top:0;z-index:100;
+}
+.nav-logo img{
+  height:40px;object-fit:contain;
+  filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(72,184,43,0.3));
+}
+.nav-back{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:0.72rem;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  display:flex;align-items:center;gap:7px;
+  transition:color .18s;
+}
+.nav-back:hover{color:var(--gg);text-decoration:none;}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── HERO ── */
+.hero{
+  background:var(--dk);
+  padding:52px 28px 44px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 100%,rgba(42,122,24,0.12),transparent 60%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gl) 30%,var(--gg) 70%,transparent);
+}
+.hero-kicker{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:0.64rem;letter-spacing:0.32em;
+  text-transform:uppercase;color:var(--gl);
+  margin-bottom:12px;
+}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,6vw,4rem);
+  color:var(--w);letter-spacing:0.06em;
+  margin-bottom:10px;position:relative;
+}
+.hero-sub{
+  font-size:0.82rem;color:rgba(255,255,255,0.38);
+  letter-spacing:0.06em;position:relative;
+}
+
+/* ── CONTENT ── */
+.content{
+  max-width:780px;margin:0 auto;
+  padding:52px 28px 80px;
+}
+
+.last-updated{
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.64rem;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--g);
+  background:rgba(42,122,24,0.08);
+  border:1px solid rgba(42,122,24,0.18);
+  border-radius:4px;padding:4px 12px;
+  margin-bottom:36px;
+}
+
+.section{
+  margin-bottom:40px;
+}
+
+.section-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:0.72rem;letter-spacing:0.24em;
+  color:var(--gl);margin-bottom:6px;
+}
+
+.section h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:1.3rem;letter-spacing:0.04em;
+  color:#111;margin-bottom:12px;
+  padding-bottom:10px;
+  border-bottom:1.5px solid var(--ow);
+}
+
+.section p{
+  font-size:0.88rem;color:#444;
+  margin-bottom:12px;font-weight:400;
+}
+
+.section ul{
+  margin:10px 0 12px 0;
+  padding-left:0;
+  list-style:none;
+  display:flex;flex-direction:column;gap:7px;
+}
+
+.section ul li{
+  font-size:0.88rem;color:#444;
+  display:flex;align-items:flex-start;gap:10px;
+  line-height:1.6;
+}
+
+.section ul li::before{
+  content:'';
+  display:inline-block;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--gl);
+  flex-shrink:0;margin-top:8px;
+}
+
+.highlight-box{
+  background:rgba(42,122,24,0.05);
+  border:1px solid rgba(42,122,24,0.14);
+  border-left:3px solid var(--gl);
+  border-radius:var(--r);
+  padding:16px 18px;
+  margin:16px 0;
+}
+
+.highlight-box p{
+  font-size:0.84rem;color:#3a3a3a;margin:0;
+}
+
+/* ── CONTACT CARD ── */
+.contact-card{
+  background:var(--dk);
+  border-radius:14px;
+  padding:32px 28px;
+  text-align:center;
+  margin-top:48px;
+  position:relative;overflow:hidden;
+}
+.contact-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(42,122,24,0.12),transparent 60%);
+  pointer-events:none;
+}
+.contact-card::after{
+  content:'';position:absolute;
+  top:0;left:10%;right:10%;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gl),transparent);
+}
+.contact-card h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.4rem;letter-spacing:0.1em;
+  color:var(--w);margin-bottom:6px;position:relative;
+}
+.contact-card p{
+  font-size:0.8rem;color:rgba(255,255,255,0.4);
+  margin-bottom:16px;position:relative;
+}
+.contact-card a.btn{
+  display:inline-block;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:0.92rem;letter-spacing:0.2em;
+  color:var(--w);background:var(--g);
+  padding:12px 30px;border-radius:7px;
+  box-shadow:0 4px 18px rgba(42,122,24,0.38);
+  transition:background .18s,transform .15s;
+  position:relative;
+}
+.contact-card a.btn:hover{
+  background:#34991d;transform:translateY(-1px);
+  text-decoration:none;
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dk);
+  padding:28px;text-align:center;
+  border-top:1px solid rgba(72,184,43,0.1);
+}
+.footer-links{
+  display:flex;justify-content:center;gap:24px;
+  margin-bottom:12px;flex-wrap:wrap;
+}
+.footer-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.68rem;letter-spacing:0.16em;
+  text-transform:uppercase;color:rgba(255,255,255,0.35);
+  transition:color .15s;
+}
+.footer-links a:hover{color:var(--gg);text-decoration:none;}
+.footer-copy{
+  font-size:0.58rem;color:rgba(255,255,255,0.2);
+  letter-spacing:0.1em;text-transform:uppercase;
+}
+
+@media(min-width:768px){
+  .nav{padding:18px 60px;}
+  .hero{padding:72px 60px 56px;}
+  .content{padding:60px 28px 100px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="./Photos/dao_detailing_banner.png" alt="Dao Detailing">
+  </div>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to Site
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Legal</div>
+  <h1>Privacy Policy</h1>
+  <div class="hero-sub">Dao Detailing &middot; daodetails.netlify.app</div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <div class="last-updated">Last Updated: March 2025</div>
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-num">01</div>
+    <h2>Who We Are</h2>
+    <p>Dao Detailing is a mobile auto detailing service operating in the DMV area (Washington DC, Maryland, Virginia). We can be reached at:</p>
+    <div class="highlight-box">
+      <p><strong>Phone:</strong> (202) 699-0209<br>
+      <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="65060d0417090c004b01040a16250208040c094b060a08">[email&#160;protected]</a><br>
+      <strong>Website:</strong> daodetails.netlify.app</p>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-num">02</div>
+    <h2>What Information We Collect</h2>
+    <p>When you submit an inquiry through our website, we collect the following information that you voluntarily provide:</p>
+    <ul>
+      <li>Your first and last name</li>
+      <li>Phone number</li>
+      <li>Email address (optional)</li>
+      <li>General location or zip code</li>
+      <li>Vehicle information (year, make, model)</li>
+      <li>Preferred appointment date or timeframe</li>
+      <li>Any additional notes you choose to include</li>
+    </ul>
+    <p>We do not collect payment information, government IDs, or any sensitive personal data through our website.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-num">03</div>
+    <h2>How We Use Your Information</h2>
+    <p>The information you provide is used solely for the following purposes:</p>
+    <ul>
+      <li>To contact you and confirm your detailing appointment</li>
+      <li>To provide a quote based on your vehicle and requested service</li>
+      <li>To schedule and coordinate your service</li>
+      <li>To follow up after your appointment if needed</li>
+    </ul>
+    <p>We do not use your information for marketing, advertising, or any automated decision-making.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-num">04</div>
+    <h2>How We Store Your Information</h2>
+    <p>Your inquiry data is stored securely using Google Firebase (Firestore), a cloud database service provided by Google LLC. Firebase is protected by Google's enterprise-grade security infrastructure.</p>
+    <div class="highlight-box">
+      <p>Your data is only accessible to authorized Dao Detailing staff. It is not stored in any publicly accessible location and is never sold or rented to third parties.</p>
+    </div>
+    <p>You can read more about Google Firebase's security and privacy practices at <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a>.</p>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-num">05</div>
+    <h2>Who We Share Your Information With</h2>
+    <p>We do not sell, trade, or share your personal information with any third parties, advertisers, or data brokers.</p>
+    <p>The only parties who may access your information are:</p>
+    <ul>
+      <li>Dao Detailing staff directly involved in your appointment</li>
+      <li>Google Firebase (as our secure data storage provider)</li>
+    </ul>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-num">06</div>
+    <h2>Cookies & Tracking</h2>
+    <p>Our website does not use cookies, tracking pixels, analytics scripts, or any third-party tracking tools. We do not track your browsing behavior on our site.</p>
+    <p>We do not use Google Analytics, Facebook Pixel, or any similar services.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-num">07</div>
+    <h2>Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Request a copy of the personal information we hold about you</li>
+      <li>Request that we correct any inaccurate information</li>
+      <li>Request that we delete your information from our records</li>
+      <li>Withdraw consent for us to contact you at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact us by phone or email and we will respond within 5 business days.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-num">08</div>
+    <h2>Data Retention</h2>
+    <p>We retain your inquiry and booking information for as long as is necessary to provide our services and maintain business records. If you request deletion of your data, we will remove it from our systems within 14 days.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <div class="section-num">09</div>
+    <h2>Children's Privacy</h2>
+    <p>Our services and website are not directed at children under the age of 13. We do not knowingly collect personal information from anyone under 13. If you believe we have inadvertently collected such information, please contact us immediately and we will delete it.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <div class="section-num">10</div>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date at the top. Continued use of our website after changes are posted constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <!-- Contact card -->
+  <div class="contact-card">
+    <h3>Questions About Your Privacy?</h3>
+    <p>Contact us directly and we'll respond within 1 business day.</p>
+    <a href="tel:2026990209" class="btn">Call (202) 699-0209</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#booking">Get a Quote</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <div c
