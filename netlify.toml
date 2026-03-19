@@ -1,14 +1,15 @@
 [build]
-  functions = "netlify/functions"
+  functions  = "netlify/functions"
+  command    = "npm install"
+  publish    = "."
+
+[build.environment]
+  NODE_VERSION             = "18"
+  SECRETS_SCAN_OMIT_KEYS   = "FIREBASE_PROJECT_ID"
 
 [functions]
   node_bundler = "esbuild"
 
-# FIREBASE_PROJECT_ID value appears in package.json as the project name — safe to ignore
-[build.environment]
-  SECRETS_SCAN_OMIT_KEYS = "FIREBASE_PROJECT_ID"
-
-# Security headers
 [[headers]]
   for = "/admin.html"
   [headers.values]
@@ -17,6 +18,6 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options          = "DENY"
+    X-Content-Type-Options   = "nosniff"
+    Referrer-Policy          = "strict-origin-when-cross-origin"
