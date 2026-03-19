@@ -1,5 +1,5 @@
 {
-  "name": "dao-detailing",
+  "name": "dao-detailing-functions",
   "version": "1.0.0",
   "description": "Dao Detailing serverless functions",
   "dependencies": {

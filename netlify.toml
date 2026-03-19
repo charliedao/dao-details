@@ -4,13 +4,16 @@
 [functions]
   node_bundler = "esbuild"
 
-# Password protect the admin page
+# FIREBASE_PROJECT_ID value appears in package.json as the project name — safe to ignore
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "FIREBASE_PROJECT_ID"
+
+# Security headers
 [[headers]]
   for = "/admin.html"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Security headers for all pages
 [[headers]]
   for = "/*"
   [headers.values]
