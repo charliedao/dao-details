@@ -3,8 +3,9 @@
 
 const { initializeApp, getApps, cert } = require('firebase-admin/app');
 const { getFirestore }                  = require('firebase-admin/firestore');
+const { getStorage }                    = require('firebase-admin/storage');
 
-function getDb() {
+function initFirebase() {
   if (!getApps().length) {
     initializeApp({
       credential: cert({
@@ -12,9 +13,19 @@ function getDb() {
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         privateKey:  process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       }),
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     });
   }
+}
+
+function getDb() {
+  initFirebase();
   return getFirestore();
+}
+
+function getBucket() {
+  initFirebase();
+  return getStorage().bucket();
 }
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://daodetails.netlify.app';
@@ -48,4 +59,4 @@ function clean(str, max = 500) {
   return String(str || '').replace(/<[^>]*>/g, '').trim().slice(0, max);
 }
 
-module.exports = { getDb, corsHeaders, preflight, ok, err, isAdmin, clean };
+module.exports = { getDb, getBucket, corsHeaders, preflight, ok, err, isAdmin, clean };

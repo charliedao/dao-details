@@ -272,6 +272,9 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
       <div class="nav-item" onclick="goPage('add-booking')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Add Booking
       </div>
+      <div class="nav-item" onclick="goPage('gallery')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery
+      </div>
     </div>
 
     <div class="main-content">
@@ -414,6 +417,58 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
             <div class="form-group full"><label class="form-label">Notes</label><textarea class="form-input form-textarea" id="nb-notes" placeholder="Special requests, condition notes…"></textarea></div>
           </div>
           <button class="form-submit" id="nb-submit" onclick="saveBooking()">Save Booking</button>
+        </div>
+      </div>
+
+      <!-- GALLERY PAGE -->
+      <div class="page" id="page-gallery">
+        <div class="page-hdr">
+          <div class="page-hdr-left"><h1>Gallery</h1><p>Upload before/after photos — they appear on gallery.html</p></div>
+          <a href="gallery.html" target="_blank" class="hdr-btn secondary">View Public Gallery</a>
+        </div>
+
+        <!-- Upload panel -->
+        <div class="form-panel">
+          <div class="form-panel-title">Upload New Photo</div>
+          <!-- Drop zone -->
+          <div id="drop-zone" style="border:2px dashed rgba(72,184,43,0.25);border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:18px;" onclick="document.getElementById('img-input').click()" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
+            <div id="dz-preview" style="display:none;margin-bottom:12px;">
+              <img id="dz-img" style="max-height:160px;max-width:100%;border-radius:8px;margin:0 auto;" src="" alt="">
+            </div>
+            <div id="dz-text">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,184,43,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Click or drag photo here</div>
+              <div style="font-size:0.68rem;color:rgba(255,255,255,0.2);margin-top:4px;">JPEG, PNG or WebP — max 5MB</div>
+            </div>
+            <input type="file" id="img-input" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="previewImage(event)">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-input form-select" id="img-category">
+                <option value="exterior">Exterior</option>
+                <option value="interior">Interior</option>
+                <option value="full">Full Detail</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Caption (optional)</label>
+              <input class="form-input" type="text" id="img-caption" placeholder="e.g. 2021 Honda Accord — After">
+            </div>
+          </div>
+          <button class="form-submit" id="upload-btn" onclick="uploadImage()">Upload Photo</button>
+          <div id="upload-err" style="display:none;margin-top:10px;background:rgba(232,54,74,0.1);border:1px solid rgba(232,54,74,0.25);border-radius:7px;padding:10px 14px;font-size:0.78rem;color:#f87f8c;"></div>
+        </div>
+
+        <!-- Gallery grid -->
+        <div class="form-panel">
+          <div class="form-panel-title" style="display:flex;align-items:center;justify-content:space-between;">
+            <span>Uploaded Photos</span>
+            <button class="hdr-btn secondary" style="font-size:0.68rem;padding:5px 14px;" onclick="loadAdminGallery()">Refresh</button>
+          </div>
+          <div id="admin-gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
+            <div class="loading"><div class="spinner"></div>Loading…</div>
+          </div>
         </div>
       </div>
 
@@ -884,9 +939,158 @@ function goPage(id) {
   });
   if (id==='calendar') renderCal();
   if (id==='add-booking') { const d=new Date().toISOString().split('T')[0]; const el=document.getElementById('nb-date'); if(el)el.min=d; }
+  if (id==='gallery') loadAdminGallery();
 }
 
 /* ── HELPERS ── */
+/* ════════════════════════════════
+   GALLERY
+════════════════════════════════ */
+let _galleryImages = [];
+let _imgFile = null;
+let _imgBase64 = null;
+let _imgMime = null;
+
+function dzOver(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.6)';
+  document.getElementById('drop-zone').style.background  = 'rgba(72,184,43,0.05)';
+}
+function dzLeave() {
+  document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.25)';
+  document.getElementById('drop-zone').style.background  = '';
+}
+function dzDrop(e) {
+  e.preventDefault();
+  dzLeave();
+  const file = e.dataTransfer.files[0];
+  if (file) handleImageFile(file);
+}
+
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) handleImageFile(file);
+}
+
+function handleImageFile(file) {
+  const allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
+  if (!allowed.includes(file.type)) { toast('Only JPEG, PNG or WebP allowed','e'); return; }
+  if (file.size > 5 * 1024 * 1024)  { toast('Image must be under 5MB','e'); return; }
+
+  _imgFile = file;
+  _imgMime = file.type;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    _imgBase64 = e.target.result.split(',')[1];
+    document.getElementById('dz-img').src = e.target.result;
+    document.getElementById('dz-preview').style.display = 'block';
+    document.getElementById('dz-text').style.display    = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+async function uploadImage() {
+  if (!_imgBase64 || !_imgFile) { toast('Please select an image first','e'); return; }
+
+  const btn = document.getElementById('upload-btn');
+  const err = document.getElementById('upload-err');
+  btn.disabled = true; btn.textContent = 'Uploading…';
+  err.style.display = 'none';
+
+  try {
+    const res = await fetch('/.netlify/functions/gallery-data?action=upload', {
+      method:  'POST',
+      headers: apiHeaders(),
+      body: JSON.stringify({
+        imageData: _imgBase64,
+        fileName:  _imgFile.name,
+        mimeType:  _imgMime,
+        caption:   document.getElementById('img-caption').value.trim(),
+        category:  document.getElementById('img-category').value,
+      }),
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      toast('Photo uploaded!');
+      // Reset form
+      _imgFile = null; _imgBase64 = null; _imgMime = null;
+      document.getElementById('img-input').value = '';
+      document.getElementById('img-caption').value = '';
+      document.getElementById('dz-preview').style.display = 'none';
+      document.getElementById('dz-text').style.display    = 'block';
+      document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.25)';
+      loadAdminGallery();
+    } else {
+      err.textContent   = data.error || 'Upload failed';
+      err.style.display = 'block';
+    }
+  } catch(e) {
+    err.textContent   = 'Network error — try again';
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Upload Photo';
+  }
+}
+
+async function loadAdminGallery() {
+  const grid = document.getElementById('admin-gallery-grid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><div class="spinner"></div>Loading…</div>';
+
+  try {
+    const res  = await fetch('/.netlify/functions/gallery-data?action=list');
+    const data = await res.json();
+    if (res.ok && data.images) {
+      _galleryImages = data.images;
+      renderAdminGallery();
+    } else {
+      grid.innerHTML = '<div style="grid-column:1/-1;color:rgba(255,255,255,0.25);font-size:0.78rem;padding:20px;text-align:center;">No photos yet</div>';
+    }
+  } catch(e) {
+    grid.innerHTML = '<div style="grid-column:1/-1;color:#f87f8c;font-size:0.78rem;padding:20px;text-align:center;">Failed to load</div>';
+  }
+}
+
+function renderAdminGallery() {
+  const grid = document.getElementById('admin-gallery-grid');
+  if (!_galleryImages.length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;color:rgba(255,255,255,0.25);font-size:0.78rem;padding:20px;text-align:center;">No photos uploaded yet</div>';
+    return;
+  }
+  grid.innerHTML = _galleryImages.map(img => `
+    <div style="position:relative;border-radius:8px;overflow:hidden;background:var(--d3);">
+      <img src="${esc(img.url)}" alt="" style="width:100%;height:140px;object-fit:cover;display:block;">
+      <div style="padding:8px 10px;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gl);margin-bottom:2px;">${esc(img.category||'')}</div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(img.caption||'—')}</div>
+      </div>
+      <button onclick="deleteGalleryImage('${img.id}','${esc(img.storagePath||'')}')" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(232,54,74,0.8);border:none;color:#fff;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;" onmouseover="this.style.background='rgba(232,54,74,1)'" onmouseout="this.style.background='rgba(232,54,74,0.8)'">&times;</button>
+    </div>
+  `).join('');
+}
+
+async function deleteGalleryImage(id, storagePath) {
+  if (!confirm('Delete this photo?')) return;
+  try {
+    const res = await fetch('/.netlify/functions/gallery-data?action=delete', {
+      method:  'DELETE',
+      headers: apiHeaders(),
+      body:    JSON.stringify({ id, storagePath }),
+    });
+    const data = await res.json();
+    if (res.ok && data.success) {
+      toast('Photo deleted');
+      loadAdminGallery();
+    } else {
+      toast(data.error || 'Delete failed','e');
+    }
+  } catch(e) { toast('Network error','e'); }
+}
+
+/* ════════════════════════════════
+   HELPERS
+════════════════════════════════ */
 function esc(s){ const d=document.createElement('div'); d.textContent=String(s||''); return d.innerHTML; }
 function emptyState(msg){ return `<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg><p>${msg}</p></div>`; }
 
