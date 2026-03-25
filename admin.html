@@ -1009,6 +1009,37 @@ async function saveEditBooking(){
   const btn=document.getElementById('eb-submit');
   btn.disabled=true; btn.textContent='Saving…';
 
+  const updatedFields={
+    name:`${first} ${last}`.trim(),
+    phone:f('eb-phone'),
+    email:f('eb-email'),
+    address:f('eb-address'),
+    vehicle:f('eb-vehicle'),
+    service,
+    date:f('eb-date'),
+    time,
+    price:f('eb-price'),
+    status:f('eb-status'),
+    notes:f('eb-notes'),
+    timezone:'EST',
+  };
+
+  // ── Optimistic local update so UI changes instantly ──
+  const idx=_bookings.findIndex(x=>x._id===_editId);
+  const previousBooking=idx!==-1?{..._bookings[idx]}:null;
+  if(idx!==-1){
+    _bookings[idx]={..._bookings[idx],...updatedFields};
+  }
+
+  // Close modals and refresh UI immediately
+  closeEditModal();
+  closeModal();
+  renderBookings(_bookFilter);
+  renderDashboard();
+  renderCal();
+  toast('Booking updated!');
+
+  // ── Then persist to backend ──
   try{
     const res=await fetch('/.netlify/functions/admin-booking',{
       method:'PUT',
@@ -1016,29 +1047,30 @@ async function saveEditBooking(){
       body:JSON.stringify({
         id:_editId,
         collection:'bookings',
-        name:`${first} ${last}`.trim(),
-        phone:f('eb-phone'),
-        email:f('eb-email'),
-        address:f('eb-address'),
-        vehicle:f('eb-vehicle'),
-        service,
-        date:f('eb-date'),
-        time,
-        price:f('eb-price'),
-        status:f('eb-status'),
-        notes:f('eb-notes'),
-        timezone:'EST',
+        ...updatedFields,
       }),
     });
     const data=await res.json();
-    if(res.ok&&data.success){
-      toast('Booking updated!');
-      closeEditModal();
-      closeModal();
+    if(!res.ok||!data.success){
+      // Rollback optimistic update on failure
+      if(previousBooking&&idx!==-1) _bookings[idx]=previousBooking;
+      renderBookings(_bookFilter);
+      renderDashboard();
+      renderCal();
+      toast(data.error||'Save failed — changes reverted','e');
+    } else {
+      // Full reload from server to confirm truth
       await loadBookings();
       renderDashboard();
-    }else{toast(data.error||'Error updating booking','e');}
-  }catch(e){toast('Network error','e');}
+    }
+  }catch(e){
+    // Rollback on network error
+    if(previousBooking&&idx!==-1) _bookings[idx]=previousBooking;
+    renderBookings(_bookFilter);
+    renderDashboard();
+    renderCal();
+    toast('Network error — changes reverted','e');
+  }
   finally{btn.disabled=false; btn.textContent='Save Changes';}
 }
 
@@ -1064,6 +1096,15 @@ function convertToBooking(id){
 
 /* ── STATUS UPDATE ── */
 async function updateStatus(id,collection,status){
+  // Optimistic local update — UI changes instantly
+  const arr=collection==='inquiries'?_inquiries:_bookings;
+  const idx=arr.findIndex(x=>x._id===id);
+  const prev=idx!==-1?arr[idx].status:null;
+  if(idx!==-1) arr[idx].status=status;
+  if(collection==='inquiries') renderInquiries(_inqFilter);
+  else renderBookings(_bookFilter);
+  renderDashboard(); renderCal(); updateBadges();
+
   try{
     const res=await fetch('/.netlify/functions/admin-booking',{
       method:'PUT',headers:apiHeaders(),
@@ -1072,10 +1113,25 @@ async function updateStatus(id,collection,status){
     const data=await res.json();
     if(res.ok&&data.success){
       toast('Status updated: '+status);
-      collection==='inquiries'?await loadInquiries():await loadBookings();
+      // Confirm from server
+      if(collection==='inquiries') await loadInquiries();
+      else await loadBookings();
       renderDashboard();
-    }else{toast(data.error||'Error updating status','e');}
-  }catch(e){toast('Network error','e');}
+    }else{
+      // Rollback
+      if(idx!==-1) arr[idx].status=prev;
+      if(collection==='inquiries') renderInquiries(_inqFilter);
+      else renderBookings(_bookFilter);
+      renderDashboard(); renderCal(); updateBadges();
+      toast(data.error||'Error updating status','e');
+    }
+  }catch(e){
+    if(idx!==-1) arr[idx].status=prev;
+    if(collection==='inquiries') renderInquiries(_inqFilter);
+    else renderBookings(_bookFilter);
+    renderDashboard(); renderCal(); updateBadges();
+    toast('Network error','e');
+  }
 }
 
 /* ── DELETE ── */
@@ -1280,5 +1336,39 @@ function toast(msg,type=''){
   _toastTimer=setTimeout(()=>{el.className='';},2800);
 }
 </script>
+
+<!--
+═══════════════════════════════════════════════════════════════
+  NETLIFY FUNCTION REQUIRED UPDATE — netlify/functions/admin-booking.js
+  Your PUT handler must support full-field updates, not just status.
+  Update the PUT section to look like this:
+
+  if (event.httpMethod === 'PUT') {
+    const body = JSON.parse(event.body);
+    const { id, collection, status, updateType, ...rest } = body;
+
+    if (!id || !collection) return respond(400, { error: 'Missing id or collection' });
+
+    let updateData = {};
+
+    if (updateType === 'full') {
+      // Full booking edit — update all provided fields
+      const allowed = ['name','phone','email','address','vehicle','service','date','time','price','status','notes','timezone'];
+      allowed.forEach(k => { if (rest[k] !== undefined) updateData[k] = rest[k]; });
+      if (status) updateData.status = status;
+    } else {
+      // Status-only update
+      if (!status) return respond(400, { error: 'Missing status' });
+      updateData = { status };
+    }
+
+    updateData.updatedAt = new Date().toISOString();
+
+    const ref = db.collection(collection).doc(id);
+    await ref.update(updateData);
+    return respond(200, { success: true });
+  }
+═══════════════════════════════════════════════════════════════
+-->
 </body>
 </html>
