@@ -128,6 +128,23 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 .act-delete{background:rgba(232,54,74,0.1);color:#f87f8c;}.act-delete:hover{background:rgba(232,54,74,0.2);}
 .act-edit{background:rgba(245,158,11,0.1);color:#fcd34d;}.act-edit:hover{background:rgba(245,158,11,0.2);}
 
+/* ── TIME PICKER ── */
+.time-picker-wrap{position:relative;width:100%;}
+.time-select-row{display:flex;gap:6px;align-items:center;}
+.time-select-row select{flex:1;background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:7px;padding:10px 10px;font-family:'Barlow',sans-serif;font-size:0.84rem;color:var(--w);outline:none;appearance:none;transition:border-color .2s;cursor:pointer;}
+.time-select-row select:focus{border-color:rgba(72,184,43,0.45);background:rgba(72,184,43,0.04);}
+.time-select-row select option{background:var(--d3);}
+.time-divider{color:rgba(255,255,255,0.3);font-weight:700;font-size:1rem;}
+.time-ampm{flex-shrink:0;min-width:70px;}
+.custom-time-toggle{display:flex;align-items:center;gap:6px;margin-top:6px;cursor:pointer;}
+.custom-time-toggle input[type=checkbox]{accent-color:var(--gl);width:13px;height:13px;cursor:pointer;}
+.custom-time-toggle label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);cursor:pointer;}
+.custom-time-input-wrap{margin-top:8px;display:none;}
+.custom-time-input-wrap.show{display:block;}
+.custom-time-input-wrap input{background:rgba(255,255,255,0.04);border:1.5px solid rgba(72,184,43,0.3);border-radius:7px;padding:10px 13px;font-family:'Barlow',sans-serif;font-size:0.84rem;color:var(--w);outline:none;width:100%;transition:border-color .2s;}
+.custom-time-input-wrap input:focus{border-color:rgba(72,184,43,0.6);}
+.custom-time-input-wrap input::placeholder{color:rgba(255,255,255,0.2);}
+
 /* Calendar */
 .admin-cal-wrap{background:var(--d4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:20px;margin-bottom:20px;}
 .admin-cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
@@ -136,15 +153,19 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 .admin-cal-month{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.12em;color:var(--w);}
 .admin-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
 .admin-cal-dow{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;color:rgba(255,255,255,0.25);text-align:center;padding:4px 0;}
-.admin-cal-day{min-height:68px;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.04);padding:6px 7px;cursor:pointer;transition:all .18s;position:relative;}
+.admin-cal-day{min-height:84px;border-radius:8px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.04);padding:6px 7px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;}
 .admin-cal-day:hover:not(.cal-disabled){background:rgba(72,184,43,0.07);border-color:rgba(72,184,43,0.2);}
 .admin-cal-day.cal-today{border-color:rgba(72,184,43,0.3);}
 .admin-cal-day.cal-empty{background:transparent;border-color:transparent;cursor:default;}
-.cal-day-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;color:rgba(255,255,255,0.5);}
+.admin-cal-day.cal-selected{border-color:var(--gl);background:rgba(72,184,43,0.08);}
+.cal-day-num{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:3px;}
 .admin-cal-day.cal-today .cal-day-num{color:var(--gg);}
-.cal-day-dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px;}
-.cal-dot{width:6px;height:6px;border-radius:50%;}
-.cal-dot.green{background:var(--gl);}.cal-dot.blue{background:var(--blue);}.cal-dot.orange{background:var(--orange);}
+.cal-booking-chip{font-family:'Barlow Condensed',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:0.04em;line-height:1.3;padding:2px 5px;border-radius:4px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cal-chip-confirmed{background:rgba(59,130,246,0.18);color:#93c5fd;}
+.cal-chip-completed{background:rgba(72,184,43,0.15);color:var(--gl);}
+.cal-chip-pending{background:rgba(245,158,11,0.15);color:#fcd34d;}
+.cal-chip-cancelled{background:rgba(232,54,74,0.12);color:#f87f8c;}
+.cal-more{font-family:'Barlow Condensed',sans-serif;font-size:0.55rem;color:rgba(255,255,255,0.3);padding-left:4px;}
 
 /* Form panel */
 .form-panel{background:var(--d4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:22px;margin-bottom:20px;}
@@ -167,7 +188,7 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.show{display:flex;}
-.modal-box{background:var(--d3);border:1px solid rgba(72,184,43,0.2);border-radius:16px;padding:32px 30px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
+.modal-box{background:var(--d3);border:1px solid rgba(72,184,43,0.2);border-radius:16px;padding:32px 30px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.12em;color:var(--w);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid rgba(72,184,43,0.12);display:flex;align-items:center;justify-content:space-between;}
 .modal-close{width:30px;height:30px;border-radius:7px;background:rgba(255,255,255,0.05);border:none;color:rgba(255,255,255,0.4);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .18s;}
 .modal-close:hover{background:rgba(232,54,74,0.15);color:var(--red);}
@@ -186,12 +207,44 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 .modal-act-btn.confirm{background:var(--g);color:var(--w);}.modal-act-btn.confirm:hover{background:var(--gm);}
 .modal-act-btn.cancel{background:rgba(232,54,74,0.12);color:#f87f8c;}.modal-act-btn.cancel:hover{background:rgba(232,54,74,0.22);}
 .modal-act-btn.close{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);}.modal-act-btn.close:hover{background:rgba(255,255,255,0.1);}
+.modal-act-btn.edit-btn{background:rgba(245,158,11,0.12);color:#fcd34d;}.modal-act-btn.edit-btn:hover{background:rgba(245,158,11,0.22);}
+
+/* Edit booking modal */
+.edit-modal-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px;}
+.edit-modal-overlay.show{display:flex;}
+.edit-modal-box{background:var(--d3);border:1px solid rgba(245,158,11,0.25);border-radius:16px;padding:28px 28px 24px;max-width:580px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.75);}
+.edit-modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.12em;color:#fcd34d;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(245,158,11,0.12);display:flex;align-items:center;justify-content:space-between;}
+.edit-modal-title .modal-close{color:rgba(255,255,255,0.4);}
+.edit-section-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,158,11,0.6);margin-bottom:12px;margin-top:18px;padding-top:14px;border-top:1px solid rgba(245,158,11,0.08);}
+.edit-section-title:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+.edit-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.edit-row.triple{grid-template-columns:1fr 1fr 1fr;}
+.edit-row.single{grid-template-columns:1fr;}
+.edit-group{display:flex;flex-direction:column;gap:5px;}
+.edit-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.56rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.edit-input{background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.08);border-radius:7px;padding:9px 12px;font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--w);outline:none;width:100%;transition:border-color .2s;}
+.edit-input:focus{border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.04);}
+.edit-input::placeholder{color:rgba(255,255,255,0.15);}
+.edit-select{appearance:none;background:rgba(255,255,255,0.04) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,158,11,0.5)' fill='none' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;padding-right:34px;}
+.edit-select option{background:var(--d3);}
+.edit-textarea{resize:vertical;min-height:60px;}
+.edit-save-btn{width:100%;margin-top:14px;font-family:'Bebas Neue',sans-serif;font-size:0.96rem;letter-spacing:0.2em;color:var(--w);background:rgba(245,158,11,0.7);padding:13px;border:none;border-radius:7px;box-shadow:0 4px 16px rgba(245,158,11,0.2);transition:background .18s,transform .15s;}
+.edit-save-btn:hover{background:rgba(245,158,11,0.9);transform:translateY(-1px);}
+.edit-save-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+/* Cal sidebar */
+.cal-sidebar-list{display:flex;flex-direction:column;gap:8px;}
+.cal-sidebar-item{background:rgba(255,255,255,0.04);border:1px solid rgba(72,184,43,0.1);border-radius:8px;padding:11px 13px;cursor:pointer;transition:all .18s;}
+.cal-sidebar-item:hover{border-color:rgba(72,184,43,0.25);background:rgba(72,184,43,0.06);}
+.cal-sidebar-time{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(72,184,43,0.7);margin-bottom:3px;}
+.cal-sidebar-name{font-weight:600;color:var(--w);font-size:0.84rem;line-height:1.2;}
+.cal-sidebar-car{font-size:0.72rem;color:rgba(255,255,255,0.38);margin-top:2px;}
+.cal-sidebar-svc{font-size:0.7rem;color:rgba(255,255,255,0.3);margin-top:1px;}
 
 .empty-state{padding:48px 20px;text-align:center;}
 .empty-state svg{width:40px;height:40px;stroke:rgba(255,255,255,0.12);fill:none;stroke-width:1.5;margin:0 auto 14px;}
 .empty-state p{font-size:0.82rem;color:rgba(255,255,255,0.25);}
 
-/* Loading spinner */
 .loading{display:flex;align-items:center;justify-content:center;padding:40px;gap:10px;color:rgba(255,255,255,0.3);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.12em;}
 .spinner{width:18px;height:18px;border:2px solid rgba(72,184,43,0.2);border-top-color:var(--gl);border-radius:50%;animation:spin .7s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -204,7 +257,7 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{border-color:rgba(232,54,74,0.25);color:#f87f8c;}
 
-@media(max-width:900px){.sidebar{display:none;}.main-content{padding:18px;}.form-row{grid-template-columns:1fr;}.stat-row{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:900px){.sidebar{display:none;}.main-content{padding:18px;}.form-row{grid-template-columns:1fr;}.stat-row{grid-template-columns:repeat(2,1fr);}.edit-row{grid-template-columns:1fr;}.edit-row.triple{grid-template-columns:1fr;}}
 @media(max-width:600px){.topbar{padding:0 16px;}.topbar-title,.topbar-tag{display:none;}.modal-detail-grid{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -271,9 +324,6 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
       </div>
       <div class="nav-item" onclick="goPage('add-booking')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Add Booking
-      </div>
-      <div class="nav-item" onclick="goPage('gallery')">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery
       </div>
     </div>
 
@@ -350,7 +400,7 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
           <div class="page-hdr-left"><h1>Schedule</h1><p>Appointment calendar</p></div>
           <button class="hdr-btn" onclick="goPage('add-booking')">+ Add Booking</button>
         </div>
-        <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start;">
+        <div style="display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start;">
           <div class="admin-cal-wrap">
             <div class="admin-cal-nav">
               <button class="admin-cal-nav-btn" onclick="shiftMonth(-1)">&#8249;</button>
@@ -361,8 +411,8 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
           </div>
           <div>
             <div class="form-panel">
-              <div class="form-panel-title">Selected Day</div>
-              <div id="cal-day-detail" style="font-size:0.82rem;color:rgba(255,255,255,0.35);">Click a date to see bookings.</div>
+              <div class="form-panel-title" id="cal-sidebar-title">Select a date</div>
+              <div id="cal-day-detail" style="font-size:0.82rem;color:rgba(255,255,255,0.35);">Click a date to see bookings for that day.</div>
             </div>
           </div>
         </div>
@@ -396,13 +446,34 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
             </div>
             <div class="form-group"><label class="form-label">Date *</label><input class="form-input" type="date" id="nb-date"></div>
             <div class="form-group">
-              <label class="form-label">Time *</label>
-              <select class="form-input form-select" id="nb-time">
-                <option value="">Select…</option>
-                <option>8:00 AM</option><option>9:00 AM</option><option>10:00 AM</option>
-                <option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option>
-                <option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option>
-              </select>
+              <label class="form-label">Time * <span style="font-size:0.5rem;color:rgba(72,184,43,0.5);letter-spacing:0.1em;">(EST)</span></label>
+              <!-- Structured time picker -->
+              <div class="time-picker-wrap" id="nb-time-picker">
+                <div class="time-select-row">
+                  <select id="nb-time-hour" class="form-input form-select">
+                    <option value="">Hr</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option><option>11</option><option>12</option>
+                  </select>
+                  <span class="time-divider">:</span>
+                  <select id="nb-time-min" class="form-input form-select">
+                    <option value="00">00</option><option value="15">15</option>
+                    <option value="30">30</option><option value="45">45</option>
+                  </select>
+                  <select id="nb-time-ampm" class="form-input form-select time-ampm">
+                    <option value="AM">AM</option>
+                    <option value="PM" selected>PM</option>
+                  </select>
+                </div>
+                <div class="custom-time-toggle">
+                  <input type="checkbox" id="nb-custom-toggle" onchange="toggleCustomTime('nb')">
+                  <label for="nb-custom-toggle">Enter custom time</label>
+                </div>
+                <div class="custom-time-input-wrap" id="nb-custom-time-wrap">
+                  <input class="form-input" type="text" id="nb-custom-time" placeholder="e.g. 7:30 AM, Noon, 2:45 PM">
+                </div>
+              </div>
             </div>
             <div class="form-group"><label class="form-label">Price</label><input class="form-input" type="text" id="nb-price" placeholder="$60"></div>
             <div class="form-group">
@@ -420,63 +491,11 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
         </div>
       </div>
 
-      <!-- GALLERY PAGE -->
-      <div class="page" id="page-gallery">
-        <div class="page-hdr">
-          <div class="page-hdr-left"><h1>Gallery</h1><p>Upload before/after photos — they appear on gallery.html</p></div>
-          <a href="gallery.html" target="_blank" class="hdr-btn secondary">View Public Gallery</a>
-        </div>
-
-        <!-- Upload panel -->
-        <div class="form-panel">
-          <div class="form-panel-title">Upload New Photo</div>
-          <!-- Drop zone -->
-          <div id="drop-zone" style="border:2px dashed rgba(72,184,43,0.25);border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:18px;" onclick="document.getElementById('img-input').click()" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event)">
-            <div id="dz-preview" style="display:none;margin-bottom:12px;">
-              <img id="dz-img" style="max-height:160px;max-width:100%;border-radius:8px;margin:0 auto;" src="" alt="">
-            </div>
-            <div id="dz-text">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(72,184,43,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;display:block;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);">Click or drag photo here</div>
-              <div style="font-size:0.68rem;color:rgba(255,255,255,0.2);margin-top:4px;">JPEG, PNG or WebP — max 5MB</div>
-            </div>
-            <input type="file" id="img-input" accept="image/jpeg,image/png,image/webp" style="display:none;" onchange="previewImage(event)">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Category</label>
-              <select class="form-input form-select" id="img-category">
-                <option value="exterior">Exterior</option>
-                <option value="interior">Interior</option>
-                <option value="full">Full Detail</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Caption (optional)</label>
-              <input class="form-input" type="text" id="img-caption" placeholder="e.g. 2021 Honda Accord — After">
-            </div>
-          </div>
-          <button class="form-submit" id="upload-btn" onclick="uploadImage()">Upload Photo</button>
-          <div id="upload-err" style="display:none;margin-top:10px;background:rgba(232,54,74,0.1);border:1px solid rgba(232,54,74,0.25);border-radius:7px;padding:10px 14px;font-size:0.78rem;color:#f87f8c;"></div>
-        </div>
-
-        <!-- Gallery grid -->
-        <div class="form-panel">
-          <div class="form-panel-title" style="display:flex;align-items:center;justify-content:space-between;">
-            <span>Uploaded Photos</span>
-            <button class="hdr-btn secondary" style="font-size:0.68rem;padding:5px 14px;" onclick="loadAdminGallery()">Refresh</button>
-          </div>
-          <div id="admin-gallery-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;">
-            <div class="loading"><div class="spinner"></div>Loading…</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- VIEW/STATUS MODAL -->
 <div class="modal-overlay" id="detail-modal">
   <div class="modal-box">
     <div class="modal-title">
@@ -497,185 +516,325 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
   </div>
 </div>
 
+<!-- EDIT BOOKING MODAL -->
+<div class="edit-modal-overlay" id="edit-modal">
+  <div class="edit-modal-box">
+    <div class="edit-modal-title">
+      <span>Edit Booking</span>
+      <button class="modal-close" onclick="closeEditModal()">&#215;</button>
+    </div>
+
+    <div class="edit-section-title">Customer Information</div>
+    <div class="edit-row">
+      <div class="edit-group"><label class="edit-label">First Name</label><input class="edit-input" type="text" id="eb-first" placeholder="John"></div>
+      <div class="edit-group"><label class="edit-label">Last Name</label><input class="edit-input" type="text" id="eb-last" placeholder="Doe"></div>
+    </div>
+    <div class="edit-row">
+      <div class="edit-group"><label class="edit-label">Phone</label><input class="edit-input" type="tel" id="eb-phone" placeholder="(202) 000-0000"></div>
+      <div class="edit-group"><label class="edit-label">Email</label><input class="edit-input" type="email" id="eb-email" placeholder="john@email.com"></div>
+    </div>
+    <div class="edit-row single">
+      <div class="edit-group"><label class="edit-label">Service Address</label><input class="edit-input" type="text" id="eb-address"></div>
+    </div>
+    <div class="edit-row single">
+      <div class="edit-group"><label class="edit-label">Vehicle</label><input class="edit-input" type="text" id="eb-vehicle" placeholder="2021 Honda Accord"></div>
+    </div>
+
+    <div class="edit-section-title">Appointment Details</div>
+    <div class="edit-row triple">
+      <div class="edit-group">
+        <label class="edit-label">Service</label>
+        <select class="edit-input edit-select" id="eb-service" onchange="autoEditPrice()">
+          <option value="">Select…</option>
+          <option value="Exterior Wash">Exterior Wash</option>
+          <option value="Interior Detail">Interior Detail</option>
+          <option value="Full Detail">Full Detail</option>
+          <option value="custom">Custom…</option>
+        </select>
+      </div>
+      <div class="edit-group"><label class="edit-label">Date</label><input class="edit-input" type="date" id="eb-date"></div>
+      <div class="edit-group">
+        <label class="edit-label">Time <span style="font-size:0.5rem;color:rgba(245,158,11,0.6);">(EST)</span></label>
+        <div class="time-picker-wrap">
+          <div class="time-select-row">
+            <select id="eb-time-hour" class="edit-input edit-select">
+              <option value="">Hr</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+              <option>5</option><option>6</option><option>7</option><option>8</option>
+              <option>9</option><option>10</option><option>11</option><option>12</option>
+            </select>
+            <span class="time-divider">:</span>
+            <select id="eb-time-min" class="edit-input edit-select">
+              <option value="00">00</option><option value="15">15</option>
+              <option value="30">30</option><option value="45">45</option>
+            </select>
+            <select id="eb-time-ampm" class="edit-input edit-select time-ampm">
+              <option value="AM">AM</option>
+              <option value="PM" selected>PM</option>
+            </select>
+          </div>
+          <div class="custom-time-toggle">
+            <input type="checkbox" id="eb-custom-toggle" onchange="toggleCustomTime('eb')">
+            <label for="eb-custom-toggle">Enter custom time</label>
+          </div>
+          <div class="custom-time-input-wrap" id="eb-custom-time-wrap">
+            <input class="edit-input" type="text" id="eb-custom-time" placeholder="e.g. 7:30 AM, Noon, 2:45 PM">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="edit-row">
+      <div class="edit-group"><label class="edit-label">Price</label><input class="edit-input" type="text" id="eb-price" placeholder="$60"></div>
+      <div class="edit-group">
+        <label class="edit-label">Status</label>
+        <select class="edit-input edit-select" id="eb-status">
+          <option value="confirmed">Confirmed</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+      </div>
+    </div>
+    <div class="edit-row single">
+      <div class="edit-group"><label class="edit-label">Notes</label><textarea class="edit-input edit-textarea" id="eb-notes" placeholder="Special requests, condition notes…"></textarea></div>
+    </div>
+
+    <button class="edit-save-btn" id="eb-submit" onclick="saveEditBooking()">Save Changes</button>
+  </div>
+</div>
+
 <div id="toast"></div>
 
-<!-- No Firebase config here. Login goes to Netlify Function server-side. -->
 <script>
-/* Admin token stored in memory only — never localStorage, never a cookie */
 window._adminToken = null;
 
-function showLoginErr(msg) {
-  const el = document.getElementById('login-err');
-  el.textContent = msg;
-  el.classList.add('show');
+function showLoginErr(msg){
+  const el=document.getElementById('login-err');
+  el.textContent=msg; el.classList.add('show');
 }
 
-function showApp(email) {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('admin-app').style.display    = 'block';
-  document.getElementById('topbar-user').textContent    = email;
+function showApp(email){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('admin-app').style.display='block';
+  document.getElementById('topbar-user').textContent=email;
   initDashboard();
 }
 
-window.doLogin = async function() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass  = document.getElementById('login-pass').value;
-  const btn   = document.getElementById('login-btn');
-  const errEl = document.getElementById('login-err');
-
-  if (!email || !pass) { showLoginErr('Please enter your email and password.'); return; }
+window.doLogin = async function(){
+  const email=document.getElementById('login-email').value.trim();
+  const pass=document.getElementById('login-pass').value;
+  const btn=document.getElementById('login-btn');
+  const errEl=document.getElementById('login-err');
+  if(!email||!pass){showLoginErr('Please enter your email and password.');return;}
   errEl.classList.remove('show');
-  btn.disabled = true; btn.textContent = 'Signing in…';
-
-  try {
-    const res  = await fetch('/.netlify/functions/admin-auth', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ email, password: pass }),
+  btn.disabled=true; btn.textContent='Signing in…';
+  try{
+    const res=await fetch('/.netlify/functions/admin-auth',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email,password:pass}),
     });
-    const data = await res.json();
-
-    if (res.ok && data.success) {
-      window._adminToken = data.token;
-      showApp(data.email);
-    } else {
-      showLoginErr(data.error || 'Sign-in failed. Try again.');
-    }
-  } catch (e) {
-    console.error('Login error:', e);
-    showLoginErr('Could not connect. Check your internet and try again.');
-  } finally {
-    btn.disabled = false; btn.textContent = 'Sign In';
-  }
+    const data=await res.json();
+    if(res.ok&&data.success){window._adminToken=data.token; showApp(data.email);}
+    else{showLoginErr(data.error||'Sign-in failed. Try again.');}
+  }catch(e){showLoginErr('Could not connect. Check your internet and try again.');}
+  finally{btn.disabled=false; btn.textContent='Sign In';}
 };
 
-window.doLogout = function() {
-  window._adminToken = null;
-  document.getElementById('login-email').value = '';
-  document.getElementById('login-pass').value  = '';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('admin-app').style.display    = 'none';
+window.doLogout=function(){
+  window._adminToken=null;
+  document.getElementById('login-email').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('admin-app').style.display='none';
 };
 
-document.getElementById('login-pass').addEventListener('keydown',  e => { if(e.key==='Enter') window.doLogin(); });
-document.getElementById('login-email').addEventListener('keydown', e => { if(e.key==='Enter') window.doLogin(); });
+document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')window.doLogin();});
+document.getElementById('login-email').addEventListener('keydown',e=>{if(e.key==='Enter')window.doLogin();});
 </script>
 
 <script>
 /* ════════════════════════════════
-   ALL DATA FUNCTIONS
-   Use Netlify Functions via fetch
-   Token comes from Firebase Auth exchange
+   CORE DATA + STATE
 ════════════════════════════════ */
+let _inquiries=[];
+let _bookings=[];
+let _inqFilter='all';
+let _bookFilter='all';
+let _modalId=null;
+let _modalCol=null;
+let _editId=null;
+let _calYear=new Date().getFullYear();
+let _calMonth=new Date().getMonth();
 
-let _inquiries = [];
-let _bookings  = [];
-let _inqFilter  = 'all';
-let _bookFilter = 'all';
-let _modalId    = null;
-let _modalCol   = null;
-let _calYear    = new Date().getFullYear();
-let _calMonth   = new Date().getMonth();
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DOWS=['Su','Mo','Tu','We','Th','Fr','Sa'];
 
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DOWS   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+function token(){return window._adminToken||'';}
+function apiHeaders(){return{'Content-Type':'application/json','X-Admin-Token':token()};}
 
-function token() { return window._adminToken || ''; }
+/* ── EST TIME HELPERS ──
+   All times stored as "H:MM AM/PM EST" in the database.
+   We always display and save in Eastern Time regardless of browser timezone.
+*/
 
-function apiHeaders() {
-  return { 'Content-Type': 'application/json', 'X-Admin-Token': token() };
+/**
+ * Compose a clean EST time string from parts.
+ * e.g. hour=9, min="30", ampm="AM" → "9:30 AM EST"
+ */
+function buildEstTimeString(hour, min, ampm){
+  return `${hour}:${String(min).padStart(2,'0')} ${ampm} EST`;
+}
+
+/**
+ * Parse a stored time string (like "9:30 AM EST" or "9:30 AM")
+ * back into {hour, min, ampm} for pre-filling inputs.
+ */
+function parseTimeString(timeStr){
+  if(!timeStr) return {hour:'',min:'00',ampm:'AM'};
+  const clean=timeStr.replace(/\s*EST\s*/i,'').trim();
+  const match=clean.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+  if(match){
+    return{hour:String(parseInt(match[1])),min:match[2],ampm:match[3].toUpperCase()};
+  }
+  return{hour:'',min:'00',ampm:'AM'};
+}
+
+/**
+ * Get final time string from a picker (prefix 'nb' or 'eb').
+ * Checks custom toggle first; falls back to dropdowns.
+ * Always appends " EST".
+ */
+function getTimeValue(prefix){
+  const customOn=document.getElementById(`${prefix}-custom-toggle`)?.checked;
+  if(customOn){
+    const custom=(document.getElementById(`${prefix}-custom-time`)?.value||'').trim();
+    if(!custom) return '';
+    // Append EST if not already there
+    return custom.replace(/\s*EST\s*$/i,'').trim()+' EST';
+  }
+  const hour=document.getElementById(`${prefix}-time-hour`)?.value||'';
+  const min=document.getElementById(`${prefix}-time-min`)?.value||'00';
+  const ampm=document.getElementById(`${prefix}-time-ampm`)?.value||'AM';
+  if(!hour) return '';
+  return buildEstTimeString(hour, min, ampm);
+}
+
+/**
+ * Toggle between structured and custom time inputs.
+ */
+function toggleCustomTime(prefix){
+  const on=document.getElementById(`${prefix}-custom-toggle`)?.checked;
+  const wrap=document.getElementById(`${prefix}-custom-time-wrap`);
+  const row=document.getElementById(`${prefix}-time-picker`)?.querySelector('.time-select-row');
+  if(wrap) wrap.classList.toggle('show', on);
+  if(row) row.style.opacity=on?'0.3':'1';
+  if(row) row.style.pointerEvents=on?'none':'auto';
+}
+
+/**
+ * Pre-fill a time picker (prefix 'eb') from a stored time string.
+ */
+function prefillTimePicker(prefix, timeStr){
+  const{hour,min,ampm}=parseTimeString(timeStr);
+  const hourSel=document.getElementById(`${prefix}-time-hour`);
+  const minSel=document.getElementById(`${prefix}-time-min`);
+  const ampmSel=document.getElementById(`${prefix}-time-ampm`);
+  if(hourSel) hourSel.value=hour;
+  if(minSel){
+    // Find closest standard minute or set custom
+    const roundedMin=['00','15','30','45'].includes(min)?min:'00';
+    minSel.value=roundedMin;
+  }
+  if(ampmSel) ampmSel.value=ampm;
+
+  // If time doesn't match a standard slot, use custom
+  const needsCustom=timeStr&&!timeStr.match(/^\d{1,2}:(00|15|30|45)\s*(AM|PM)(\s*EST)?$/i);
+  const toggle=document.getElementById(`${prefix}-custom-toggle`);
+  if(needsCustom&&toggle){
+    toggle.checked=true;
+    toggleCustomTime(prefix);
+    const customInput=document.getElementById(`${prefix}-custom-time`);
+    if(customInput) customInput.value=timeStr.replace(/\s*EST\s*$/i,'').trim();
+  }else if(toggle){
+    toggle.checked=false;
+    toggleCustomTime(prefix);
+  }
 }
 
 /* ── INIT ── */
-function initDashboard() {
-  document.getElementById('dash-date').textContent =
+function initDashboard(){
+  document.getElementById('dash-date').textContent=
     new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   loadAll();
 }
 
-async function loadAll() {
-  await Promise.all([loadInquiries(), loadBookings()]);
+async function loadAll(){
+  await Promise.all([loadInquiries(),loadBookings()]);
   renderDashboard();
 }
 
 /* ── FETCH DATA ── */
-async function loadInquiries() {
-  try {
-    const res  = await fetch('/.netlify/functions/admin-data?collection=inquiries', { headers: apiHeaders() });
-    const data = await res.json();
-    if (res.ok) {
-      _inquiries = data.data || [];
-      renderInquiries(_inqFilter);
-      updateBadges();
-    } else {
-      toast(data.error || 'Failed to load inquiries', 'e');
-    }
-  } catch(e) { toast('Network error loading inquiries', 'e'); }
+async function loadInquiries(){
+  try{
+    const res=await fetch('/.netlify/functions/admin-data?collection=inquiries',{headers:apiHeaders()});
+    const data=await res.json();
+    if(res.ok){_inquiries=data.data||[]; renderInquiries(_inqFilter); updateBadges();}
+    else{toast(data.error||'Failed to load inquiries','e');}
+  }catch(e){toast('Network error loading inquiries','e');}
 }
 
-async function loadBookings() {
-  try {
-    const res  = await fetch('/.netlify/functions/admin-data?collection=bookings', { headers: apiHeaders() });
-    const data = await res.json();
-    if (res.ok) {
-      _bookings = data.data || [];
-      renderBookings(_bookFilter);
-      renderCal();
-      updateBadges();
-    } else {
-      toast(data.error || 'Failed to load bookings', 'e');
-    }
-  } catch(e) { toast('Network error loading bookings', 'e'); }
+async function loadBookings(){
+  try{
+    const res=await fetch('/.netlify/functions/admin-data?collection=bookings',{headers:apiHeaders()});
+    const data=await res.json();
+    if(res.ok){_bookings=data.data||[]; renderBookings(_bookFilter); renderCal(); updateBadges();}
+    else{toast(data.error||'Failed to load bookings','e');}
+  }catch(e){toast('Network error loading bookings','e');}
 }
 
 /* ── DASHBOARD ── */
-function renderDashboard() {
-  document.getElementById('st-inq').textContent  = _inquiries.length;
-  document.getElementById('st-new').textContent  = _inquiries.filter(i=>i.status==='new').length;
-  document.getElementById('st-book').textContent = _bookings.length;
-  document.getElementById('st-done').textContent = _bookings.filter(b=>b.status==='completed').length;
+function renderDashboard(){
+  document.getElementById('st-inq').textContent=_inquiries.length;
+  document.getElementById('st-new').textContent=_inquiries.filter(i=>i.status==='new').length;
+  document.getElementById('st-book').textContent=_bookings.length;
+  document.getElementById('st-done').textContent=_bookings.filter(b=>b.status==='completed').length;
 
-  const ri = _inquiries.slice(0,5);
-  document.getElementById('dash-inq-table').innerHTML = ri.length
-    ? renderInqRows(ri) : emptyState('No inquiries yet');
+  const ri=_inquiries.slice(0,5);
+  document.getElementById('dash-inq-table').innerHTML=ri.length?renderInqRows(ri):emptyState('No inquiries yet');
 
-  const today = new Date().toISOString().split('T')[0];
-  const ub = _bookings.filter(b=>(b.status==='confirmed'||b.status==='pending')&&b.date>=today)
+  const today=new Date().toISOString().split('T')[0];
+  const ub=_bookings.filter(b=>(b.status==='confirmed'||b.status==='pending')&&b.date>=today)
     .sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
-  document.getElementById('dash-book-table').innerHTML = ub.length
-    ? renderBookRows(ub) : emptyState('No upcoming bookings');
+  document.getElementById('dash-book-table').innerHTML=ub.length?renderBookRows(ub):emptyState('No upcoming bookings');
 }
 
 /* ── BADGES ── */
-function updateBadges() {
-  const n = _inquiries.filter(i=>i.status==='new').length;
-  const nb = document.getElementById('notif-badge');
-  const ib = document.getElementById('inq-nav-badge');
-  if(nb){ nb.textContent = n; nb.style.display = n ? 'flex' : 'none'; }
-  if(ib){ ib.textContent = n; ib.style.display = n ? 'inline' : 'none'; }
-
-  const u = _bookings.filter(b=>b.status==='confirmed'||b.status==='pending').length;
-  const bb = document.getElementById('book-nav-badge');
-  if(bb){ bb.textContent = u; bb.style.display = u ? 'inline' : 'none'; }
+function updateBadges(){
+  const n=_inquiries.filter(i=>i.status==='new').length;
+  const nb=document.getElementById('notif-badge');
+  const ib=document.getElementById('inq-nav-badge');
+  if(nb){nb.textContent=n; nb.style.display=n?'flex':'none';}
+  if(ib){ib.textContent=n; ib.style.display=n?'inline':'none';}
+  const u=_bookings.filter(b=>b.status==='confirmed'||b.status==='pending').length;
+  const bb=document.getElementById('book-nav-badge');
+  if(bb){bb.textContent=u; bb.style.display=u?'inline':'none';}
 }
 
 /* ── INQUIRIES ── */
-function filterInq(f, btn) {
-  _inqFilter = f;
+function filterInq(f,btn){
+  _inqFilter=f;
   document.querySelectorAll('#page-inquiries .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderInquiries(f);
+  btn.classList.add('active'); renderInquiries(f);
 }
 
-function renderInquiries(f) {
-  let data = _inquiries;
-  if (f !== 'all') data = data.filter(i=>i.status===f);
-  document.getElementById('inq-table').innerHTML = data.length
-    ? renderInqRows(data) : emptyState('No inquiries found');
+function renderInquiries(f){
+  let data=_inquiries;
+  if(f!=='all') data=data.filter(i=>i.status===f);
+  document.getElementById('inq-table').innerHTML=data.length?renderInqRows(data):emptyState('No inquiries found');
 }
 
-function renderInqRows(data) {
-  return `<table class="tbl"><thead><tr>
+function renderInqRows(data){
+  return`<table class="tbl"><thead><tr>
     <th>Customer</th><th>Service</th><th>Vehicle</th><th>Pref. Date</th><th>Status</th><th>Submitted</th><th>Actions</th>
   </tr></thead><tbody>${data.map(i=>`<tr>
     <td><div class="cell-name">${esc(i.name)}</div><div class="cell-sub">${esc(i.phone)}</div></td>
@@ -693,414 +852,432 @@ function renderInqRows(data) {
 }
 
 /* ── BOOKINGS ── */
-function filterBook(f, btn) {
-  _bookFilter = f;
+function filterBook(f,btn){
+  _bookFilter=f;
   document.querySelectorAll('#page-bookings .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderBookings(f);
+  btn.classList.add('active'); renderBookings(f);
 }
 
-function renderBookings(f) {
-  let data = _bookings;
-  if (f !== 'all') data = data.filter(b=>b.status===f);
-  data = [...data].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  document.getElementById('book-table').innerHTML = data.length
-    ? renderBookRows(data) : emptyState('No bookings found');
+function renderBookings(f){
+  let data=_bookings;
+  if(f!=='all') data=data.filter(b=>b.status===f);
+  data=[...data].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+  document.getElementById('book-table').innerHTML=data.length?renderBookRows(data):emptyState('No bookings found');
 }
 
-function renderBookRows(data) {
-  return `<table class="tbl"><thead><tr>
-    <th>Customer</th><th>Service</th><th>Date &amp; Time</th><th>Address</th><th>Price</th><th>Status</th><th>Actions</th>
+function renderBookRows(data){
+  return`<table class="tbl"><thead><tr>
+    <th>Customer</th><th>Service</th><th>Date &amp; Time</th><th>Vehicle</th><th>Price</th><th>Status</th><th>Actions</th>
   </tr></thead><tbody>${data.map(b=>`<tr>
     <td><div class="cell-name">${esc(b.name)}</div><div class="cell-sub">${esc(b.phone)}</div></td>
     <td>${esc(b.service)}</td>
     <td><div style="font-size:0.82rem;">${esc(b.date)}</div><div class="cell-sub">${esc(b.time)}</div></td>
-    <td style="font-size:0.75rem;color:rgba(255,255,255,0.45);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(b.address||'—')}</td>
+    <td style="font-size:0.75rem;color:rgba(255,255,255,0.45);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(b.vehicle||'—')}</td>
     <td style="font-family:'Bebas Neue';font-size:1.1rem;color:var(--gg);letter-spacing:0.06em;">${esc(b.price||'—')}</td>
     <td><span class="pill pill-${b.status||'pending'}">${b.status||'pending'}</span></td>
     <td>
       <button class="act-btn act-view"   onclick="openModal('${b._id}','bookings')">View</button>
-      <button class="act-btn act-edit"   onclick="updateStatus('${b._id}','bookings','completed')">Done</button>
+      <button class="act-btn act-edit"   onclick="openEditModal('${b._id}')">Edit</button>
       <button class="act-btn act-delete" onclick="deleteDoc('${b._id}','bookings')">Del</button>
     </td>
   </tr>`).join('')}</tbody></table>`;
 }
 
 /* ── ADD BOOKING ── */
-function autoPrice() {
-  const prices = {'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};
-  const svc = document.getElementById('nb-service').value;
-  document.getElementById('nb-price').value = prices[svc] || '';
+function autoPrice(){
+  const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};
+  const svc=document.getElementById('nb-service').value;
+  document.getElementById('nb-price').value=prices[svc]||'';
 }
 
-async function saveBooking() {
-  const f = id => document.getElementById(id)?.value.trim() || '';
+function autoEditPrice(){
+  const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};
+  const svc=document.getElementById('eb-service').value;
+  if(svc&&svc!=='custom'){
+    document.getElementById('eb-price').value=prices[svc]||document.getElementById('eb-price').value;
+  }
+}
+
+async function saveBooking(){
+  const f=id=>document.getElementById(id)?.value.trim()||'';
   const first=f('nb-first'),last=f('nb-last'),phone=f('nb-phone');
-  const service=f('nb-service'),date=f('nb-date'),time=f('nb-time');
+  const service=f('nb-service'),date=f('nb-date');
   const address=f('nb-address'),vehicle=f('nb-vehicle');
 
-  if(!first||!last) { toast('Enter customer name','e'); return; }
-  if(!phone)        { toast('Enter phone number','e');  return; }
-  if(!service)      { toast('Select a service','e');    return; }
-  if(!date)         { toast('Select a date','e');       return; }
-  if(!time)         { toast('Select a time','e');       return; }
-  if(!address)      { toast('Enter service address','e'); return; }
-  if(!vehicle)      { toast('Enter vehicle info','e');  return; }
+  if(!first||!last){toast('Enter customer name','e');return;}
+  if(!phone){toast('Enter phone number','e');return;}
+  if(!service){toast('Select a service','e');return;}
+  if(!date){toast('Select a date','e');return;}
+  if(!address){toast('Enter service address','e');return;}
+  if(!vehicle){toast('Enter vehicle info','e');return;}
 
-  const btn = document.getElementById('nb-submit');
+  // Get time with EST enforcement
+  const time=getTimeValue('nb');
+  if(!time){toast('Select a time','e');return;}
+
+  const btn=document.getElementById('nb-submit');
   btn.disabled=true; btn.textContent='Saving…';
 
-  try {
-    const res = await fetch('/.netlify/functions/admin-booking', {
-      method:  'POST',
-      headers: apiHeaders(),
-      body: JSON.stringify({
-        name:`${first} ${last}`, phone, email:f('nb-email'),
-        address, vehicle, service, date, time,
-        price: f('nb-price') || ({'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'}[service]||''),
-        status: f('nb-status') || 'confirmed',
-        notes: f('nb-notes'),
+  try{
+    const res=await fetch('/.netlify/functions/admin-booking',{
+      method:'POST',headers:apiHeaders(),
+      body:JSON.stringify({
+        name:`${first} ${last}`,phone,email:f('nb-email'),
+        address,vehicle,service,date,time,
+        price:f('nb-price')||({'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'}[service]||''),
+        status:f('nb-status')||'confirmed',
+        notes:f('nb-notes'),
+        timezone:'EST',
       }),
     });
-    const data = await res.json();
-    if (res.ok && data.success) {
+    const data=await res.json();
+    if(res.ok&&data.success){
       toast('Booking saved!');
       ['nb-first','nb-last','nb-phone','nb-email','nb-address','nb-vehicle','nb-price','nb-notes']
-        .forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+        .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
       document.getElementById('nb-service').value='';
       document.getElementById('nb-date').value='';
-      document.getElementById('nb-time').value='';
+      document.getElementById('nb-time-hour').value='';
+      document.getElementById('nb-time-min').value='00';
+      document.getElementById('nb-time-ampm').value='PM';
+      const tog=document.getElementById('nb-custom-toggle');
+      if(tog){tog.checked=false; toggleCustomTime('nb');}
       await loadBookings();
       goPage('bookings');
-    } else {
-      toast(data.error || 'Error saving booking','e');
-    }
-  } catch(e) { toast('Network error','e'); }
-  finally { btn.disabled=false; btn.textContent='Save Booking'; }
+    }else{toast(data.error||'Error saving booking','e');}
+  }catch(e){toast('Network error','e');}
+  finally{btn.disabled=false; btn.textContent='Save Booking';}
 }
 
-/* Convert inquiry to booking — pre-fills form */
-function convertToBooking(id) {
-  const i = _inquiries.find(x=>x._id===id);
+/* ── EDIT BOOKING MODAL ── */
+function openEditModal(id){
+  const b=_bookings.find(x=>x._id===id);
+  if(!b) return;
+  _editId=id;
+
+  // Split name
+  const parts=(b.name||'').split(' ');
+  const first=parts[0]||'';
+  const last=parts.slice(1).join(' ')||'';
+
+  const sv=(elId,val)=>{const el=document.getElementById(elId);if(el)el.value=val||'';};
+  sv('eb-first',first); sv('eb-last',last);
+  sv('eb-phone',b.phone); sv('eb-email',b.email);
+  sv('eb-address',b.address); sv('eb-vehicle',b.vehicle);
+  sv('eb-date',b.date); sv('eb-price',b.price);
+  sv('eb-notes',b.notes);
+
+  // Service
+  const svcEl=document.getElementById('eb-service');
+  if(svcEl){
+    const knownServices=['Exterior Wash','Interior Detail','Full Detail'];
+    if(knownServices.includes(b.service)){svcEl.value=b.service;}
+    else{svcEl.value='custom';}
+  }
+
+  // Status
+  const statEl=document.getElementById('eb-status');
+  if(statEl) statEl.value=b.status||'confirmed';
+
+  // Pre-fill time picker
+  prefillTimePicker('eb', b.time||'');
+
+  document.getElementById('edit-modal').classList.add('show');
+}
+
+function closeEditModal(){
+  document.getElementById('edit-modal').classList.remove('show');
+  _editId=null;
+}
+
+async function saveEditBooking(){
+  if(!_editId) return;
+  const f=id=>document.getElementById(id)?.value.trim()||'';
+  const first=f('eb-first'),last=f('eb-last');
+  if(!first){toast('Enter first name','e');return;}
+
+  const time=getTimeValue('eb');
+  if(!time){toast('Select a time','e');return;}
+
+  // Handle custom service name
+  let service=f('eb-service');
+  if(service==='custom'){
+    service=prompt('Enter the service name:','');
+    if(!service) return;
+  }
+
+  const btn=document.getElementById('eb-submit');
+  btn.disabled=true; btn.textContent='Saving…';
+
+  try{
+    const res=await fetch('/.netlify/functions/admin-booking',{
+      method:'PUT',
+      headers:apiHeaders(),
+      body:JSON.stringify({
+        id:_editId,
+        collection:'bookings',
+        name:`${first} ${last}`.trim(),
+        phone:f('eb-phone'),
+        email:f('eb-email'),
+        address:f('eb-address'),
+        vehicle:f('eb-vehicle'),
+        service,
+        date:f('eb-date'),
+        time,
+        price:f('eb-price'),
+        status:f('eb-status'),
+        notes:f('eb-notes'),
+        timezone:'EST',
+      }),
+    });
+    const data=await res.json();
+    if(res.ok&&data.success){
+      toast('Booking updated!');
+      closeEditModal();
+      closeModal();
+      await loadBookings();
+      renderDashboard();
+    }else{toast(data.error||'Error updating booking','e');}
+  }catch(e){toast('Network error','e');}
+  finally{btn.disabled=false; btn.textContent='Save Changes';}
+}
+
+/* ── CONVERT INQUIRY → BOOKING ── */
+function convertToBooking(id){
+  const i=_inquiries.find(x=>x._id===id);
   if(!i) return;
   closeModal();
   goPage('add-booking');
   setTimeout(()=>{
-    const [first,...rest] = (i.name||'').split(' ');
-    const sv = (id,v)=>{ const el=document.getElementById(id); if(el) el.value=v; };
-    sv('nb-first', first||''); sv('nb-last', rest.join(' ')||'');
-    sv('nb-phone', i.phone||''); sv('nb-email', i.email||'');
-    sv('nb-vehicle', i.vehicle||'');
-    sv('nb-notes', `Converted from inquiry. ${i.notes||''}`);
-    const svc = document.getElementById('nb-service');
-    if(svc) [...svc.options].forEach(o=>{ if(o.value===i.service) svc.value=i.service; });
+    const[first,...rest]=(i.name||'').split(' ');
+    const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v;};
+    sv('nb-first',first||''); sv('nb-last',rest.join(' ')||'');
+    sv('nb-phone',i.phone||''); sv('nb-email',i.email||'');
+    sv('nb-vehicle',i.vehicle||'');
+    sv('nb-notes',`Converted from inquiry. ${i.notes||''}`);
+    const svc=document.getElementById('nb-service');
+    if(svc)[...svc.options].forEach(o=>{if(o.value===i.service)svc.value=i.service;});
     autoPrice();
-    // Mark inquiry as pending
-    updateStatus(id, 'inquiries', 'pending');
-  }, 120);
+    updateStatus(id,'inquiries','pending');
+  },120);
 }
 
 /* ── STATUS UPDATE ── */
-async function updateStatus(id, collection, status) {
-  try {
-    const res = await fetch('/.netlify/functions/admin-booking', {
-      method:  'PUT',
-      headers: apiHeaders(),
-      body:    JSON.stringify({ id, collection, status }),
+async function updateStatus(id,collection,status){
+  try{
+    const res=await fetch('/.netlify/functions/admin-booking',{
+      method:'PUT',headers:apiHeaders(),
+      body:JSON.stringify({id,collection,status}),
     });
-    const data = await res.json();
-    if (res.ok && data.success) {
-      toast('Status updated: ' + status);
-      collection === 'inquiries' ? await loadInquiries() : await loadBookings();
+    const data=await res.json();
+    if(res.ok&&data.success){
+      toast('Status updated: '+status);
+      collection==='inquiries'?await loadInquiries():await loadBookings();
       renderDashboard();
-    } else {
-      toast(data.error || 'Error updating status','e');
-    }
-  } catch(e) { toast('Network error','e'); }
+    }else{toast(data.error||'Error updating status','e');}
+  }catch(e){toast('Network error','e');}
 }
 
 /* ── DELETE ── */
-async function deleteDoc(id, collection) {
-  if (!confirm(`Delete this ${collection === 'inquiries' ? 'inquiry' : 'booking'}?`)) return;
-  try {
-    const res = await fetch('/.netlify/functions/admin-booking', {
-      method:  'DELETE',
-      headers: apiHeaders(),
-      body:    JSON.stringify({ id, collection }),
+async function deleteDoc(id,collection){
+  if(!confirm(`Delete this ${collection==='inquiries'?'inquiry':'booking'}?`)) return;
+  try{
+    const res=await fetch('/.netlify/functions/admin-booking',{
+      method:'DELETE',headers:apiHeaders(),
+      body:JSON.stringify({id,collection}),
     });
-    const data = await res.json();
-    if (res.ok && data.success) {
-      toast('Deleted successfully');
-      closeModal();
-      collection === 'inquiries' ? await loadInquiries() : await loadBookings();
+    const data=await res.json();
+    if(res.ok&&data.success){
+      toast('Deleted successfully'); closeModal();
+      collection==='inquiries'?await loadInquiries():await loadBookings();
       renderDashboard();
-    } else {
-      toast(data.error || 'Error deleting','e');
-    }
-  } catch(e) { toast('Network error','e'); }
+    }else{toast(data.error||'Error deleting','e');}
+  }catch(e){toast('Network error','e');}
 }
 
-/* ── MODAL ── */
-function openModal(id, collection) {
-  const item = collection === 'inquiries'
-    ? _inquiries.find(x=>x._id===id)
-    : _bookings.find(x=>x._id===id);
-  if (!item) return;
+/* ── VIEW MODAL ── */
+function openModal(id,collection){
+  const item=collection==='inquiries'?_inquiries.find(x=>x._id===id):_bookings.find(x=>x._id===id);
+  if(!item) return;
+  _modalId=id; _modalCol=collection;
+  document.getElementById('modal-title-text').textContent=
+    (collection==='inquiries'?'Inquiry':'Booking')+' — '+esc(item.name);
+  document.getElementById('modal-status-sel').value=item.status||'new';
 
-  _modalId  = id;
-  _modalCol = collection;
-  document.getElementById('modal-title-text').textContent =
-    (collection === 'inquiries' ? 'Inquiry' : 'Booking') + ' — ' + esc(item.name);
-  document.getElementById('modal-status-sel').value = item.status || 'new';
-
-  const skip = ['_id','status'];
-  document.getElementById('modal-detail-grid').innerHTML =
+  const skip=['_id','status'];
+  document.getElementById('modal-detail-grid').innerHTML=
     Object.entries(item).filter(([k])=>!skip.includes(k)).map(([k,v])=>`
       <div>
         <div class="md-key">${k.replace(/([A-Z])/g,' $1').trim()}</div>
         <div class="md-val ${k==='price'?'highlight':''}">${esc(String(v||'—'))}</div>
       </div>`).join('');
 
-  const actions = collection === 'inquiries'
-    ? `<button class="modal-act-btn confirm" onclick="convertToBooking('${id}')">Convert to Booking</button>
-       <button class="modal-act-btn cancel"  onclick="deleteDoc('${id}','inquiries')">Delete</button>`
-    : `<button class="modal-act-btn confirm" onclick="updateStatus('${id}','bookings','completed');closeModal()">Mark Complete</button>
-       <button class="modal-act-btn cancel"  onclick="deleteDoc('${id}','bookings')">Delete</button>`;
-
-  document.getElementById('modal-actions').innerHTML =
-    actions + `<button class="modal-act-btn close" onclick="closeModal()">Close</button>`;
+  let actions='';
+  if(collection==='inquiries'){
+    actions=`<button class="modal-act-btn confirm" onclick="convertToBooking('${id}')">Convert to Booking</button>
+             <button class="modal-act-btn cancel"  onclick="deleteDoc('${id}','inquiries')">Delete</button>`;
+  }else{
+    actions=`<button class="modal-act-btn edit-btn" onclick="closeModal();openEditModal('${id}')">Edit Booking</button>
+             <button class="modal-act-btn confirm"  onclick="updateStatus('${id}','bookings','completed');closeModal()">Mark Complete</button>
+             <button class="modal-act-btn cancel"   onclick="deleteDoc('${id}','bookings')">Delete</button>`;
+  }
+  document.getElementById('modal-actions').innerHTML=
+    actions+`<button class="modal-act-btn close" onclick="closeModal()">Close</button>`;
   document.getElementById('detail-modal').classList.add('show');
 }
 
-function saveStatus() {
-  if (!_modalId || !_modalCol) return;
-  const status = document.getElementById('modal-status-sel').value;
-  updateStatus(_modalId, _modalCol, status);
+function saveStatus(){
+  if(!_modalId||!_modalCol) return;
+  const status=document.getElementById('modal-status-sel').value;
+  updateStatus(_modalId,_modalCol,status);
 }
 
-function closeModal() {
+function closeModal(){
   document.getElementById('detail-modal').classList.remove('show');
-  _modalId = null; _modalCol = null;
+  _modalId=null; _modalCol=null;
 }
 
 /* ── CALENDAR ── */
-function renderCal() {
-  const y=_calYear, m=_calMonth;
-  document.getElementById('cal-month-label').textContent = `${MONTHS[m]} ${y}`;
-  const grid = document.getElementById('cal-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  DOWS.forEach(d=>{ const el=document.createElement('div'); el.className='admin-cal-dow'; el.textContent=d; grid.appendChild(el); });
-  const firstDay = new Date(y,m,1).getDay();
-  const daysIn   = new Date(y,m+1,0).getDate();
-  const today    = new Date();
+function renderCal(){
+  const y=_calYear,m=_calMonth;
+  document.getElementById('cal-month-label').textContent=`${MONTHS[m]} ${y}`;
+  const grid=document.getElementById('cal-grid');
+  if(!grid) return;
+  grid.innerHTML='';
+
+  // Day-of-week headers
+  DOWS.forEach(d=>{
+    const el=document.createElement('div');
+    el.className='admin-cal-dow'; el.textContent=d; grid.appendChild(el);
+  });
+
+  const firstDay=new Date(y,m,1).getDay();
+  const daysIn=new Date(y,m+1,0).getDate();
+  const today=new Date();
+
+  // Empty cells
   for(let i=0;i<firstDay;i++){
     const el=document.createElement('div'); el.className='admin-cal-day cal-empty'; grid.appendChild(el);
   }
+
+  // Day cells
   for(let d=1;d<=daysIn;d++){
-    const dateStr  = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dayBooks = _bookings.filter(b=>b.date===dateStr);
-    const el = document.createElement('div');
-    el.className = 'admin-cal-day';
-    if(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate()) el.classList.add('cal-today');
-    el.innerHTML = `<div class="cal-day-num">${d}</div>
-      <div class="cal-day-dots">${dayBooks.map(b=>`<div class="cal-dot ${b.status==='completed'?'green':b.status==='confirmed'?'blue':'orange'}"></div>`).join('')}</div>`;
-    el.onclick = ()=>showCalDay(dateStr, dayBooks);
+    const dateStr=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dayBooks=_bookings
+      .filter(b=>b.date===dateStr)
+      .sort((a,b)=>sortTime(a.time)-sortTime(b.time));
+
+    const el=document.createElement('div');
+    el.className='admin-cal-day';
+    if(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate())
+      el.classList.add('cal-today');
+
+    // Day number
+    const numDiv=document.createElement('div');
+    numDiv.className='cal-day-num'; numDiv.textContent=d;
+    el.appendChild(numDiv);
+
+    // Booking chips — show up to 2, then "+N more"
+    const show=dayBooks.slice(0,2);
+    const extra=dayBooks.length-show.length;
+    show.forEach(b=>{
+      const chip=document.createElement('div');
+      chip.className=`cal-booking-chip cal-chip-${b.status||'pending'}`;
+      // Show time + name + vehicle
+      const shortTime=(b.time||'').replace(/\s*EST\s*$/i,'').trim();
+      chip.textContent=`${shortTime} · ${(b.name||'').split(' ')[0]} · ${(b.vehicle||'').split(' ').slice(-1)[0]}`;
+      chip.title=`${b.name} — ${b.vehicle} — ${b.service} @ ${b.time}`;
+      el.appendChild(chip);
+    });
+    if(extra>0){
+      const more=document.createElement('div');
+      more.className='cal-more'; more.textContent=`+${extra} more`;
+      el.appendChild(more);
+    }
+
+    el.onclick=()=>showCalDay(dateStr,dayBooks);
     grid.appendChild(el);
   }
 }
 
-function showCalDay(dateStr, dayBooks) {
-  const el = document.getElementById('cal-day-detail');
-  if (!dayBooks.length) { el.innerHTML=`<div style="color:rgba(255,255,255,0.3);font-size:0.8rem;">${dateStr} — No bookings</div>`; return; }
-  el.innerHTML = `<div style="font-family:'Barlow Condensed';font-weight:700;font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gg);margin-bottom:12px;">${dateStr}</div>` +
-    dayBooks.map(b=>`<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(72,184,43,0.1);border-radius:7px;padding:10px 12px;margin-bottom:8px;cursor:pointer;" onclick="openModal('${b._id}','bookings')">
-      <div style="font-weight:600;color:var(--w);font-size:0.84rem;">${esc(b.name)}</div>
-      <div style="font-size:0.72rem;color:rgba(255,255,255,0.4);margin-top:2px;">${esc(b.time)} · ${esc(b.service)}</div>
-      <span class="pill pill-${b.status}" style="margin-top:5px;display:inline-block;">${b.status}</span>
-    </div>`).join('');
+/* Sort helper: convert "9:30 AM EST" to a comparable number */
+function sortTime(timeStr){
+  if(!timeStr) return 9999;
+  const{hour,min,ampm}=parseTimeString(timeStr);
+  if(!hour) return 9999;
+  let h=parseInt(hour);
+  if(ampm==='AM'&&h===12) h=0;
+  if(ampm==='PM'&&h!==12) h+=12;
+  return h*60+parseInt(min||0);
 }
 
-function shiftMonth(dir) {
-  _calMonth += dir;
+function showCalDay(dateStr,dayBooks){
+  const titleEl=document.getElementById('cal-sidebar-title');
+  const detailEl=document.getElementById('cal-day-detail');
+  if(titleEl) titleEl.textContent=formatDisplayDate(dateStr);
+
+  if(!dayBooks.length){
+    detailEl.innerHTML=`<div style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-align:center;padding:12px 0;">No bookings on this date</div>`;
+    return;
+  }
+
+  const sorted=[...dayBooks].sort((a,b)=>sortTime(a.time)-sortTime(b.time));
+  detailEl.innerHTML=`<div class="cal-sidebar-list">${sorted.map(b=>`
+    <div class="cal-sidebar-item" onclick="openModal('${b._id}','bookings')">
+      <div class="cal-sidebar-time">${esc((b.time||'').replace(/\s*EST\s*$/i,'').trim())}</div>
+      <div class="cal-sidebar-name">${esc(b.name)}</div>
+      <div class="cal-sidebar-car">${esc(b.vehicle||'—')}</div>
+      <div class="cal-sidebar-svc">${esc(b.service)} · <span class="pill pill-${b.status||'pending'}" style="font-size:0.52rem;">${b.status||'pending'}</span></div>
+    </div>`).join('')}</div>`;
+
+  // Highlight selected day
+  document.querySelectorAll('.admin-cal-day').forEach(el=>el.classList.remove('cal-selected'));
+}
+
+function formatDisplayDate(dateStr){
+  const[y,m,d]=dateStr.split('-').map(Number);
+  const dt=new Date(y,m-1,d);
+  return dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+}
+
+function shiftMonth(dir){
+  _calMonth+=dir;
   if(_calMonth>11){_calMonth=0;_calYear++;}
-  if(_calMonth<0) {_calMonth=11;_calYear--;}
+  if(_calMonth<0){_calMonth=11;_calYear--;}
   renderCal();
+  document.getElementById('cal-sidebar-title').textContent='Select a date';
+  document.getElementById('cal-day-detail').innerHTML=
+    '<div style="font-size:0.82rem;color:rgba(255,255,255,0.35);">Click a date to see bookings for that day.</div>';
 }
 
 /* ── NAV ── */
-function goPage(id) {
+function goPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const pg  = document.getElementById('page-'+id);
-  if (pg) pg.classList.add('active');
-  document.querySelectorAll(`.nav-item`).forEach(n=>{
+  const pg=document.getElementById('page-'+id);
+  if(pg) pg.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{
     if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes(`'${id}'`)) n.classList.add('active');
   });
-  if (id==='calendar') renderCal();
-  if (id==='add-booking') { const d=new Date().toISOString().split('T')[0]; const el=document.getElementById('nb-date'); if(el)el.min=d; }
-  if (id==='gallery') loadAdminGallery();
+  if(id==='calendar') renderCal();
+  if(id==='add-booking'){
+    const d=new Date().toISOString().split('T')[0];
+    const el=document.getElementById('nb-date');
+    if(el) el.min=d;
+  }
 }
 
 /* ── HELPERS ── */
-/* ════════════════════════════════
-   GALLERY
-════════════════════════════════ */
-let _galleryImages = [];
-let _imgFile = null;
-let _imgBase64 = null;
-let _imgMime = null;
-
-function dzOver(e) {
-  e.preventDefault();
-  document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.6)';
-  document.getElementById('drop-zone').style.background  = 'rgba(72,184,43,0.05)';
-}
-function dzLeave() {
-  document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.25)';
-  document.getElementById('drop-zone').style.background  = '';
-}
-function dzDrop(e) {
-  e.preventDefault();
-  dzLeave();
-  const file = e.dataTransfer.files[0];
-  if (file) handleImageFile(file);
-}
-
-function previewImage(event) {
-  const file = event.target.files[0];
-  if (file) handleImageFile(file);
-}
-
-function handleImageFile(file) {
-  const allowed = ['image/jpeg','image/jpg','image/png','image/webp'];
-  if (!allowed.includes(file.type)) { toast('Only JPEG, PNG or WebP allowed','e'); return; }
-  if (file.size > 5 * 1024 * 1024)  { toast('Image must be under 5MB','e'); return; }
-
-  _imgFile = file;
-  _imgMime = file.type;
-
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    _imgBase64 = e.target.result.split(',')[1];
-    document.getElementById('dz-img').src = e.target.result;
-    document.getElementById('dz-preview').style.display = 'block';
-    document.getElementById('dz-text').style.display    = 'none';
-  };
-  reader.readAsDataURL(file);
-}
-
-async function uploadImage() {
-  if (!_imgBase64 || !_imgFile) { toast('Please select an image first','e'); return; }
-
-  const btn = document.getElementById('upload-btn');
-  const err = document.getElementById('upload-err');
-  btn.disabled = true; btn.textContent = 'Uploading…';
-  err.style.display = 'none';
-
-  try {
-    const res = await fetch('/.netlify/functions/gallery-data?action=upload', {
-      method:  'POST',
-      headers: apiHeaders(),
-      body: JSON.stringify({
-        imageData: _imgBase64,
-        fileName:  _imgFile.name,
-        mimeType:  _imgMime,
-        caption:   document.getElementById('img-caption').value.trim(),
-        category:  document.getElementById('img-category').value,
-      }),
-    });
-    const data = await res.json();
-    if (res.ok && data.success) {
-      toast('Photo uploaded!');
-      // Reset form
-      _imgFile = null; _imgBase64 = null; _imgMime = null;
-      document.getElementById('img-input').value = '';
-      document.getElementById('img-caption').value = '';
-      document.getElementById('dz-preview').style.display = 'none';
-      document.getElementById('dz-text').style.display    = 'block';
-      document.getElementById('drop-zone').style.borderColor = 'rgba(72,184,43,0.25)';
-      loadAdminGallery();
-    } else {
-      err.textContent   = data.error || 'Upload failed';
-      err.style.display = 'block';
-    }
-  } catch(e) {
-    err.textContent   = 'Network error — try again';
-    err.style.display = 'block';
-  } finally {
-    btn.disabled = false; btn.textContent = 'Upload Photo';
-  }
-}
-
-async function loadAdminGallery() {
-  const grid = document.getElementById('admin-gallery-grid');
-  if (!grid) return;
-  grid.innerHTML = '<div class="loading" style="grid-column:1/-1"><div class="spinner"></div>Loading…</div>';
-
-  try {
-    const res  = await fetch('/.netlify/functions/gallery-data?action=list');
-    const data = await res.json();
-    if (res.ok && data.images) {
-      _galleryImages = data.images;
-      renderAdminGallery();
-    } else {
-      grid.innerHTML = '<div style="grid-column:1/-1;color:rgba(255,255,255,0.25);font-size:0.78rem;padding:20px;text-align:center;">No photos yet</div>';
-    }
-  } catch(e) {
-    grid.innerHTML = '<div style="grid-column:1/-1;color:#f87f8c;font-size:0.78rem;padding:20px;text-align:center;">Failed to load</div>';
-  }
-}
-
-function renderAdminGallery() {
-  const grid = document.getElementById('admin-gallery-grid');
-  if (!_galleryImages.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;color:rgba(255,255,255,0.25);font-size:0.78rem;padding:20px;text-align:center;">No photos uploaded yet</div>';
-    return;
-  }
-  grid.innerHTML = _galleryImages.map(img => `
-    <div style="position:relative;border-radius:8px;overflow:hidden;background:var(--d3);">
-      <img src="${esc(img.url)}" alt="" style="width:100%;height:140px;object-fit:cover;display:block;">
-      <div style="padding:8px 10px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gl);margin-bottom:2px;">${esc(img.category||'')}</div>
-        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(img.caption||'—')}</div>
-      </div>
-      <button onclick="deleteGalleryImage('${img.id}','${esc(img.storagePath||'')}')" style="position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(232,54,74,0.8);border:none;color:#fff;font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;" onmouseover="this.style.background='rgba(232,54,74,1)'" onmouseout="this.style.background='rgba(232,54,74,0.8)'">&times;</button>
-    </div>
-  `).join('');
-}
-
-async function deleteGalleryImage(id, storagePath) {
-  if (!confirm('Delete this photo?')) return;
-  try {
-    const res = await fetch('/.netlify/functions/gallery-data?action=delete', {
-      method:  'DELETE',
-      headers: apiHeaders(),
-      body:    JSON.stringify({ id, storagePath }),
-    });
-    const data = await res.json();
-    if (res.ok && data.success) {
-      toast('Photo deleted');
-      loadAdminGallery();
-    } else {
-      toast(data.error || 'Delete failed','e');
-    }
-  } catch(e) { toast('Network error','e'); }
-}
-
-/* ════════════════════════════════
-   HELPERS
-════════════════════════════════ */
-function esc(s){ const d=document.createElement('div'); d.textContent=String(s||''); return d.innerHTML; }
-function emptyState(msg){ return `<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg><p>${msg}</p></div>`; }
+function esc(s){const d=document.createElement('div');d.textContent=String(s||'');return d.innerHTML;}
+function emptyState(msg){return`<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg><p>${msg}</p></div>`;}
 
 let _toastTimer;
-function toast(msg, type=''){
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'show' + (type==='e' ? ' error' : '');
+function toast(msg,type=''){
+  const el=document.getElementById('toast');
+  el.textContent=msg;
+  el.className='show'+(type==='e'?' error':'');
   clearTimeout(_toastTimer);
-  _toastTimer = setTimeout(()=>{ el.className=''; }, 2800);
+  _toastTimer=setTimeout(()=>{el.className='';},2800);
 }
 </script>
 </body>
