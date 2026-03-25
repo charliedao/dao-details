@@ -992,6 +992,9 @@ function closeEditModal(){
 
 async function saveEditBooking(){
   if(!_editId) return;
+  // ── Snapshot ID immediately — closeEditModal() will null _editId ──
+  const bookingId = _editId;
+
   const f=id=>document.getElementById(id)?.value.trim()||'';
   const first=f('eb-first'),last=f('eb-last');
   if(!first){toast('Enter first name','e');return;}
@@ -1025,7 +1028,7 @@ async function saveEditBooking(){
   };
 
   // ── Optimistic local update so UI changes instantly ──
-  const idx=_bookings.findIndex(x=>x._id===_editId);
+  const idx=_bookings.findIndex(x=>x._id===bookingId);
   const previousBooking=idx!==-1?{..._bookings[idx]}:null;
   if(idx!==-1){
     _bookings[idx]={..._bookings[idx],...updatedFields};
@@ -1045,7 +1048,7 @@ async function saveEditBooking(){
       method:'PUT',
       headers:apiHeaders(),
       body:JSON.stringify({
-        id:_editId,
+        id:bookingId,
         collection:'bookings',
         ...updatedFields,
       }),
