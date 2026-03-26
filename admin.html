@@ -257,8 +257,162 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
 #toast.show{transform:translateY(0);opacity:1;}
 #toast.error{border-color:rgba(232,54,74,0.25);color:#f87f8c;}
 
+/* ══════════════════════════════════════════
+   INVOICE MAKER
+══════════════════════════════════════════ */
+.invoice-layout{display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start;}
+.invoice-controls{display:flex;flex-direction:column;gap:0;}
+.inv-panel{background:var(--d4);border:1px solid rgba(255,255,255,0.06);border-radius:var(--r);padding:20px;margin-bottom:16px;}
+.inv-panel-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gg);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(72,184,43,0.1);display:flex;align-items:center;gap:8px;}
+.inv-panel-title svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.inv-field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px;}
+.inv-field:last-child{margin-bottom:0;}
+.inv-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.28);}
+.inv-input{background:rgba(255,255,255,0.04);border:1.5px solid rgba(255,255,255,0.07);border-radius:7px;padding:9px 12px;font-family:'Barlow',sans-serif;font-size:0.82rem;color:var(--w);outline:none;width:100%;transition:border-color .2s,background .2s;}
+.inv-input::placeholder{color:rgba(255,255,255,0.15);}
+.inv-input:focus{border-color:rgba(72,184,43,0.45);background:rgba(72,184,43,0.04);}
+.inv-input-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.inv-textarea{resize:vertical;min-height:56px;font-family:'Barlow',sans-serif;}
+
+/* Line items */
+.line-items-table{width:100%;border-collapse:collapse;margin-bottom:10px;}
+.line-items-table th{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.54rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.25);padding:6px 8px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.06);}
+.line-items-table td{padding:5px 4px;vertical-align:middle;}
+.li-input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:5px;padding:7px 9px;font-family:'Barlow',sans-serif;font-size:0.78rem;color:var(--w);outline:none;width:100%;transition:border-color .2s;}
+.li-input:focus{border-color:rgba(72,184,43,0.4);}
+.li-input::placeholder{color:rgba(255,255,255,0.13);}
+.li-input.price{text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;}
+.li-del{width:28px;height:28px;border-radius:5px;background:rgba(232,54,74,0.08);border:none;color:rgba(232,54,74,0.5);font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0;}
+.li-del:hover{background:rgba(232,54,74,0.18);color:#f87f8c;}
+.add-line-btn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;padding:7px 14px;border-radius:6px;border:1px dashed rgba(72,184,43,0.25);background:transparent;color:rgba(72,184,43,0.6);transition:all .18s;width:100%;}
+.add-line-btn:hover{border-color:rgba(72,184,43,0.5);color:var(--gl);background:rgba(72,184,43,0.05);}
+
+/* Tax / discount row */
+.inv-calc-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.inv-calc-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em;color:rgba(255,255,255,0.4);}
+.inv-calc-input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:5px;padding:5px 9px;font-family:'Barlow',sans-serif;font-size:0.78rem;color:var(--w);outline:none;width:80px;text-align:right;}
+.inv-calc-input:focus{border-color:rgba(72,184,43,0.4);}
+.inv-total-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0 0;}
+.inv-total-label{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.14em;color:rgba(255,255,255,0.6);}
+.inv-total-val{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--gg);}
+
+/* Export buttons */
+.export-btns{display:flex;flex-direction:column;gap:10px;}
+.exp-btn{display:flex;align-items:center;justify-content:center;gap:9px;font-family:'Bebas Neue',sans-serif;font-size:0.92rem;letter-spacing:0.18em;padding:13px 18px;border:none;border-radius:8px;transition:all .18s;}
+.exp-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.exp-btn.pdf{background:var(--g);color:var(--w);box-shadow:0 4px 16px rgba(42,122,24,0.35);}
+.exp-btn.pdf:hover{background:var(--gm);transform:translateY(-1px);}
+.exp-btn.img{background:rgba(59,130,246,0.15);color:#93c5fd;border:1px solid rgba(59,130,246,0.2);}
+.exp-btn.img:hover{background:rgba(59,130,246,0.25);transform:translateY(-1px);}
+.exp-btn.copy{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.08);}
+.exp-btn.copy:hover{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);}
+.exp-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none!important;}
+
+/* ── INVOICE PREVIEW ── */
+.invoice-preview-wrap{
+  position:sticky;top:88px;
+  background:var(--d4);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:var(--r);
+  padding:24px;
+  overflow:hidden;
+}
+.inv-preview-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.inv-preview-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06);}
+
+/* THE ACTUAL INVOICE (white paper) */
+#invoice-doc{
+  background:#fff;
+  color:#1a1a1a;
+  font-family:'Barlow',sans-serif;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+  min-height:600px;
+  width:100%;
+}
+.inv-doc-header{
+  background:#0b0b0b;
+  padding:28px 32px 22px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+}
+.inv-doc-logo-wrap{display:flex;align-items:center;gap:14px;}
+.inv-doc-logo{height:44px;object-fit:contain;}
+.inv-doc-logo-text{display:flex;flex-direction:column;}
+.inv-doc-biz-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.14em;color:#fff;line-height:1;}
+.inv-doc-biz-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.56rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(111,217,82,0.75);margin-top:2px;}
+.inv-doc-header-right{text-align:right;}
+.inv-doc-invoice-word{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:0.16em;color:#6fd952;line-height:1;}
+.inv-doc-num{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.12em;color:rgba(255,255,255,0.5);margin-top:2px;}
+.inv-doc-date{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px;}
+
+.inv-doc-meta{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:0;
+  border-bottom:3px solid #6fd952;
+}
+.inv-doc-meta-cell{padding:18px 24px;border-right:1px solid #e8e8e8;}
+.inv-doc-meta-cell:last-child{border-right:none;}
+.inv-doc-meta-key{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.54rem;letter-spacing:0.22em;text-transform:uppercase;color:#999;margin-bottom:5px;}
+.inv-doc-meta-val{font-family:'Barlow',sans-serif;font-weight:600;font-size:0.84rem;color:#111;line-height:1.4;}
+.inv-doc-meta-val.big{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:#2a7a18;}
+
+.inv-doc-body{padding:24px 24px 0;}
+.inv-doc-items{width:100%;border-collapse:collapse;margin-bottom:0;}
+.inv-doc-items thead tr{background:#f6f6f6;border-bottom:2px solid #e0e0e0;}
+.inv-doc-items th{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:#777;padding:10px 14px;text-align:left;}
+.inv-doc-items th.right{text-align:right;}
+.inv-doc-items td{padding:11px 14px;font-size:0.84rem;color:#333;border-bottom:1px solid #f0f0f0;vertical-align:top;}
+.inv-doc-items td.right{text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#111;}
+.inv-doc-items td.desc-cell{color:#555;font-size:0.75rem;font-style:italic;padding-top:3px;}
+.inv-doc-items tbody tr:last-child td{border-bottom:none;}
+.inv-doc-items tbody tr:hover{background:#fafafa;}
+
+.inv-doc-totals{display:flex;justify-content:flex-end;padding:14px 24px 0;}
+.inv-doc-totals-table{width:260px;}
+.inv-doc-totals-table td{padding:5px 10px;font-size:0.82rem;color:#555;}
+.inv-doc-totals-table td.right{text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#333;}
+.inv-doc-totals-table tr.total-row{border-top:2px solid #2a7a18;}
+.inv-doc-totals-table tr.total-row td{padding-top:10px;color:#111;}
+.inv-doc-totals-table tr.total-row td.right{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.06em;color:#2a7a18;}
+
+.inv-doc-footer-area{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:18px 24px 0;border-top:1px solid #eee;padding-top:16px;}
+.inv-doc-footer-cell{}
+.inv-doc-footer-label{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.54rem;letter-spacing:0.2em;text-transform:uppercase;color:#aaa;margin-bottom:5px;}
+.inv-doc-footer-val{font-size:0.78rem;color:#555;line-height:1.5;white-space:pre-wrap;}
+
+.inv-doc-bottom-bar{
+  margin-top:20px;
+  background:#0b0b0b;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.inv-doc-bottom-left{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.64rem;letter-spacing:0.1em;color:rgba(255,255,255,0.35);}
+.inv-doc-bottom-right{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.6rem;letter-spacing:0.14em;color:rgba(111,217,82,0.6);}
+
+/* Color theme options */
+.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;}
+.theme-swatch{width:28px;height:28px;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:all .18s;}
+.theme-swatch:hover{transform:scale(1.12);}
+.theme-swatch.active{border-color:var(--w);box-shadow:0 0 0 2px rgba(255,255,255,0.15);}
+
+@media(max-width:1100px){.invoice-layout{grid-template-columns:1fr;}.invoice-preview-wrap{position:static;}}
 @media(max-width:900px){.sidebar{display:none;}.main-content{padding:18px;}.form-row{grid-template-columns:1fr;}.stat-row{grid-template-columns:repeat(2,1fr);}.edit-row{grid-template-columns:1fr;}.edit-row.triple{grid-template-columns:1fr;}}
 @media(max-width:600px){.topbar{padding:0 16px;}.topbar-title,.topbar-tag{display:none;}.modal-detail-grid{grid-template-columns:1fr;}}
+
+/* Print styles for invoice */
+@media print{
+  body *{visibility:hidden!important;}
+  #invoice-doc,#invoice-doc *{visibility:visible!important;}
+  #invoice-doc{position:fixed!important;left:0!important;top:0!important;width:100%!important;box-shadow:none!important;border-radius:0!important;}
+}
 </style>
 </head>
 <body>
@@ -324,6 +478,10 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
       </div>
       <div class="nav-item" onclick="goPage('add-booking')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Add Booking
+      </div>
+      <div class="sidebar-section">Tools</div>
+      <div class="nav-item" onclick="goPage('invoice')">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>Invoice Maker
       </div>
     </div>
 
@@ -447,7 +605,6 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
             <div class="form-group"><label class="form-label">Date *</label><input class="form-input" type="date" id="nb-date"></div>
             <div class="form-group">
               <label class="form-label">Time * <span style="font-size:0.5rem;color:rgba(72,184,43,0.5);letter-spacing:0.1em;">(EST)</span></label>
-              <!-- Structured time picker -->
               <div class="time-picker-wrap" id="nb-time-picker">
                 <div class="time-select-row">
                   <select id="nb-time-hour" class="form-input form-select">
@@ -490,6 +647,212 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
           <button class="form-submit" id="nb-submit" onclick="saveBooking()">Save Booking</button>
         </div>
       </div>
+
+      <!-- ═══════════════════════════════════ INVOICE MAKER ═══════════════════════════════════ -->
+      <div class="page" id="page-invoice">
+        <div class="page-hdr">
+          <div class="page-hdr-left">
+            <h1>Invoice Maker</h1>
+            <p>Create &amp; export professional invoices</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="hdr-btn secondary" onclick="invReset()">Clear Form</button>
+            <button class="hdr-btn secondary" onclick="invFromBooking()">Import from Booking</button>
+          </div>
+        </div>
+
+        <div class="invoice-layout">
+          <!-- LEFT: Controls -->
+          <div class="invoice-controls">
+
+            <!-- Business Info -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Your Business
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Business Name</label>
+                <input class="inv-input" id="inv-biz-name" value="Dao Detailing" oninput="invUpdate()">
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Tagline / Subtitle</label>
+                <input class="inv-input" id="inv-biz-tag" value="Premium Mobile Auto Detailing" oninput="invUpdate()">
+              </div>
+              <div class="inv-input-row">
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Phone</label>
+                  <input class="inv-input" id="inv-biz-phone" placeholder="(202) 555-0100" oninput="invUpdate()">
+                </div>
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Email</label>
+                  <input class="inv-input" id="inv-biz-email" placeholder="info@daodetailing.com" oninput="invUpdate()">
+                </div>
+              </div>
+              <div class="inv-field" style="margin-top:12px;">
+                <label class="inv-label">Website / Social</label>
+                <input class="inv-input" id="inv-biz-web" placeholder="daodetailing.com · @daodetailing" oninput="invUpdate()">
+              </div>
+            </div>
+
+            <!-- Invoice Meta -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Invoice Details
+              </div>
+              <div class="inv-input-row">
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Invoice #</label>
+                  <input class="inv-input" id="inv-num" placeholder="INV-001" oninput="invUpdate()">
+                </div>
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Date</label>
+                  <input class="inv-input" type="date" id="inv-date" oninput="invUpdate()">
+                </div>
+              </div>
+              <div class="inv-field" style="margin-top:12px;">
+                <label class="inv-label">Due Date / Payment Terms</label>
+                <input class="inv-input" id="inv-due" placeholder="Due on receipt · Cash / Venmo / Zelle" oninput="invUpdate()">
+              </div>
+            </div>
+
+            <!-- Bill To -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Bill To
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Customer Name</label>
+                <input class="inv-input" id="inv-cust-name" placeholder="John Doe" oninput="invUpdate()">
+              </div>
+              <div class="inv-input-row">
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Phone</label>
+                  <input class="inv-input" id="inv-cust-phone" placeholder="(202) 555-0200" oninput="invUpdate()">
+                </div>
+                <div class="inv-field" style="margin-bottom:0;">
+                  <label class="inv-label">Email</label>
+                  <input class="inv-input" id="inv-cust-email" placeholder="john@email.com" oninput="invUpdate()">
+                </div>
+              </div>
+              <div class="inv-field" style="margin-top:12px;">
+                <label class="inv-label">Vehicle</label>
+                <input class="inv-input" id="inv-cust-vehicle" placeholder="2021 Honda Accord — White" oninput="invUpdate()">
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Service Address</label>
+                <input class="inv-input" id="inv-cust-address" placeholder="123 Main St, Washington DC 20001" oninput="invUpdate()">
+              </div>
+            </div>
+
+            <!-- Line Items -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                Line Items
+              </div>
+              <table class="line-items-table">
+                <thead><tr>
+                  <th style="width:40%;">Service / Item</th>
+                  <th style="width:28%;">Description</th>
+                  <th style="width:10%;text-align:center;">Qty</th>
+                  <th style="width:14%;text-align:right;">Amount</th>
+                  <th style="width:8%;"></th>
+                </tr></thead>
+                <tbody id="inv-line-items"></tbody>
+              </table>
+              <button class="add-line-btn" onclick="invAddLine()">+ Add Line Item</button>
+
+              <!-- Totals -->
+              <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);">
+                <div class="inv-calc-row">
+                  <span class="inv-calc-label">Subtotal</span>
+                  <span id="inv-subtotal-disp" style="font-family:'Barlow Condensed';font-weight:700;font-size:0.82rem;color:rgba(255,255,255,0.6);">$0.00</span>
+                </div>
+                <div class="inv-calc-row">
+                  <span class="inv-calc-label">Discount ($)</span>
+                  <input class="inv-calc-input" type="number" id="inv-discount" value="0" min="0" oninput="invCalcTotals()" placeholder="0">
+                </div>
+                <div class="inv-calc-row">
+                  <span class="inv-calc-label">Tax (%)</span>
+                  <input class="inv-calc-input" type="number" id="inv-tax" value="0" min="0" max="100" step="0.1" oninput="invCalcTotals()" placeholder="0">
+                </div>
+                <div class="inv-total-row">
+                  <span class="inv-total-label">Total Due</span>
+                  <span class="inv-total-val" id="inv-total-disp">$0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes & Terms -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Notes &amp; Terms
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Notes to Customer</label>
+                <textarea class="inv-input inv-textarea" id="inv-notes" placeholder="Thank you for your business! Feel free to reach out with any questions." oninput="invUpdate()" rows="3"></textarea>
+              </div>
+              <div class="inv-field">
+                <label class="inv-label">Payment Instructions</label>
+                <input class="inv-input" id="inv-payment" placeholder="Venmo: @dao-detailing · Cash accepted · Zelle on request" oninput="invUpdate()">
+              </div>
+            </div>
+
+            <!-- Color Theme -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                Accent Color
+              </div>
+              <div class="theme-swatches" id="theme-swatches">
+                <div class="theme-swatch active" data-color="#2a7a18" data-light="#6fd952" style="background:#2a7a18;" onclick="invSetTheme(this)" title="Green (Default)"></div>
+                <div class="theme-swatch" data-color="#1e40af" data-light="#60a5fa" style="background:#1e40af;" onclick="invSetTheme(this)" title="Blue"></div>
+                <div class="theme-swatch" data-color="#7c3aed" data-light="#a78bfa" style="background:#7c3aed;" onclick="invSetTheme(this)" title="Purple"></div>
+                <div class="theme-swatch" data-color="#be185d" data-light="#f472b6" style="background:#be185d;" onclick="invSetTheme(this)" title="Pink"></div>
+                <div class="theme-swatch" data-color="#b45309" data-light="#fbbf24" style="background:#b45309;" onclick="invSetTheme(this)" title="Amber"></div>
+                <div class="theme-swatch" data-color="#0f766e" data-light="#2dd4bf" style="background:#0f766e;" onclick="invSetTheme(this)" title="Teal"></div>
+                <div class="theme-swatch" data-color="#1e293b" data-light="#94a3b8" style="background:#1e293b;border:1px solid rgba(255,255,255,0.1);" onclick="invSetTheme(this)" title="Slate"></div>
+              </div>
+            </div>
+
+            <!-- Export -->
+            <div class="inv-panel">
+              <div class="inv-panel-title">
+                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export Invoice
+              </div>
+              <div class="export-btns">
+                <button class="exp-btn pdf" onclick="invExportPDF()">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  Save / Print as PDF
+                </button>
+                <button class="exp-btn img" onclick="invExportImage()">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  Download as Image
+                </button>
+                <button class="exp-btn copy" onclick="invCopyText()">
+                  <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  Copy as Text Summary
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Live Preview -->
+          <div class="invoice-preview-wrap">
+            <div class="inv-preview-label">Live Preview</div>
+            <div id="invoice-doc">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end invoice page -->
 
     </div>
   </div>
@@ -603,7 +966,22 @@ img{display:block;}a{text-decoration:none;color:inherit;}button{cursor:pointer;}
   </div>
 </div>
 
+<!-- IMPORT BOOKING MODAL -->
+<div class="modal-overlay" id="import-booking-modal">
+  <div class="modal-box" style="max-width:480px;">
+    <div class="modal-title">
+      <span>Import from Booking</span>
+      <button class="modal-close" onclick="document.getElementById('import-booking-modal').classList.remove('show')">&#215;</button>
+    </div>
+    <p style="font-size:0.78rem;color:rgba(255,255,255,0.4);margin-bottom:14px;">Select a booking to pre-fill the invoice form.</p>
+    <div id="import-booking-list" style="display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;"></div>
+  </div>
+</div>
+
 <div id="toast"></div>
+
+<!-- html2canvas for image export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
 window._adminToken = null;
@@ -672,44 +1050,21 @@ const DOWS=['Su','Mo','Tu','We','Th','Fr','Sa'];
 function token(){return window._adminToken||'';}
 function apiHeaders(){return{'Content-Type':'application/json','X-Admin-Token':token()};}
 
-/* ── EST TIME HELPERS ──
-   All times stored as "H:MM AM/PM EST" in the database.
-   We always display and save in Eastern Time regardless of browser timezone.
-*/
-
-/**
- * Compose a clean EST time string from parts.
- * e.g. hour=9, min="30", ampm="AM" → "9:30 AM EST"
- */
 function buildEstTimeString(hour, min, ampm){
   return `${hour}:${String(min).padStart(2,'0')} ${ampm} EST`;
 }
-
-/**
- * Parse a stored time string (like "9:30 AM EST" or "9:30 AM")
- * back into {hour, min, ampm} for pre-filling inputs.
- */
 function parseTimeString(timeStr){
   if(!timeStr) return {hour:'',min:'00',ampm:'AM'};
   const clean=timeStr.replace(/\s*EST\s*/i,'').trim();
   const match=clean.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
-  if(match){
-    return{hour:String(parseInt(match[1])),min:match[2],ampm:match[3].toUpperCase()};
-  }
+  if(match){return{hour:String(parseInt(match[1])),min:match[2],ampm:match[3].toUpperCase()};}
   return{hour:'',min:'00',ampm:'AM'};
 }
-
-/**
- * Get final time string from a picker (prefix 'nb' or 'eb').
- * Checks custom toggle first; falls back to dropdowns.
- * Always appends " EST".
- */
 function getTimeValue(prefix){
   const customOn=document.getElementById(`${prefix}-custom-toggle`)?.checked;
   if(customOn){
     const custom=(document.getElementById(`${prefix}-custom-time`)?.value||'').trim();
     if(!custom) return '';
-    // Append EST if not already there
     return custom.replace(/\s*EST\s*$/i,'').trim()+' EST';
   }
   const hour=document.getElementById(`${prefix}-time-hour`)?.value||'';
@@ -718,10 +1073,6 @@ function getTimeValue(prefix){
   if(!hour) return '';
   return buildEstTimeString(hour, min, ampm);
 }
-
-/**
- * Toggle between structured and custom time inputs.
- */
 function toggleCustomTime(prefix){
   const on=document.getElementById(`${prefix}-custom-toggle`)?.checked;
   const wrap=document.getElementById(`${prefix}-custom-time-wrap`);
@@ -730,50 +1081,27 @@ function toggleCustomTime(prefix){
   if(row) row.style.opacity=on?'0.3':'1';
   if(row) row.style.pointerEvents=on?'none':'auto';
 }
-
-/**
- * Pre-fill a time picker (prefix 'eb') from a stored time string.
- */
 function prefillTimePicker(prefix, timeStr){
   const{hour,min,ampm}=parseTimeString(timeStr);
   const hourSel=document.getElementById(`${prefix}-time-hour`);
   const minSel=document.getElementById(`${prefix}-time-min`);
   const ampmSel=document.getElementById(`${prefix}-time-ampm`);
   if(hourSel) hourSel.value=hour;
-  if(minSel){
-    // Find closest standard minute or set custom
-    const roundedMin=['00','15','30','45'].includes(min)?min:'00';
-    minSel.value=roundedMin;
-  }
+  if(minSel){const roundedMin=['00','15','30','45'].includes(min)?min:'00'; minSel.value=roundedMin;}
   if(ampmSel) ampmSel.value=ampm;
-
-  // If time doesn't match a standard slot, use custom
   const needsCustom=timeStr&&!timeStr.match(/^\d{1,2}:(00|15|30|45)\s*(AM|PM)(\s*EST)?$/i);
   const toggle=document.getElementById(`${prefix}-custom-toggle`);
-  if(needsCustom&&toggle){
-    toggle.checked=true;
-    toggleCustomTime(prefix);
-    const customInput=document.getElementById(`${prefix}-custom-time`);
-    if(customInput) customInput.value=timeStr.replace(/\s*EST\s*$/i,'').trim();
-  }else if(toggle){
-    toggle.checked=false;
-    toggleCustomTime(prefix);
-  }
+  if(needsCustom&&toggle){toggle.checked=true;toggleCustomTime(prefix);const ci=document.getElementById(`${prefix}-custom-time`);if(ci)ci.value=timeStr.replace(/\s*EST\s*$/i,'').trim();}
+  else if(toggle){toggle.checked=false;toggleCustomTime(prefix);}
 }
 
-/* ── INIT ── */
 function initDashboard(){
   document.getElementById('dash-date').textContent=
     new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   loadAll();
 }
+async function loadAll(){await Promise.all([loadInquiries(),loadBookings()]);renderDashboard();}
 
-async function loadAll(){
-  await Promise.all([loadInquiries(),loadBookings()]);
-  renderDashboard();
-}
-
-/* ── FETCH DATA ── */
 async function loadInquiries(){
   try{
     const res=await fetch('/.netlify/functions/admin-data?collection=inquiries',{headers:apiHeaders()});
@@ -782,7 +1110,6 @@ async function loadInquiries(){
     else{toast(data.error||'Failed to load inquiries','e');}
   }catch(e){toast('Network error loading inquiries','e');}
 }
-
 async function loadBookings(){
   try{
     const res=await fetch('/.netlify/functions/admin-data?collection=bookings',{headers:apiHeaders()});
@@ -792,51 +1119,30 @@ async function loadBookings(){
   }catch(e){toast('Network error loading bookings','e');}
 }
 
-/* ── DASHBOARD ── */
 function renderDashboard(){
   document.getElementById('st-inq').textContent=_inquiries.length;
   document.getElementById('st-new').textContent=_inquiries.filter(i=>i.status==='new').length;
   document.getElementById('st-book').textContent=_bookings.length;
   document.getElementById('st-done').textContent=_bookings.filter(b=>b.status==='completed').length;
-
   const ri=_inquiries.slice(0,5);
   document.getElementById('dash-inq-table').innerHTML=ri.length?renderInqRows(ri):emptyState('No inquiries yet');
-
   const today=new Date().toISOString().split('T')[0];
-  const ub=_bookings.filter(b=>(b.status==='confirmed'||b.status==='pending')&&b.date>=today)
-    .sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
+  const ub=_bookings.filter(b=>(b.status==='confirmed'||b.status==='pending')&&b.date>=today).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
   document.getElementById('dash-book-table').innerHTML=ub.length?renderBookRows(ub):emptyState('No upcoming bookings');
 }
-
-/* ── BADGES ── */
 function updateBadges(){
   const n=_inquiries.filter(i=>i.status==='new').length;
-  const nb=document.getElementById('notif-badge');
-  const ib=document.getElementById('inq-nav-badge');
-  if(nb){nb.textContent=n; nb.style.display=n?'flex':'none';}
-  if(ib){ib.textContent=n; ib.style.display=n?'inline':'none';}
+  const nb=document.getElementById('notif-badge');const ib=document.getElementById('inq-nav-badge');
+  if(nb){nb.textContent=n;nb.style.display=n?'flex':'none';}
+  if(ib){ib.textContent=n;ib.style.display=n?'inline':'none';}
   const u=_bookings.filter(b=>b.status==='confirmed'||b.status==='pending').length;
   const bb=document.getElementById('book-nav-badge');
-  if(bb){bb.textContent=u; bb.style.display=u?'inline':'none';}
+  if(bb){bb.textContent=u;bb.style.display=u?'inline':'none';}
 }
-
-/* ── INQUIRIES ── */
-function filterInq(f,btn){
-  _inqFilter=f;
-  document.querySelectorAll('#page-inquiries .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); renderInquiries(f);
-}
-
-function renderInquiries(f){
-  let data=_inquiries;
-  if(f!=='all') data=data.filter(i=>i.status===f);
-  document.getElementById('inq-table').innerHTML=data.length?renderInqRows(data):emptyState('No inquiries found');
-}
-
+function filterInq(f,btn){_inqFilter=f;document.querySelectorAll('#page-inquiries .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderInquiries(f);}
+function renderInquiries(f){let data=_inquiries;if(f!=='all')data=data.filter(i=>i.status===f);document.getElementById('inq-table').innerHTML=data.length?renderInqRows(data):emptyState('No inquiries found');}
 function renderInqRows(data){
-  return`<table class="tbl"><thead><tr>
-    <th>Customer</th><th>Service</th><th>Vehicle</th><th>Pref. Date</th><th>Status</th><th>Submitted</th><th>Actions</th>
-  </tr></thead><tbody>${data.map(i=>`<tr>
+  return`<table class="tbl"><thead><tr><th>Customer</th><th>Service</th><th>Vehicle</th><th>Pref. Date</th><th>Status</th><th>Submitted</th><th>Actions</th></tr></thead><tbody>${data.map(i=>`<tr>
     <td><div class="cell-name">${esc(i.name)}</div><div class="cell-sub">${esc(i.phone)}</div></td>
     <td><div>${esc(i.service)}</div><div class="cell-sub">${esc(i.price)}</div></td>
     <td style="color:rgba(255,255,255,0.55);font-size:0.78rem;">${esc(i.vehicle||'—')}</td>
@@ -844,31 +1150,15 @@ function renderInqRows(data){
     <td><span class="pill pill-${i.status||'new'}">${i.status||'new'}</span></td>
     <td style="font-size:0.75rem;color:rgba(255,255,255,0.3);">${esc(i.submitted||'—')}</td>
     <td>
-      <button class="act-btn act-view"    onclick="openModal('${i._id}','inquiries')">View</button>
+      <button class="act-btn act-view" onclick="openModal('${i._id}','inquiries')">View</button>
       <button class="act-btn act-confirm" onclick="convertToBooking('${i._id}')">Book</button>
-      <button class="act-btn act-delete"  onclick="deleteDoc('${i._id}','inquiries')">Del</button>
-    </td>
-  </tr>`).join('')}</tbody></table>`;
+      <button class="act-btn act-delete" onclick="deleteDoc('${i._id}','inquiries')">Del</button>
+    </td></tr>`).join('')}</tbody></table>`;
 }
-
-/* ── BOOKINGS ── */
-function filterBook(f,btn){
-  _bookFilter=f;
-  document.querySelectorAll('#page-bookings .filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active'); renderBookings(f);
-}
-
-function renderBookings(f){
-  let data=_bookings;
-  if(f!=='all') data=data.filter(b=>b.status===f);
-  data=[...data].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
-  document.getElementById('book-table').innerHTML=data.length?renderBookRows(data):emptyState('No bookings found');
-}
-
+function filterBook(f,btn){_bookFilter=f;document.querySelectorAll('#page-bookings .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderBookings(f);}
+function renderBookings(f){let data=_bookings;if(f!=='all')data=data.filter(b=>b.status===f);data=[...data].sort((a,b)=>(b.date||'').localeCompare(a.date||''));document.getElementById('book-table').innerHTML=data.length?renderBookRows(data):emptyState('No bookings found');}
 function renderBookRows(data){
-  return`<table class="tbl"><thead><tr>
-    <th>Customer</th><th>Service</th><th>Date &amp; Time</th><th>Vehicle</th><th>Price</th><th>Status</th><th>Actions</th>
-  </tr></thead><tbody>${data.map(b=>`<tr>
+  return`<table class="tbl"><thead><tr><th>Customer</th><th>Service</th><th>Date &amp; Time</th><th>Vehicle</th><th>Price</th><th>Status</th><th>Actions</th></tr></thead><tbody>${data.map(b=>`<tr>
     <td><div class="cell-name">${esc(b.name)}</div><div class="cell-sub">${esc(b.phone)}</div></td>
     <td>${esc(b.service)}</td>
     <td><div style="font-size:0.82rem;">${esc(b.date)}</div><div class="cell-sub">${esc(b.time)}</div></td>
@@ -876,502 +1166,581 @@ function renderBookRows(data){
     <td style="font-family:'Bebas Neue';font-size:1.1rem;color:var(--gg);letter-spacing:0.06em;">${esc(b.price||'—')}</td>
     <td><span class="pill pill-${b.status||'pending'}">${b.status||'pending'}</span></td>
     <td>
-      <button class="act-btn act-view"   onclick="openModal('${b._id}','bookings')">View</button>
-      <button class="act-btn act-edit"   onclick="openEditModal('${b._id}')">Edit</button>
+      <button class="act-btn act-view" onclick="openModal('${b._id}','bookings')">View</button>
+      <button class="act-btn act-edit" onclick="openEditModal('${b._id}')">Edit</button>
       <button class="act-btn act-delete" onclick="deleteDoc('${b._id}','bookings')">Del</button>
-    </td>
-  </tr>`).join('')}</tbody></table>`;
+    </td></tr>`).join('')}</tbody></table>`;
 }
-
-/* ── ADD BOOKING ── */
-function autoPrice(){
-  const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};
-  const svc=document.getElementById('nb-service').value;
-  document.getElementById('nb-price').value=prices[svc]||'';
-}
-
-function autoEditPrice(){
-  const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};
-  const svc=document.getElementById('eb-service').value;
-  if(svc&&svc!=='custom'){
-    document.getElementById('eb-price').value=prices[svc]||document.getElementById('eb-price').value;
-  }
-}
+function autoPrice(){const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};const svc=document.getElementById('nb-service').value;document.getElementById('nb-price').value=prices[svc]||'';}
+function autoEditPrice(){const prices={'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'};const svc=document.getElementById('eb-service').value;if(svc&&svc!=='custom'){document.getElementById('eb-price').value=prices[svc]||document.getElementById('eb-price').value;}}
 
 async function saveBooking(){
   const f=id=>document.getElementById(id)?.value.trim()||'';
   const first=f('nb-first'),last=f('nb-last'),phone=f('nb-phone');
   const service=f('nb-service'),date=f('nb-date');
   const address=f('nb-address'),vehicle=f('nb-vehicle');
-
   if(!first||!last){toast('Enter customer name','e');return;}
   if(!phone){toast('Enter phone number','e');return;}
   if(!service){toast('Select a service','e');return;}
   if(!date){toast('Select a date','e');return;}
   if(!address){toast('Enter service address','e');return;}
   if(!vehicle){toast('Enter vehicle info','e');return;}
-
-  // Get time with EST enforcement
   const time=getTimeValue('nb');
   if(!time){toast('Select a time','e');return;}
-
   const btn=document.getElementById('nb-submit');
   btn.disabled=true; btn.textContent='Saving…';
-
   try{
     const res=await fetch('/.netlify/functions/admin-booking',{
       method:'POST',headers:apiHeaders(),
-      body:JSON.stringify({
-        name:`${first} ${last}`,phone,email:f('nb-email'),
-        address,vehicle,service,date,time,
-        price:f('nb-price')||({'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'}[service]||''),
-        status:f('nb-status')||'confirmed',
-        notes:f('nb-notes'),
-        timezone:'EST',
-      }),
+      body:JSON.stringify({name:`${first} ${last}`,phone,email:f('nb-email'),address,vehicle,service,date,time,price:f('nb-price')||({'Exterior Wash':'$60','Interior Detail':'$75','Full Detail':'$120'}[service]||''),status:f('nb-status')||'confirmed',notes:f('nb-notes'),timezone:'EST'}),
     });
     const data=await res.json();
     if(res.ok&&data.success){
       toast('Booking saved!');
-      ['nb-first','nb-last','nb-phone','nb-email','nb-address','nb-vehicle','nb-price','nb-notes']
-        .forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-      document.getElementById('nb-service').value='';
-      document.getElementById('nb-date').value='';
-      document.getElementById('nb-time-hour').value='';
-      document.getElementById('nb-time-min').value='00';
-      document.getElementById('nb-time-ampm').value='PM';
-      const tog=document.getElementById('nb-custom-toggle');
-      if(tog){tog.checked=false; toggleCustomTime('nb');}
-      await loadBookings();
-      goPage('bookings');
+      ['nb-first','nb-last','nb-phone','nb-email','nb-address','nb-vehicle','nb-price','nb-notes'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+      document.getElementById('nb-service').value='';document.getElementById('nb-date').value='';document.getElementById('nb-time-hour').value='';document.getElementById('nb-time-min').value='00';document.getElementById('nb-time-ampm').value='PM';
+      const tog=document.getElementById('nb-custom-toggle');if(tog){tog.checked=false;toggleCustomTime('nb');}
+      await loadBookings();goPage('bookings');
     }else{toast(data.error||'Error saving booking','e');}
   }catch(e){toast('Network error','e');}
-  finally{btn.disabled=false; btn.textContent='Save Booking';}
+  finally{btn.disabled=false;btn.textContent='Save Booking';}
 }
 
-/* ── EDIT BOOKING MODAL ── */
 function openEditModal(id){
-  const b=_bookings.find(x=>x._id===id);
-  if(!b) return;
+  const b=_bookings.find(x=>x._id===id);if(!b)return;
   _editId=id;
-
-  // Split name
-  const parts=(b.name||'').split(' ');
-  const first=parts[0]||'';
-  const last=parts.slice(1).join(' ')||'';
-
+  const parts=(b.name||'').split(' ');const first=parts[0]||'';const last=parts.slice(1).join(' ')||'';
   const sv=(elId,val)=>{const el=document.getElementById(elId);if(el)el.value=val||'';};
-  sv('eb-first',first); sv('eb-last',last);
-  sv('eb-phone',b.phone); sv('eb-email',b.email);
-  sv('eb-address',b.address); sv('eb-vehicle',b.vehicle);
-  sv('eb-date',b.date); sv('eb-price',b.price);
-  sv('eb-notes',b.notes);
-
-  // Service
+  sv('eb-first',first);sv('eb-last',last);sv('eb-phone',b.phone);sv('eb-email',b.email);sv('eb-address',b.address);sv('eb-vehicle',b.vehicle);sv('eb-date',b.date);sv('eb-price',b.price);sv('eb-notes',b.notes);
   const svcEl=document.getElementById('eb-service');
-  if(svcEl){
-    const knownServices=['Exterior Wash','Interior Detail','Full Detail'];
-    if(knownServices.includes(b.service)){svcEl.value=b.service;}
-    else{svcEl.value='custom';}
-  }
-
-  // Status
-  const statEl=document.getElementById('eb-status');
-  if(statEl) statEl.value=b.status||'confirmed';
-
-  // Pre-fill time picker
-  prefillTimePicker('eb', b.time||'');
-
+  if(svcEl){const k=['Exterior Wash','Interior Detail','Full Detail'];if(k.includes(b.service)){svcEl.value=b.service;}else{svcEl.value='custom';}}
+  const statEl=document.getElementById('eb-status');if(statEl)statEl.value=b.status||'confirmed';
+  prefillTimePicker('eb',b.time||'');
   document.getElementById('edit-modal').classList.add('show');
 }
-
-function closeEditModal(){
-  document.getElementById('edit-modal').classList.remove('show');
-  _editId=null;
-}
+function closeEditModal(){document.getElementById('edit-modal').classList.remove('show');_editId=null;}
 
 async function saveEditBooking(){
-  if(!_editId) return;
-  // ── Snapshot ID immediately — closeEditModal() will null _editId ──
-  const bookingId = _editId;
-
+  if(!_editId)return;
+  const bookingId=_editId;
   const f=id=>document.getElementById(id)?.value.trim()||'';
   const first=f('eb-first'),last=f('eb-last');
   if(!first){toast('Enter first name','e');return;}
-
-  const time=getTimeValue('eb');
-  if(!time){toast('Select a time','e');return;}
-
-  // Handle custom service name
-  let service=f('eb-service');
-  if(service==='custom'){
-    service=prompt('Enter the service name:','');
-    if(!service) return;
-  }
-
-  const btn=document.getElementById('eb-submit');
-  btn.disabled=true; btn.textContent='Saving…';
-
-  const updatedFields={
-    name:`${first} ${last}`.trim(),
-    phone:f('eb-phone'),
-    email:f('eb-email'),
-    address:f('eb-address'),
-    vehicle:f('eb-vehicle'),
-    service,
-    date:f('eb-date'),
-    time,
-    price:f('eb-price'),
-    status:f('eb-status'),
-    notes:f('eb-notes'),
-    timezone:'EST',
-  };
-
-  // ── Optimistic local update so UI changes instantly ──
-  const idx=_bookings.findIndex(x=>x._id===bookingId);
-  const previousBooking=idx!==-1?{..._bookings[idx]}:null;
-  if(idx!==-1){
-    _bookings[idx]={..._bookings[idx],...updatedFields};
-  }
-
-  // Close modals and refresh UI immediately
-  closeEditModal();
-  closeModal();
-  renderBookings(_bookFilter);
-  renderDashboard();
-  renderCal();
-  toast('Booking updated!');
-
-  // ── Then persist to backend ──
+  const time=getTimeValue('eb');if(!time){toast('Select a time','e');return;}
+  let service=f('eb-service');if(service==='custom'){service=prompt('Enter the service name:','');if(!service)return;}
+  const btn=document.getElementById('eb-submit');btn.disabled=true;btn.textContent='Saving…';
+  const updatedFields={name:`${first} ${last}`.trim(),phone:f('eb-phone'),email:f('eb-email'),address:f('eb-address'),vehicle:f('eb-vehicle'),service,date:f('eb-date'),time,price:f('eb-price'),status:f('eb-status'),notes:f('eb-notes'),timezone:'EST'};
+  const idx=_bookings.findIndex(x=>x._id===bookingId);const previousBooking=idx!==-1?{..._bookings[idx]}:null;if(idx!==-1)_bookings[idx]={..._bookings[idx],...updatedFields};
+  closeEditModal();closeModal();renderBookings(_bookFilter);renderDashboard();renderCal();toast('Booking updated!');
   try{
-    const res=await fetch('/.netlify/functions/admin-booking',{
-      method:'PUT',
-      headers:apiHeaders(),
-      body:JSON.stringify({
-        id:bookingId,
-        collection:'bookings',
-        ...updatedFields,
-      }),
-    });
+    const res=await fetch('/.netlify/functions/admin-booking',{method:'PUT',headers:apiHeaders(),body:JSON.stringify({id:bookingId,collection:'bookings',...updatedFields})});
     const data=await res.json();
-    if(!res.ok||!data.success){
-      // Rollback optimistic update on failure
-      if(previousBooking&&idx!==-1) _bookings[idx]=previousBooking;
-      renderBookings(_bookFilter);
-      renderDashboard();
-      renderCal();
-      toast(data.error||'Save failed — changes reverted','e');
-    } else {
-      // Full reload from server to confirm truth
-      await loadBookings();
-      renderDashboard();
-    }
-  }catch(e){
-    // Rollback on network error
-    if(previousBooking&&idx!==-1) _bookings[idx]=previousBooking;
-    renderBookings(_bookFilter);
-    renderDashboard();
-    renderCal();
-    toast('Network error — changes reverted','e');
-  }
-  finally{btn.disabled=false; btn.textContent='Save Changes';}
+    if(!res.ok||!data.success){if(previousBooking&&idx!==-1)_bookings[idx]=previousBooking;renderBookings(_bookFilter);renderDashboard();renderCal();toast(data.error||'Save failed — changes reverted','e');}
+    else{await loadBookings();renderDashboard();}
+  }catch(e){if(previousBooking&&idx!==-1)_bookings[idx]=previousBooking;renderBookings(_bookFilter);renderDashboard();renderCal();toast('Network error — changes reverted','e');}
+  finally{btn.disabled=false;btn.textContent='Save Changes';}
 }
 
-/* ── CONVERT INQUIRY → BOOKING ── */
 function convertToBooking(id){
-  const i=_inquiries.find(x=>x._id===id);
-  if(!i) return;
-  closeModal();
-  goPage('add-booking');
+  const i=_inquiries.find(x=>x._id===id);if(!i)return;
+  closeModal();goPage('add-booking');
   setTimeout(()=>{
     const[first,...rest]=(i.name||'').split(' ');
     const sv=(elId,v)=>{const el=document.getElementById(elId);if(el)el.value=v;};
-    sv('nb-first',first||''); sv('nb-last',rest.join(' ')||'');
-    sv('nb-phone',i.phone||''); sv('nb-email',i.email||'');
-    sv('nb-vehicle',i.vehicle||'');
-    sv('nb-notes',`Converted from inquiry. ${i.notes||''}`);
-    const svc=document.getElementById('nb-service');
-    if(svc)[...svc.options].forEach(o=>{if(o.value===i.service)svc.value=i.service;});
-    autoPrice();
+    sv('nb-first',first||'');sv('nb-last',rest.join(' ')||'');sv('nb-phone',i.phone||'');sv('nb-email',i.email||'');sv('nb-vehicle',i.vehicle||'');sv('nb-notes',`Converted from inquiry. ${i.notes||''}`);
+    const svc=document.getElementById('nb-service');if(svc)[...svc.options].forEach(o=>{if(o.value===i.service)svc.value=i.service;});autoPrice();
     updateStatus(id,'inquiries','pending');
   },120);
 }
 
-/* ── STATUS UPDATE ── */
 async function updateStatus(id,collection,status){
-  // Optimistic local update — UI changes instantly
   const arr=collection==='inquiries'?_inquiries:_bookings;
-  const idx=arr.findIndex(x=>x._id===id);
-  const prev=idx!==-1?arr[idx].status:null;
-  if(idx!==-1) arr[idx].status=status;
-  if(collection==='inquiries') renderInquiries(_inqFilter);
-  else renderBookings(_bookFilter);
-  renderDashboard(); renderCal(); updateBadges();
-
+  const idx=arr.findIndex(x=>x._id===id);const prev=idx!==-1?arr[idx].status:null;
+  if(idx!==-1)arr[idx].status=status;
+  if(collection==='inquiries')renderInquiries(_inqFilter);else renderBookings(_bookFilter);
+  renderDashboard();renderCal();updateBadges();
   try{
-    const res=await fetch('/.netlify/functions/admin-booking',{
-      method:'PUT',headers:apiHeaders(),
-      body:JSON.stringify({id,collection,status}),
-    });
+    const res=await fetch('/.netlify/functions/admin-booking',{method:'PUT',headers:apiHeaders(),body:JSON.stringify({id,collection,status})});
     const data=await res.json();
-    if(res.ok&&data.success){
-      toast('Status updated: '+status);
-      // Confirm from server
-      if(collection==='inquiries') await loadInquiries();
-      else await loadBookings();
-      renderDashboard();
-    }else{
-      // Rollback
-      if(idx!==-1) arr[idx].status=prev;
-      if(collection==='inquiries') renderInquiries(_inqFilter);
-      else renderBookings(_bookFilter);
-      renderDashboard(); renderCal(); updateBadges();
-      toast(data.error||'Error updating status','e');
-    }
-  }catch(e){
-    if(idx!==-1) arr[idx].status=prev;
-    if(collection==='inquiries') renderInquiries(_inqFilter);
-    else renderBookings(_bookFilter);
-    renderDashboard(); renderCal(); updateBadges();
-    toast('Network error','e');
-  }
+    if(res.ok&&data.success){toast('Status updated: '+status);if(collection==='inquiries')await loadInquiries();else await loadBookings();renderDashboard();}
+    else{if(idx!==-1)arr[idx].status=prev;if(collection==='inquiries')renderInquiries(_inqFilter);else renderBookings(_bookFilter);renderDashboard();renderCal();updateBadges();toast(data.error||'Error updating status','e');}
+  }catch(e){if(idx!==-1)arr[idx].status=prev;if(collection==='inquiries')renderInquiries(_inqFilter);else renderBookings(_bookFilter);renderDashboard();renderCal();updateBadges();toast('Network error','e');}
 }
 
-/* ── DELETE ── */
 async function deleteDoc(id,collection){
-  if(!confirm(`Delete this ${collection==='inquiries'?'inquiry':'booking'}?`)) return;
+  if(!confirm(`Delete this ${collection==='inquiries'?'inquiry':'booking'}?`))return;
   try{
-    const res=await fetch('/.netlify/functions/admin-booking',{
-      method:'DELETE',headers:apiHeaders(),
-      body:JSON.stringify({id,collection}),
-    });
+    const res=await fetch('/.netlify/functions/admin-booking',{method:'DELETE',headers:apiHeaders(),body:JSON.stringify({id,collection})});
     const data=await res.json();
-    if(res.ok&&data.success){
-      toast('Deleted successfully'); closeModal();
-      collection==='inquiries'?await loadInquiries():await loadBookings();
-      renderDashboard();
-    }else{toast(data.error||'Error deleting','e');}
+    if(res.ok&&data.success){toast('Deleted successfully');closeModal();collection==='inquiries'?await loadInquiries():await loadBookings();renderDashboard();}
+    else{toast(data.error||'Error deleting','e');}
   }catch(e){toast('Network error','e');}
 }
 
-/* ── VIEW MODAL ── */
 function openModal(id,collection){
-  const item=collection==='inquiries'?_inquiries.find(x=>x._id===id):_bookings.find(x=>x._id===id);
-  if(!item) return;
-  _modalId=id; _modalCol=collection;
-  document.getElementById('modal-title-text').textContent=
-    (collection==='inquiries'?'Inquiry':'Booking')+' — '+esc(item.name);
+  const item=collection==='inquiries'?_inquiries.find(x=>x._id===id):_bookings.find(x=>x._id===id);if(!item)return;
+  _modalId=id;_modalCol=collection;
+  document.getElementById('modal-title-text').textContent=(collection==='inquiries'?'Inquiry':'Booking')+' — '+esc(item.name);
   document.getElementById('modal-status-sel').value=item.status||'new';
-
   const skip=['_id','status'];
-  document.getElementById('modal-detail-grid').innerHTML=
-    Object.entries(item).filter(([k])=>!skip.includes(k)).map(([k,v])=>`
-      <div>
-        <div class="md-key">${k.replace(/([A-Z])/g,' $1').trim()}</div>
-        <div class="md-val ${k==='price'?'highlight':''}">${esc(String(v||'—'))}</div>
-      </div>`).join('');
-
+  document.getElementById('modal-detail-grid').innerHTML=Object.entries(item).filter(([k])=>!skip.includes(k)).map(([k,v])=>`<div><div class="md-key">${k.replace(/([A-Z])/g,' $1').trim()}</div><div class="md-val ${k==='price'?'highlight':''}">${esc(String(v||'—'))}</div></div>`).join('');
   let actions='';
   if(collection==='inquiries'){
-    actions=`<button class="modal-act-btn confirm" onclick="convertToBooking('${id}')">Convert to Booking</button>
-             <button class="modal-act-btn cancel"  onclick="deleteDoc('${id}','inquiries')">Delete</button>`;
+    actions=`<button class="modal-act-btn confirm" onclick="convertToBooking('${id}')">Convert to Booking</button><button class="modal-act-btn cancel" onclick="deleteDoc('${id}','inquiries')">Delete</button>`;
   }else{
     actions=`<button class="modal-act-btn edit-btn" onclick="closeModal();openEditModal('${id}')">Edit Booking</button>
-             <button class="modal-act-btn confirm"  onclick="updateStatus('${id}','bookings','completed');closeModal()">Mark Complete</button>
-             <button class="modal-act-btn cancel"   onclick="deleteDoc('${id}','bookings')">Delete</button>`;
+             <button class="modal-act-btn confirm" onclick="updateStatus('${id}','bookings','completed');closeModal()">Mark Complete</button>
+             <button class="modal-act-btn cancel" onclick="deleteDoc('${id}','bookings')">Delete</button>`;
   }
-  document.getElementById('modal-actions').innerHTML=
-    actions+`<button class="modal-act-btn close" onclick="closeModal()">Close</button>`;
+  document.getElementById('modal-actions').innerHTML=actions+`<button class="modal-act-btn close" onclick="closeModal()">Close</button>`;
   document.getElementById('detail-modal').classList.add('show');
 }
+function saveStatus(){if(!_modalId||!_modalCol)return;updateStatus(_modalId,_modalCol,document.getElementById('modal-status-sel').value);}
+function closeModal(){document.getElementById('detail-modal').classList.remove('show');_modalId=null;_modalCol=null;}
 
-function saveStatus(){
-  if(!_modalId||!_modalCol) return;
-  const status=document.getElementById('modal-status-sel').value;
-  updateStatus(_modalId,_modalCol,status);
-}
-
-function closeModal(){
-  document.getElementById('detail-modal').classList.remove('show');
-  _modalId=null; _modalCol=null;
-}
-
-/* ── CALENDAR ── */
 function renderCal(){
   const y=_calYear,m=_calMonth;
   document.getElementById('cal-month-label').textContent=`${MONTHS[m]} ${y}`;
-  const grid=document.getElementById('cal-grid');
-  if(!grid) return;
-  grid.innerHTML='';
-
-  // Day-of-week headers
-  DOWS.forEach(d=>{
-    const el=document.createElement('div');
-    el.className='admin-cal-dow'; el.textContent=d; grid.appendChild(el);
-  });
-
-  const firstDay=new Date(y,m,1).getDay();
-  const daysIn=new Date(y,m+1,0).getDate();
-  const today=new Date();
-
-  // Empty cells
-  for(let i=0;i<firstDay;i++){
-    const el=document.createElement('div'); el.className='admin-cal-day cal-empty'; grid.appendChild(el);
-  }
-
-  // Day cells
+  const grid=document.getElementById('cal-grid');if(!grid)return;grid.innerHTML='';
+  DOWS.forEach(d=>{const el=document.createElement('div');el.className='admin-cal-dow';el.textContent=d;grid.appendChild(el);});
+  const firstDay=new Date(y,m,1).getDay();const daysIn=new Date(y,m+1,0).getDate();const today=new Date();
+  for(let i=0;i<firstDay;i++){const el=document.createElement('div');el.className='admin-cal-day cal-empty';grid.appendChild(el);}
   for(let d=1;d<=daysIn;d++){
     const dateStr=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const dayBooks=_bookings
-      .filter(b=>b.date===dateStr)
-      .sort((a,b)=>sortTime(a.time)-sortTime(b.time));
-
-    const el=document.createElement('div');
-    el.className='admin-cal-day';
-    if(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate())
-      el.classList.add('cal-today');
-
-    // Day number
-    const numDiv=document.createElement('div');
-    numDiv.className='cal-day-num'; numDiv.textContent=d;
-    el.appendChild(numDiv);
-
-    // Booking chips — show up to 2, then "+N more"
-    const show=dayBooks.slice(0,2);
-    const extra=dayBooks.length-show.length;
-    show.forEach(b=>{
-      const chip=document.createElement('div');
-      chip.className=`cal-booking-chip cal-chip-${b.status||'pending'}`;
-      // Show time + name + vehicle
-      const shortTime=(b.time||'').replace(/\s*EST\s*$/i,'').trim();
-      chip.textContent=`${shortTime} · ${(b.name||'').split(' ')[0]} · ${(b.vehicle||'').split(' ').slice(-1)[0]}`;
-      chip.title=`${b.name} — ${b.vehicle} — ${b.service} @ ${b.time}`;
-      el.appendChild(chip);
-    });
-    if(extra>0){
-      const more=document.createElement('div');
-      more.className='cal-more'; more.textContent=`+${extra} more`;
-      el.appendChild(more);
-    }
-
-    el.onclick=()=>showCalDay(dateStr,dayBooks);
-    grid.appendChild(el);
+    const dayBooks=_bookings.filter(b=>b.date===dateStr).sort((a,b)=>sortTime(a.time)-sortTime(b.time));
+    const el=document.createElement('div');el.className='admin-cal-day';
+    if(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate())el.classList.add('cal-today');
+    const numDiv=document.createElement('div');numDiv.className='cal-day-num';numDiv.textContent=d;el.appendChild(numDiv);
+    const show=dayBooks.slice(0,2);const extra=dayBooks.length-show.length;
+    show.forEach(b=>{const chip=document.createElement('div');chip.className=`cal-booking-chip cal-chip-${b.status||'pending'}`;const shortTime=(b.time||'').replace(/\s*EST\s*$/i,'').trim();chip.textContent=`${shortTime} · ${(b.name||'').split(' ')[0]} · ${(b.vehicle||'').split(' ').slice(-1)[0]}`;chip.title=`${b.name} — ${b.vehicle} — ${b.service} @ ${b.time}`;el.appendChild(chip);});
+    if(extra>0){const more=document.createElement('div');more.className='cal-more';more.textContent=`+${extra} more`;el.appendChild(more);}
+    el.onclick=()=>showCalDay(dateStr,dayBooks);grid.appendChild(el);
   }
 }
-
-/* Sort helper: convert "9:30 AM EST" to a comparable number */
-function sortTime(timeStr){
-  if(!timeStr) return 9999;
-  const{hour,min,ampm}=parseTimeString(timeStr);
-  if(!hour) return 9999;
-  let h=parseInt(hour);
-  if(ampm==='AM'&&h===12) h=0;
-  if(ampm==='PM'&&h!==12) h+=12;
-  return h*60+parseInt(min||0);
-}
-
+function sortTime(timeStr){if(!timeStr)return 9999;const{hour,min,ampm}=parseTimeString(timeStr);if(!hour)return 9999;let h=parseInt(hour);if(ampm==='AM'&&h===12)h=0;if(ampm==='PM'&&h!==12)h+=12;return h*60+parseInt(min||0);}
 function showCalDay(dateStr,dayBooks){
-  const titleEl=document.getElementById('cal-sidebar-title');
-  const detailEl=document.getElementById('cal-day-detail');
-  if(titleEl) titleEl.textContent=formatDisplayDate(dateStr);
-
-  if(!dayBooks.length){
-    detailEl.innerHTML=`<div style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-align:center;padding:12px 0;">No bookings on this date</div>`;
-    return;
-  }
-
+  const titleEl=document.getElementById('cal-sidebar-title');const detailEl=document.getElementById('cal-day-detail');
+  if(titleEl)titleEl.textContent=formatDisplayDate(dateStr);
+  if(!dayBooks.length){detailEl.innerHTML=`<div style="color:rgba(255,255,255,0.3);font-size:0.8rem;text-align:center;padding:12px 0;">No bookings on this date</div>`;return;}
   const sorted=[...dayBooks].sort((a,b)=>sortTime(a.time)-sortTime(b.time));
-  detailEl.innerHTML=`<div class="cal-sidebar-list">${sorted.map(b=>`
-    <div class="cal-sidebar-item" onclick="openModal('${b._id}','bookings')">
-      <div class="cal-sidebar-time">${esc((b.time||'').replace(/\s*EST\s*$/i,'').trim())}</div>
-      <div class="cal-sidebar-name">${esc(b.name)}</div>
-      <div class="cal-sidebar-car">${esc(b.vehicle||'—')}</div>
-      <div class="cal-sidebar-svc">${esc(b.service)} · <span class="pill pill-${b.status||'pending'}" style="font-size:0.52rem;">${b.status||'pending'}</span></div>
-    </div>`).join('')}</div>`;
-
-  // Highlight selected day
+  detailEl.innerHTML=`<div class="cal-sidebar-list">${sorted.map(b=>`<div class="cal-sidebar-item" onclick="openModal('${b._id}','bookings')"><div class="cal-sidebar-time">${esc((b.time||'').replace(/\s*EST\s*$/i,'').trim())}</div><div class="cal-sidebar-name">${esc(b.name)}</div><div class="cal-sidebar-car">${esc(b.vehicle||'—')}</div><div class="cal-sidebar-svc">${esc(b.service)} · <span class="pill pill-${b.status||'pending'}" style="font-size:0.52rem;">${b.status||'pending'}</span></div></div>`).join('')}</div>`;
   document.querySelectorAll('.admin-cal-day').forEach(el=>el.classList.remove('cal-selected'));
 }
+function formatDisplayDate(dateStr){const[y,m,d]=dateStr.split('-').map(Number);const dt=new Date(y,m-1,d);return dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}
+function shiftMonth(dir){_calMonth+=dir;if(_calMonth>11){_calMonth=0;_calYear++;}if(_calMonth<0){_calMonth=11;_calYear--;}renderCal();document.getElementById('cal-sidebar-title').textContent='Select a date';document.getElementById('cal-day-detail').innerHTML='<div style="font-size:0.82rem;color:rgba(255,255,255,0.35);">Click a date to see bookings for that day.</div>';}
 
-function formatDisplayDate(dateStr){
-  const[y,m,d]=dateStr.split('-').map(Number);
-  const dt=new Date(y,m-1,d);
-  return dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
-}
-
-function shiftMonth(dir){
-  _calMonth+=dir;
-  if(_calMonth>11){_calMonth=0;_calYear++;}
-  if(_calMonth<0){_calMonth=11;_calYear--;}
-  renderCal();
-  document.getElementById('cal-sidebar-title').textContent='Select a date';
-  document.getElementById('cal-day-detail').innerHTML=
-    '<div style="font-size:0.82rem;color:rgba(255,255,255,0.35);">Click a date to see bookings for that day.</div>';
-}
-
-/* ── NAV ── */
 function goPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const pg=document.getElementById('page-'+id);
-  if(pg) pg.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>{
-    if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes(`'${id}'`)) n.classList.add('active');
-  });
-  if(id==='calendar') renderCal();
-  if(id==='add-booking'){
-    const d=new Date().toISOString().split('T')[0];
-    const el=document.getElementById('nb-date');
-    if(el) el.min=d;
-  }
+  const pg=document.getElementById('page-'+id);if(pg)pg.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>{if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes(`'${id}'`))n.classList.add('active');});
+  if(id==='calendar')renderCal();
+  if(id==='add-booking'){const d=new Date().toISOString().split('T')[0];const el=document.getElementById('nb-date');if(el)el.min=d;}
+  if(id==='invoice')invInit();
 }
 
-/* ── HELPERS ── */
 function esc(s){const d=document.createElement('div');d.textContent=String(s||'');return d.innerHTML;}
 function emptyState(msg){return`<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg><p>${msg}</p></div>`;}
-
 let _toastTimer;
-function toast(msg,type=''){
-  const el=document.getElementById('toast');
-  el.textContent=msg;
-  el.className='show'+(type==='e'?' error':'');
-  clearTimeout(_toastTimer);
-  _toastTimer=setTimeout(()=>{el.className='';},2800);
-}
+function toast(msg,type=''){const el=document.getElementById('toast');el.textContent=msg;el.className='show'+(type==='e'?' error':'');clearTimeout(_toastTimer);_toastTimer=setTimeout(()=>{el.className='';},2800);}
 </script>
 
-<!--
-═══════════════════════════════════════════════════════════════
-  NETLIFY FUNCTION REQUIRED UPDATE — netlify/functions/admin-booking.js
-  Your PUT handler must support full-field updates, not just status.
-  Update the PUT section to look like this:
+<!-- ═══════════════════════ INVOICE MAKER JS ═══════════════════════ -->
+<script>
+/* ── Invoice State ── */
+let _invLines = [];
+let _invTheme = { dark: '#2a7a18', light: '#6fd952' };
+let _invNextId = 1;
 
-  if (event.httpMethod === 'PUT') {
-    const body = JSON.parse(event.body);
-    const { id, collection, status, updateType, ...rest } = body;
+function invInit() {
+  // Set today's date
+  const today = new Date().toISOString().split('T')[0];
+  const dateEl = document.getElementById('inv-date');
+  if (dateEl && !dateEl.value) dateEl.value = today;
 
-    if (!id || !collection) return respond(400, { error: 'Missing id or collection' });
-
-    let updateData = {};
-
-    if (updateType === 'full') {
-      // Full booking edit — update all provided fields
-      const allowed = ['name','phone','email','address','vehicle','service','date','time','price','status','notes','timezone'];
-      allowed.forEach(k => { if (rest[k] !== undefined) updateData[k] = rest[k]; });
-      if (status) updateData.status = status;
-    } else {
-      // Status-only update
-      if (!status) return respond(400, { error: 'Missing status' });
-      updateData = { status };
-    }
-
-    updateData.updatedAt = new Date().toISOString();
-
-    const ref = db.collection(collection).doc(id);
-    await ref.update(updateData);
-    return respond(200, { success: true });
+  // Auto-generate invoice number
+  const numEl = document.getElementById('inv-num');
+  if (numEl && !numEl.value) {
+    const ts = Date.now().toString().slice(-5);
+    numEl.value = `INV-${ts}`;
   }
-═══════════════════════════════════════════════════════════════
--->
+
+  // Add default line items if empty
+  if (_invLines.length === 0) {
+    invAddLine('Full Detail', 'Complete interior + exterior detail', 1, 120);
+  }
+
+  invUpdate();
+}
+
+function invAddLine(name='', desc='', qty=1, amount='') {
+  _invLines.push({ id: _invNextId++, name, desc, qty, amount: amount||'' });
+  invRenderLines();
+  invCalcTotals();
+}
+
+function invRemoveLine(id) {
+  _invLines = _invLines.filter(l => l.id !== id);
+  invRenderLines();
+  invCalcTotals();
+}
+
+function invLineChange(id, field, value) {
+  const line = _invLines.find(l => l.id === id);
+  if (line) {
+    line[field] = value;
+    invCalcTotals();
+  }
+}
+
+function invRenderLines() {
+  const tbody = document.getElementById('inv-line-items');
+  if (!tbody) return;
+  tbody.innerHTML = _invLines.map(l => `
+    <tr>
+      <td><input class="li-input" placeholder="Service name" value="${esc(String(l.name||''))}" oninput="invLineChange(${l.id},'name',this.value);invUpdate()"></td>
+      <td><input class="li-input" placeholder="Description (optional)" value="${esc(String(l.desc||''))}" oninput="invLineChange(${l.id},'desc',this.value);invUpdate()"></td>
+      <td><input class="li-input" type="number" min="1" value="${l.qty||1}" style="text-align:center;width:50px;" oninput="invLineChange(${l.id},'qty',this.value);invCalcTotals();invUpdate()"></td>
+      <td><input class="li-input price" type="number" min="0" step="0.01" placeholder="0.00" value="${l.amount||''}" oninput="invLineChange(${l.id},'amount',this.value);invCalcTotals();invUpdate()"></td>
+      <td><button class="li-del" onclick="invRemoveLine(${l.id})" title="Remove">×</button></td>
+    </tr>
+  `).join('');
+}
+
+function invCalcTotals() {
+  let sub = 0;
+  _invLines.forEach(l => {
+    const qty = parseFloat(l.qty) || 1;
+    const amt = parseFloat(l.amount) || 0;
+    sub += qty * amt;
+  });
+
+  const discount = parseFloat(document.getElementById('inv-discount')?.value) || 0;
+  const taxPct   = parseFloat(document.getElementById('inv-tax')?.value) || 0;
+
+  const afterDiscount = Math.max(0, sub - discount);
+  const taxAmt = afterDiscount * (taxPct / 100);
+  const total = afterDiscount + taxAmt;
+
+  const fmt = n => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  const subEl = document.getElementById('inv-subtotal-disp');
+  const totEl = document.getElementById('inv-total-disp');
+  if (subEl) subEl.textContent = fmt(sub);
+  if (totEl) totEl.textContent = fmt(total);
+
+  invUpdate();
+}
+
+function invUpdate() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+
+  const bizName   = g('inv-biz-name') || 'Dao Detailing';
+  const bizTag    = g('inv-biz-tag')  || 'Premium Mobile Auto Detailing';
+  const bizPhone  = g('inv-biz-phone');
+  const bizEmail  = g('inv-biz-email');
+  const bizWeb    = g('inv-biz-web');
+
+  const invNum    = g('inv-num')  || '—';
+  const invDate   = g('inv-date') || '—';
+  const invDue    = g('inv-due')  || 'Due on receipt';
+
+  const custName    = g('inv-cust-name')    || '—';
+  const custPhone   = g('inv-cust-phone');
+  const custEmail   = g('inv-cust-email');
+  const custVehicle = g('inv-cust-vehicle');
+  const custAddress = g('inv-cust-address');
+
+  const notes   = g('inv-notes');
+  const payment = g('inv-payment');
+
+  // Compute totals fresh
+  let sub = 0;
+  _invLines.forEach(l => { sub += (parseFloat(l.qty)||1) * (parseFloat(l.amount)||0); });
+  const discount = parseFloat(document.getElementById('inv-discount')?.value) || 0;
+  const taxPct   = parseFloat(document.getElementById('inv-tax')?.value) || 0;
+  const afterDiscount = Math.max(0, sub - discount);
+  const taxAmt = afterDiscount * (taxPct / 100);
+  const total = afterDiscount + taxAmt;
+  const fmt = n => '$' + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  const dk = _invTheme.dark;
+  const lt = _invTheme.light;
+
+  // Format display date
+  let displayDate = invDate;
+  if (invDate && invDate !== '—') {
+    try {
+      const [y,m,d] = invDate.split('-').map(Number);
+      displayDate = new Date(y,m-1,d).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+    } catch(e) {}
+  }
+
+  // Build line items HTML
+  const lineRows = _invLines.map(l => {
+    const qty = parseFloat(l.qty)||1;
+    const amt = parseFloat(l.amount)||0;
+    const lineTotal = qty * amt;
+    return `<tr>
+      <td style="font-weight:600;color:#222;">${esc(l.name||'—')}${l.desc ? `<br><span style="font-size:0.72rem;color:#888;font-style:italic;">${esc(l.desc)}</span>` : ''}</td>
+      <td class="right" style="color:#555;font-size:0.8rem;">${qty > 1 ? qty : ''}</td>
+      <td class="right" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;">${amt > 0 ? fmt(amt) : '—'}</td>
+      <td class="right" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#111;">${lineTotal > 0 ? fmt(lineTotal) : '—'}</td>
+    </tr>`;
+  }).join('');
+
+  // Footer contact info
+  const bizContact = [bizPhone, bizEmail, bizWeb].filter(Boolean).join('  ·  ');
+  const custContactLines = [custPhone, custEmail, custAddress].filter(Boolean).join('\n');
+
+  const doc = document.getElementById('invoice-doc');
+  if (!doc) return;
+
+  doc.innerHTML = `
+    <div class="inv-doc-header" style="background:#0b0b0b;">
+      <div class="inv-doc-logo-wrap">
+        <img class="inv-doc-logo" src="./Photos/dao_detailing_logo.png" alt="${esc(bizName)}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+          onload="this.nextElementSibling.style.display='none';">
+        <div class="inv-doc-logo-text" style="display:none;">
+          <div class="inv-doc-biz-name" style="color:#fff;">${esc(bizName)}</div>
+        </div>
+        <div class="inv-doc-logo-text" style="margin-left:4px;">
+          <div class="inv-doc-biz-name" style="color:#fff;">${esc(bizName)}</div>
+          <div class="inv-doc-biz-tag" style="color:${lt}80;">${esc(bizTag)}</div>
+        </div>
+      </div>
+      <div class="inv-doc-header-right">
+        <div class="inv-doc-invoice-word" style="color:${lt};">INVOICE</div>
+        <div class="inv-doc-num" style="color:rgba(255,255,255,0.5);">#${esc(invNum)}</div>
+        <div class="inv-doc-date" style="color:rgba(255,255,255,0.38);">${esc(displayDate)}</div>
+      </div>
+    </div>
+
+    <div class="inv-doc-meta" style="border-bottom-color:${lt};">
+      <div class="inv-doc-meta-cell">
+        <div class="inv-doc-meta-key">Bill To</div>
+        <div class="inv-doc-meta-val" style="font-weight:700;">${esc(custName)}</div>
+        ${custVehicle ? `<div style="font-size:0.75rem;color:#777;margin-top:3px;">${esc(custVehicle)}</div>` : ''}
+        ${custContactLines ? `<div style="font-size:0.72rem;color:#888;margin-top:4px;white-space:pre-line;">${esc(custContactLines)}</div>` : ''}
+      </div>
+      <div class="inv-doc-meta-cell">
+        <div class="inv-doc-meta-key">Payment Terms</div>
+        <div class="inv-doc-meta-val">${esc(invDue)}</div>
+      </div>
+      <div class="inv-doc-meta-cell" style="border-right:none;">
+        <div class="inv-doc-meta-key">Amount Due</div>
+        <div class="inv-doc-meta-val big" style="color:${dk};">${fmt(total)}</div>
+      </div>
+    </div>
+
+    <div class="inv-doc-body">
+      <table class="inv-doc-items">
+        <thead>
+          <tr style="background:#f6f6f6;border-bottom:2px solid #e0e0e0;">
+            <th style="width:44%;">Service / Item</th>
+            <th class="right" style="width:10%;">Qty</th>
+            <th class="right" style="width:18%;">Unit Price</th>
+            <th class="right" style="width:18%;">Total</th>
+          </tr>
+        </thead>
+        <tbody>${lineRows || '<tr><td colspan="4" style="text-align:center;color:#bbb;padding:20px;font-size:0.8rem;">No line items yet</td></tr>'}</tbody>
+      </table>
+    </div>
+
+    <div class="inv-doc-totals">
+      <table class="inv-doc-totals-table">
+        <tr><td>Subtotal</td><td class="right">${fmt(sub)}</td></tr>
+        ${discount > 0 ? `<tr><td>Discount</td><td class="right" style="color:#e8364a;">-${fmt(discount)}</td></tr>` : ''}
+        ${taxPct > 0 ? `<tr><td>Tax (${taxPct}%)</td><td class="right">${fmt(taxAmt)}</td></tr>` : ''}
+        <tr class="total-row">
+          <td style="font-weight:700;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;text-transform:uppercase;font-size:0.85rem;">Total Due</td>
+          <td class="right" style="color:${dk};">${fmt(total)}</td>
+        </tr>
+      </table>
+    </div>
+
+    ${(notes || payment) ? `
+    <div class="inv-doc-footer-area">
+      ${notes ? `<div class="inv-doc-footer-cell">
+        <div class="inv-doc-footer-label">Notes</div>
+        <div class="inv-doc-footer-val">${esc(notes)}</div>
+      </div>` : '<div></div>'}
+      ${payment ? `<div class="inv-doc-footer-cell">
+        <div class="inv-doc-footer-label">Payment Instructions</div>
+        <div class="inv-doc-footer-val">${esc(payment)}</div>
+      </div>` : ''}
+    </div>` : '<div style="height:16px;"></div>'}
+
+    <div class="inv-doc-bottom-bar" style="background:#0b0b0b;">
+      <div class="inv-doc-bottom-left">${bizContact ? esc(bizContact) : esc(bizName)}</div>
+      <div class="inv-doc-bottom-right" style="color:${lt}80;">Thank you for choosing ${esc(bizName)}</div>
+    </div>
+  `;
+}
+
+function invSetTheme(el) {
+  document.querySelectorAll('.theme-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  _invTheme.dark  = el.dataset.color;
+  _invTheme.light = el.dataset.light;
+  invUpdate();
+}
+
+function invReset() {
+  if (!confirm('Clear all invoice data?')) return;
+  ['inv-biz-name','inv-biz-tag','inv-biz-phone','inv-biz-email','inv-biz-web',
+   'inv-num','inv-date','inv-due','inv-cust-name','inv-cust-phone','inv-cust-email',
+   'inv-cust-vehicle','inv-cust-address','inv-notes','inv-payment']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  document.getElementById('inv-discount').value = '0';
+  document.getElementById('inv-tax').value = '0';
+  document.getElementById('inv-biz-name').value = 'Dao Detailing';
+  document.getElementById('inv-biz-tag').value = 'Premium Mobile Auto Detailing';
+  _invLines = [];
+  _invNextId = 1;
+  invInit();
+  toast('Form cleared');
+}
+
+function invFromBooking() {
+  if (!_bookings.length) {
+    toast('No bookings loaded yet. Go to Bookings to refresh.', 'e'); return;
+  }
+  const modal = document.getElementById('import-booking-modal');
+  const list  = document.getElementById('import-booking-list');
+  const sorted = [..._bookings].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+  list.innerHTML = sorted.map(b => `
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(72,184,43,0.1);border-radius:8px;padding:12px 14px;cursor:pointer;transition:all .18s;"
+      onmouseover="this.style.borderColor='rgba(72,184,43,0.3)'" onmouseout="this.style.borderColor='rgba(72,184,43,0.1)'"
+      onclick="invImportBooking('${b._id}')">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <span style="font-weight:600;color:#fff;font-size:0.88rem;">${esc(b.name)}</span>
+        <span style="font-family:'Bebas Neue';color:var(--gg);font-size:1rem;">${esc(b.price||'—')}</span>
+      </div>
+      <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);">${esc(b.service)} · ${esc(b.date)} · ${esc(b.vehicle||'—')}</div>
+    </div>
+  `).join('');
+  modal.classList.add('show');
+}
+
+function invImportBooking(id) {
+  const b = _bookings.find(x => x._id === id);
+  if (!b) return;
+
+  const sv = (elId, val) => { const el = document.getElementById(elId); if(el) el.value = val || ''; };
+
+  sv('inv-cust-name',    b.name);
+  sv('inv-cust-phone',   b.phone);
+  sv('inv-cust-email',   b.email);
+  sv('inv-cust-vehicle', b.vehicle);
+  sv('inv-cust-address', b.address);
+
+  // Auto-fill line item from booking
+  _invLines = [];
+  _invNextId = 1;
+  const rawPrice = parseFloat((b.price||'').replace(/[^0-9.]/g,'')) || 0;
+  invAddLine(b.service || 'Detailing Service', `${b.date}${b.time ? ' @ '+b.time : ''}${b.vehicle ? ' · '+b.vehicle : ''}`, 1, rawPrice);
+
+  sv('inv-notes', b.notes || '');
+
+  // Auto-generate invoice number
+  const numEl = document.getElementById('inv-num');
+  if (numEl) { const ts = Date.now().toString().slice(-5); numEl.value = `INV-${ts}`; }
+  const dateEl = document.getElementById('inv-date');
+  if (dateEl && !dateEl.value) dateEl.value = new Date().toISOString().split('T')[0];
+
+  document.getElementById('import-booking-modal').classList.remove('show');
+  invCalcTotals();
+  invUpdate();
+  toast(`Imported: ${b.name}`);
+}
+
+/* ── Export ── */
+function invExportPDF() {
+  window.print();
+}
+
+async function invExportImage() {
+  const doc = document.getElementById('invoice-doc');
+  if (!doc) return;
+
+  const btns = document.querySelectorAll('.exp-btn');
+  btns.forEach(b => b.disabled = true);
+  toast('Generating image…');
+
+  try {
+    const canvas = await html2canvas(doc, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+    });
+
+    const link = document.createElement('a');
+    const num = document.getElementById('inv-num')?.value || 'invoice';
+    const name = document.getElementById('inv-cust-name')?.value || '';
+    const fname = `${num}${name ? '-'+name.replace(/\s+/g,'-') : ''}.png`;
+    link.download = fname;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    toast('Image downloaded!');
+  } catch(e) {
+    toast('Image export failed — try Print to PDF instead', 'e');
+  } finally {
+    btns.forEach(b => b.disabled = false);
+  }
+}
+
+function invCopyText() {
+  const g = id => (document.getElementById(id)?.value || '').trim();
+  const bizName = g('inv-biz-name') || 'Dao Detailing';
+  const invNum  = g('inv-num');
+  const invDate = g('inv-date');
+  const custName = g('inv-cust-name');
+  const custVehicle = g('inv-cust-vehicle');
+  const invDue  = g('inv-due');
+
+  let sub = 0;
+  const lineText = _invLines.map(l => {
+    const qty = parseFloat(l.qty)||1;
+    const amt = parseFloat(l.amount)||0;
+    const tot = qty * amt;
+    sub += tot;
+    return `  • ${l.name}${l.desc ? ' ('+l.desc+')' : ''}${qty>1?' x'+qty:''}: $${tot.toFixed(2)}`;
+  }).join('\n');
+
+  const discount = parseFloat(document.getElementById('inv-discount')?.value) || 0;
+  const taxPct   = parseFloat(document.getElementById('inv-tax')?.value) || 0;
+  const afterDiscount = Math.max(0, sub - discount);
+  const total = afterDiscount + afterDiscount * (taxPct/100);
+
+  const text = [
+    `INVOICE — ${bizName}`,
+    invNum ? `Invoice #: ${invNum}` : '',
+    invDate ? `Date: ${invDate}` : '',
+    custName ? `\nBill To: ${custName}` : '',
+    custVehicle ? `Vehicle: ${custVehicle}` : '',
+    '',
+    'Services:',
+    lineText,
+    '',
+    discount > 0 ? `Discount: -$${discount.toFixed(2)}` : '',
+    taxPct > 0 ? `Tax (${taxPct}%): $${(afterDiscount * taxPct/100).toFixed(2)}` : '',
+    `TOTAL DUE: $${total.toFixed(2)}`,
+    invDue ? `\nTerms: ${invDue}` : '',
+    g('inv-payment') ? `Payment: ${g('inv-payment')}` : '',
+    g('inv-notes') ? `\nNote: ${g('inv-notes')}` : '',
+  ].filter(Boolean).join('\n');
+
+  navigator.clipboard.writeText(text).then(()=>toast('Invoice copied to clipboard!')).catch(()=>toast('Copy failed','e'));
+}
+
+// Close import modal on overlay click
+document.getElementById('import-booking-modal').addEventListener('click', function(e){
+  if (e.target === this) this.classList.remove('show');
+});
+</script>
+
 </body>
 </html>
