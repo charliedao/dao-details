@@ -103,7 +103,6 @@ a{text-decoration:none;color:inherit;}
   filter:brightness(0.35);
 }
 
-/* SVG car line-art background — pure CSS drawn */
 .hero-car-bg{
   position:absolute;right:-60px;bottom:0;
   width:min(780px, 90vw);height:auto;
@@ -119,7 +118,6 @@ a{text-decoration:none;color:inherit;}
     radial-gradient(ellipse at 15% 80%, rgba(72,184,43,0.07) 0%, transparent 40%),
     linear-gradient(158deg,rgba(6,6,6,0.55) 0%,rgba(15,15,15,0.4) 45%,rgba(9,24,3,0.55) 100%);
 }
-/* scan line texture */
 .hero-bg::before{
   content:'';position:absolute;inset:0;
   background-image:repeating-linear-gradient(
@@ -127,7 +125,6 @@ a{text-decoration:none;color:inherit;}
     rgba(0,0,0,0.06) 3px,rgba(0,0,0,0.06) 4px);
   pointer-events:none;
 }
-/* diagonal speed streaks */
 .hero-bg::after{
   content:'';position:absolute;inset:0;
   background-image:repeating-linear-gradient(
@@ -147,7 +144,6 @@ a{text-decoration:none;color:inherit;}
   pointer-events:none;
 }
 
-/* Slide dots */
 .hero-dots{
   position:absolute;bottom:52px;left:50%;
   transform:translateX(-50%);
@@ -296,7 +292,6 @@ a{text-decoration:none;color:inherit;}
   50%{opacity:1;transform:translate(-50%,-50%) scale(1.03);}
 }
 
-/* Scroll indicator */
 .hero-scroll{
   position:absolute;bottom:32px;left:50%;
   transform:translateX(-50%);
@@ -319,7 +314,6 @@ a{text-decoration:none;color:inherit;}
   background:linear-gradient(180deg,rgba(255,255,255,0.6),transparent);
 }
 
-/* Stagger animations */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(28px);}
   to{opacity:1;transform:translateY(0);}
@@ -646,6 +640,225 @@ a{text-decoration:none;color:inherit;}
 .ext-bg{background:#0c0c0c;padding-bottom:16px;}
 
 /* ══════════════════════════════════════
+   ████  PRICING SECTION  ████
+══════════════════════════════════════ */
+.pricing-section{
+  background:var(--dk);
+  position:relative;overflow:hidden;
+  padding:0 0 64px;
+}
+.pricing-section::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(42,122,24,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 80%, rgba(72,184,43,0.06) 0%, transparent 40%);
+  pointer-events:none;
+}
+.pricing-section::after{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,var(--gl) 25%,var(--gg) 75%,transparent);
+}
+.pricing-inner{
+  position:relative;max-width:1320px;
+  margin:0 auto;padding:0 28px;
+}
+.pricing-sh{
+  display:flex;align-items:center;gap:16px;
+  padding:52px 0 10px;
+}
+.pricing-sl{flex:1;height:1.5px;background:linear-gradient(90deg,var(--gg),transparent);}
+.pricing-sl.r{background:linear-gradient(90deg,transparent,var(--gg));}
+.pricing-sh h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.1rem,2.6vw,1.7rem);
+  letter-spacing:0.24em;color:var(--gg);white-space:nowrap;
+}
+.pricing-sub{
+  text-align:center;
+  font-size:0.82rem;color:rgba(255,255,255,0.38);
+  margin-bottom:36px;line-height:1.6;
+  font-weight:300;
+}
+.pricing-sub strong{color:var(--gg);font-weight:600;}
+
+/* Cards */
+.pricing-cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+.pc{
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid rgba(72,184,43,0.13);
+  background:rgba(255,255,255,0.025);
+  transition:transform .24s,box-shadow .24s,border-color .24s;
+}
+.pc:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 56px rgba(0,0,0,0.4),0 0 0 1px rgba(72,184,43,0.22);
+  border-color:rgba(72,184,43,0.3);
+}
+.pc.pc-featured{
+  border-color:rgba(72,184,43,0.35);
+  background:rgba(42,122,24,0.06);
+  box-shadow:0 0 0 1px rgba(72,184,43,0.12);
+}
+.pc.pc-featured:hover{
+  box-shadow:0 20px 56px rgba(0,0,0,0.45),0 0 0 1px rgba(72,184,43,0.4);
+}
+
+/* Top accent bar */
+.pc-accent{height:3px;width:100%;}
+.pc-accent-ext{background:linear-gradient(90deg,var(--g),var(--gl),var(--gg));}
+.pc-accent-int{background:linear-gradient(90deg,var(--gm),var(--gl));}
+.pc-accent-full{background:linear-gradient(90deg,var(--g),var(--gg),var(--gc));}
+
+.pc-inner{padding:28px 26px 26px;}
+
+.pc-head{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;
+  margin-bottom:20px;gap:12px;
+}
+.pc-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.pc-icon-ext{background:rgba(72,184,43,0.1);border:1px solid rgba(72,184,43,0.2);}
+.pc-icon-int{background:rgba(42,122,24,0.12);border:1px solid rgba(42,122,24,0.25);}
+.pc-icon-full{background:linear-gradient(135deg,rgba(42,122,24,0.18),rgba(111,217,82,0.08));border:1px solid rgba(72,184,43,0.3);}
+.pc-icon svg{width:22px;height:22px;}
+
+.pc-name-wrap{}
+.pc-badge{
+  display:inline-block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:0.5rem;letter-spacing:0.18em;
+  text-transform:uppercase;
+  padding:3px 9px;border-radius:3px;
+  margin-bottom:5px;
+}
+.pc-badge-pop{background:var(--gg);color:var(--dk);}
+.pc-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  letter-spacing:0.08em;color:var(--w);
+  line-height:1;
+}
+
+/* Price block */
+.pc-price-block{
+  display:flex;align-items:baseline;gap:4px;
+  margin-bottom:6px;
+}
+.pc-from{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:600;font-size:0.65rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(255,255,255,0.35);
+}
+.pc-price{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,8vw,4.2rem);
+  letter-spacing:0.04em;line-height:1;
+  color:var(--gg);
+  text-shadow:0 0 30px rgba(111,217,82,0.18);
+}
+.pc-note{
+  font-size:0.72rem;color:rgba(255,255,255,0.3);
+  margin-bottom:20px;line-height:1.5;font-weight:300;
+}
+
+/* Divider */
+.pc-div{
+  height:1px;
+  background:linear-gradient(90deg,rgba(72,184,43,0.15),transparent);
+  margin-bottom:18px;
+}
+
+/* Includes list */
+.pc-includes-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:700;font-size:0.6rem;letter-spacing:0.22em;
+  text-transform:uppercase;color:rgba(255,255,255,0.28);
+  margin-bottom:10px;
+}
+.pc-list{
+  display:flex;flex-direction:column;gap:7px;
+  margin-bottom:24px;
+}
+.pc-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:0.8rem;color:rgba(255,255,255,0.62);
+  line-height:1.4;
+}
+.pc-check{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(72,184,43,0.12);
+  border:1px solid rgba(72,184,43,0.25);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.pc-check svg{width:9px;height:9px;stroke:var(--gg);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+
+/* CTA */
+.pc-btn{
+  width:100%;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:0.96rem;letter-spacing:0.22em;
+  padding:14px 20px;border-radius:9px;
+  border:none;cursor:pointer;
+  transition:all .2s;
+}
+.pc-btn-outline{
+  background:transparent;
+  border:1.5px solid rgba(72,184,43,0.25);
+  color:rgba(255,255,255,0.6);
+}
+.pc-btn-outline:hover{
+  border-color:var(--gl);
+  background:rgba(72,184,43,0.07);
+  color:var(--w);
+  transform:translateY(-1px);
+}
+.pc-btn-solid{
+  background:var(--g);
+  color:var(--w);
+  box-shadow:var(--sg);
+}
+.pc-btn-solid:hover{
+  background:var(--gm);
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(42,122,24,0.5);
+}
+
+/* Size note callout */
+.pricing-callout{
+  margin-top:20px;
+  background:rgba(72,184,43,0.05);
+  border:1px solid rgba(72,184,43,0.15);
+  border-radius:10px;
+  padding:16px 20px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.pricing-callout-ico{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(72,184,43,0.1);
+  border:1px solid rgba(72,184,43,0.2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.pricing-callout-ico svg{width:15px;height:15px;stroke:var(--gg);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.pricing-callout-text{
+  font-size:0.78rem;color:rgba(255,255,255,0.45);
+  line-height:1.6;
+}
+.pricing-callout-text strong{color:var(--gg);font-weight:600;}
+
+/* ══════════════════════════════════════
    WHY GRID
 ══════════════════════════════════════ */
 .why-grid{
@@ -714,7 +927,7 @@ a{text-decoration:none;color:inherit;}
 }
 
 /* ══════════════════════════════════════
-   ████  BOOKING / SCHEDULING  ████
+   BOOKING / SCHEDULING
 ══════════════════════════════════════ */
 .booking-section{
   background:var(--d2);
@@ -754,7 +967,6 @@ a{text-decoration:none;color:inherit;}
   grid-template-columns:1fr;
 }
 
-/* Step cards */
 .book-step{
   background:rgba(255,255,255,0.03);
   border:1px solid rgba(72,184,43,0.12);
@@ -776,7 +988,6 @@ a{text-decoration:none;color:inherit;}
   margin-bottom:14px;margin-top:4px;
 }
 
-/* Service select */
 .svc-select-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .svc-opt{
   background:rgba(255,255,255,0.03);
@@ -821,109 +1032,6 @@ a{text-decoration:none;color:inherit;}
   margin-top:2px;
 }
 
-/* Calendar */
-.cal-nav{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:12px;
-}
-.cal-nav-btn{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(72,184,43,0.15);
-  color:rgba(255,255,255,0.6);
-  width:32px;height:32px;border-radius:6px;
-  font-size:1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .2s;
-}
-.cal-nav-btn:hover{border-color:var(--gl);color:var(--w);background:rgba(72,184,43,0.1);}
-.cal-month{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.82rem;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--gg);
-}
-.cal-grid{
-  display:grid;grid-template-columns:repeat(7,1fr);
-  gap:4px;
-}
-.cal-dow{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.58rem;letter-spacing:0.12em;
-  color:rgba(255,255,255,0.3);text-align:center;
-  padding:4px 0;
-}
-.cal-day{
-  aspect-ratio:1;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:600;font-size:0.78rem;
-  color:rgba(255,255,255,0.5);
-  cursor:pointer;transition:all .18s;
-  border:1px solid transparent;
-}
-.cal-day:hover:not(.disabled):not(.empty){
-  background:rgba(72,184,43,0.12);
-  border-color:rgba(72,184,43,0.3);
-  color:var(--w);
-}
-.cal-day.today{
-  color:var(--gg);font-weight:700;
-  border-color:rgba(72,184,43,0.25);
-}
-.cal-day.selected{
-  background:var(--g);color:var(--w);
-  border-color:var(--gl);
-  box-shadow:0 0 12px rgba(72,184,43,0.3);
-}
-.cal-day.disabled{
-  color:rgba(255,255,255,0.15);cursor:default;
-}
-.cal-day.empty{cursor:default;}
-.cal-day.has-slot::after{
-  content:'';position:absolute;
-  bottom:3px;left:50%;transform:translateX(-50%);
-  width:4px;height:4px;border-radius:50%;
-  background:var(--gl);opacity:0.7;
-}
-.cal-day{position:relative;}
-
-/* Time slots */
-.time-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:8px;
-}
-.time-slot{
-  background:rgba(255,255,255,0.03);
-  border:1.5px solid rgba(72,184,43,0.14);
-  border-radius:8px;padding:10px 8px;
-  text-align:center;cursor:pointer;
-  transition:all .2s;
-}
-.time-slot:hover:not(.taken){
-  border-color:rgba(72,184,43,0.45);
-  background:rgba(72,184,43,0.07);
-}
-.time-slot.selected{
-  border-color:var(--gl);
-  background:rgba(72,184,43,0.12);
-  box-shadow:0 0 0 2px rgba(72,184,43,0.12);
-}
-.time-slot.taken{
-  opacity:0.35;cursor:not-allowed;
-  text-decoration:line-through;
-}
-.time-val{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.82rem;letter-spacing:0.06em;
-  color:rgba(255,255,255,0.75);
-}
-.time-slot.selected .time-val{color:var(--gg);}
-.time-period{
-  font-size:0.58rem;font-family:'Barlow Condensed',sans-serif;
-  font-weight:600;letter-spacing:0.12em;
-  color:rgba(255,255,255,0.3);
-}
-
-/* Contact fields */
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .field-group{display:flex;flex-direction:column;gap:7px;}
 .field-group.full{grid-column:1/-1;}
@@ -955,7 +1063,6 @@ a{text-decoration:none;color:inherit;}
 .field-select option{background:var(--d3);color:var(--w);}
 .field-textarea{resize:vertical;min-height:80px;}
 
-/* Book confirm button */
 .book-confirm-btn{
   width:100%;
   font-family:'Bebas Neue',sans-serif;
@@ -978,7 +1085,6 @@ a{text-decoration:none;color:inherit;}
 }
 .book-confirm-btn:hover::before{opacity:1;}
 
-/* Summary sidebar */
 .book-summary{
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(72,184,43,0.12);
@@ -994,29 +1100,6 @@ a{text-decoration:none;color:inherit;}
   padding-bottom:10px;
   border-bottom:1px solid rgba(72,184,43,0.12);
 }
-.summary-row{
-  display:flex;justify-content:space-between;
-  align-items:center;padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,0.04);
-}
-.summary-row:last-of-type{border-bottom:none;}
-.summary-key{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:600;font-size:0.68rem;letter-spacing:0.12em;
-  text-transform:uppercase;color:rgba(255,255,255,0.35);
-}
-.summary-val{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.82rem;
-  color:rgba(255,255,255,0.75);text-align:right;
-  max-width:160px;
-}
-.summary-val.price{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.6rem;color:var(--gg);
-  letter-spacing:0.06em;
-}
-.summary-val.empty{color:rgba(255,255,255,0.2);font-style:italic;}
 .summary-note{
   margin-top:14px;
   font-size:0.68rem;color:rgba(255,255,255,0.28);
@@ -1202,6 +1285,70 @@ footer::before{
 }
 
 /* ══════════════════════════════════════
+   CAROUSEL
+══════════════════════════════════════ */
+.carousel-section{background:var(--dk);padding:0 0 40px;}
+.carousel-sh{
+  display:flex;align-items:center;gap:16px;
+  padding:44px 28px 20px;
+  max-width:1320px;margin:0 auto;
+}
+.carousel-sl{flex:1;height:1.5px;background:linear-gradient(90deg,var(--gg),transparent);}
+.carousel-sl.r{background:linear-gradient(90deg,transparent,var(--gg));}
+.carousel-sh h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.1rem,2.6vw,1.7rem);letter-spacing:0.24em;color:var(--gg);white-space:nowrap;}
+.carousel-outer{
+  position:relative;overflow:hidden;
+  -webkit-mask:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);
+  mask:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);
+}
+.carousel-track{
+  display:flex;gap:12px;
+  width:max-content;
+  animation:carouselScroll 36s linear infinite;
+}
+.carousel-track:hover{animation-play-state:paused;}
+@keyframes carouselScroll{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+.carousel-card{
+  flex-shrink:0;width:240px;height:180px;
+  border-radius:10px;overflow:hidden;
+  position:relative;cursor:pointer;background:#1a1a1a;
+}
+.carousel-card img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .5s ease, transform .4s cubic-bezier(.22,1,.36,1);
+}
+.carousel-card img.ld{opacity:1;}
+.carousel-card:hover img.ld{transform:scale(1.06);}
+.carousel-card video{width:100%;height:100%;object-fit:cover;}
+.carousel-card .skel{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,#1a1a1a 25%,#262626 50%,#1a1a1a 75%);
+  background-size:200% 100%;
+  animation:csk 1.4s infinite;border-radius:10px;
+}
+@keyframes csk{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.carousel-card .ctag{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 10px 8px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.7));
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--gg);
+}
+.carousel-link{text-align:center;margin-top:24px;}
+.carousel-link a{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Bebas Neue',sans-serif;font-size:0.92rem;
+  letter-spacing:0.2em;color:var(--gg);
+  border:1.5px solid rgba(111,217,82,0.3);
+  padding:11px 28px;border-radius:7px;transition:all .2s;
+}
+.carousel-link a:hover{background:rgba(111,217,82,0.08);border-color:rgba(111,217,82,0.6);}
+
+/* ══════════════════════════════════════
    DESKTOP >= 768px
 ══════════════════════════════════════ */
 @media(min-width:768px){
@@ -1243,7 +1390,6 @@ footer::before{
   .booking-inner{padding:0 64px;}
 
   .svc-select-grid{grid-template-columns:repeat(3,1fr);}
-  .time-grid{grid-template-columns:repeat(4,1fr);}
   .field-row{grid-template-columns:1fr 1fr;}
 
   .cta-wrap{padding:36px 64px 0;}
@@ -1255,6 +1401,13 @@ footer::before{
 
   .w{padding:0 64px;}
   footer{padding:50px 64px 56px;}
+
+  /* Pricing desktop */
+  .pricing-inner{padding:0 64px;}
+  .pricing-cards{grid-template-columns:repeat(3,1fr);gap:20px;}
+  .carousel-sh{padding:44px 60px 20px;}
+  .carousel-card{width:300px;height:210px;}
+  .carousel-track{gap:16px;}
 }
 
 @media(min-width:1100px){
@@ -1273,6 +1426,7 @@ footer::before{
   </div>
   <ul class="dnav-links">
     <li><a href="#services" class="active">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
     <li><a href="#why">Why Us</a></li>
     <li><a href="gallery.html">Gallery</a></li>
     <li><a href="#reviews">Reviews</a></li>
@@ -1284,8 +1438,6 @@ footer::before{
 
 <!-- ══ HERO ══ -->
 <section class="hero" id="home">
-
-  <!-- Background media slideshow -->
   <div class="hero-media">
     <div class="hero-slide active">
       <video autoplay muted loop playsinline preload="metadata">
@@ -1342,15 +1494,15 @@ footer::before{
       <div class="hero-price-pills an d4">
         <div class="price-pill">
           <div class="price-pill-label">Exterior</div>
-          <div class="price-pill-val">$60</div>
+          <div class="price-pill-val">$100</div>
         </div>
         <div class="price-pill">
           <div class="price-pill-label">Interior</div>
-          <div class="price-pill-val">$75</div>
+          <div class="price-pill-val">$110</div>
         </div>
         <div class="price-pill">
           <div class="price-pill-label">Full Detail</div>
-          <div class="price-pill-val">$120</div>
+          <div class="price-pill-val">$130+</div>
         </div>
       </div>
       <div class="hero-btns an d5">
@@ -1365,10 +1517,7 @@ footer::before{
   </div>
 
   <div class="hero-glow-line"></div>
-
-  <!-- Slide indicator dots -->
   <div class="hero-dots" id="hero-dots"></div>
-
   <div class="hero-scroll">
     <span>Scroll</span>
     <div class="hero-scroll-line"></div>
@@ -1378,7 +1527,7 @@ footer::before{
 <!-- ══ MOBILE NAV ══ -->
 <nav class="mnav">
   <a href="#services" class="active">Services</a>
-  <a href="#why">Why Us</a>
+  <a href="#pricing">Pricing</a>
   <a href="#booking">Schedule</a>
   <a href="tel:2026990209">Call</a>
 </nav>
@@ -1391,7 +1540,7 @@ footer::before{
       <div class="trust-lbl">Rated</div>
     </div>
     <div class="trust-item">
-      <div class="trust-num">$60</div>
+      <div class="trust-num">$100</div>
       <div class="trust-lbl">Starting</div>
     </div>
     <div class="trust-item">
@@ -1416,7 +1565,7 @@ footer::before{
       </svg>
     </div>
     <div class="panel-label">Interior</div>
-    <div class="panel-price">Starting at $75</div>
+    <div class="panel-price">Starting at $110</div>
     <div class="panel-sub">Deep Clean</div>
     <div class="panel-cta">
       View Services
@@ -1432,7 +1581,7 @@ footer::before{
       </svg>
     </div>
     <div class="panel-label">Exterior</div>
-    <div class="panel-price">Starting at $60</div>
+    <div class="panel-price">Starting at $100</div>
     <div class="panel-sub">Show Shine</div>
     <div class="panel-cta">
       View Services
@@ -1457,9 +1606,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$75</div>
+            <div class="scard-price">$110</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Interior Detail','$75')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Interior Detail','$110')">Book</button>
           </div>
         </div>
         <div class="scard featured">
@@ -1472,9 +1621,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$120</div>
+            <div class="scard-price">$130+</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Full Detail','$120')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Full Detail','$130+')">Book</button>
           </div>
         </div>
       </div>
@@ -1503,9 +1652,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$60</div>
+            <div class="scard-price">$100</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Exterior Wash','$60')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Exterior Wash','$100')">Book</button>
           </div>
         </div>
       </div>
@@ -1529,9 +1678,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$75</div>
+            <div class="scard-price">$110</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Interior Detail','$75')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Interior Detail','$110')">Book</button>
           </div>
         </div>
         <div class="scard featured">
@@ -1544,9 +1693,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$120</div>
+            <div class="scard-price">$130+</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Full Detail','$120')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Full Detail','$130+')">Book</button>
           </div>
         </div>
       </div>
@@ -1564,9 +1713,9 @@ footer::before{
             </div>
           </div>
           <div class="scard-right">
-            <div class="scard-price">$60</div>
+            <div class="scard-price">$100</div>
             <div class="scard-unit">starting</div>
-            <button class="scard-book-btn" onclick="openInquiry('Exterior Wash','$60')">Book</button>
+            <button class="scard-book-btn" onclick="openInquiry('Exterior Wash','$100')">Book</button>
           </div>
         </div>
       </div>
@@ -1580,6 +1729,181 @@ footer::before{
     </div>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════
+     ████  PRICING SECTION  ████
+══════════════════════════════════════ -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-sh">
+      <div class="pricing-sl"></div>
+      <h2>Pricing</h2>
+      <div class="pricing-sl r"></div>
+    </div>
+    <p class="pricing-sub">Transparent pricing — no surprises. Final price confirmed before we start.<br><strong>All prices vary by vehicle size and condition.</strong></p>
+
+    <div class="pricing-cards">
+
+      <!-- EXTERIOR -->
+      <div class="pc">
+        <div class="pc-accent pc-accent-ext"></div>
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div>
+              <div class="pc-name">Exterior Wash</div>
+            </div>
+            <div class="pc-icon pc-icon-ext">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 17H3v-4l2.5-5.5h13L21 13v4h-2"/>
+                <circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>
+                <path d="M5 13h14"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-price-block">
+            <span class="pc-from">from</span>
+            <span class="pc-price">$100</span>
+          </div>
+          <div class="pc-note">Compact cars start at $100. Mid-size sedans &amp; coupes typically $100–$120. Pricing confirmed at booking.</div>
+          <div class="pc-div"></div>
+          <div class="pc-includes-label">What's Included</div>
+          <div class="pc-list">
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Full exterior hand wash
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Wheel &amp; rim cleaning
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Tire dressing &amp; conditioning
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Exterior window streak-free clean
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Door jamb wipe-down
+            </div>
+          </div>
+          <button class="pc-btn pc-btn-outline" onclick="openInquiry('Exterior Wash','$100')">Get a Quote</button>
+        </div>
+      </div>
+
+      <!-- INTERIOR -->
+      <div class="pc">
+        <div class="pc-accent pc-accent-int"></div>
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div>
+              <div class="pc-name">Interior Detail</div>
+            </div>
+            <div class="pc-icon pc-icon-int">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 17l1.5-7h13L20 17"/>
+                <path d="M4 17h16v2a1 1 0 01-1 1H5a1 1 0 01-1-1v-2z"/>
+                <path d="M9 10V8a3 3 0 016 0v2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-price-block">
+            <span class="pc-from">from</span>
+            <span class="pc-price">$110</span>
+          </div>
+          <div class="pc-note">Standard interiors start at $110. Heavily soiled, pet hair, or larger vehicles priced accordingly. We quote before we start.</div>
+          <div class="pc-div"></div>
+          <div class="pc-includes-label">What's Included</div>
+          <div class="pc-list">
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Full deep vacuum (seats, carpet, trunk)
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Dashboard &amp; center console wipe-down
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Door panels &amp; pockets cleaned
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Interior glass &amp; mirrors
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Cup holders &amp; vents detailed
+            </div>
+          </div>
+          <button class="pc-btn pc-btn-outline" onclick="openInquiry('Interior Detail','$110')">Get a Quote</button>
+        </div>
+      </div>
+
+      <!-- FULL DETAIL — FEATURED -->
+      <div class="pc pc-featured">
+        <div class="pc-accent pc-accent-full"></div>
+        <div class="pc-inner">
+          <div class="pc-head">
+            <div>
+              <div class="pc-badge pc-badge-pop">Best Value</div>
+              <div class="pc-name">Full Detail</div>
+            </div>
+            <div class="pc-icon pc-icon-full">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--gg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pc-price-block">
+            <span class="pc-from">from</span>
+            <span class="pc-price">$130</span>
+          </div>
+          <div class="pc-note">Sedans &amp; coupes from $130. SUVs, trucks &amp; vans from $160+. Large or heavily soiled vehicles quoted individually.</div>
+          <div class="pc-div"></div>
+          <div class="pc-includes-label">Everything in Both — Plus</div>
+          <div class="pc-list">
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Complete interior deep clean
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Full exterior hand wash &amp; dry
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Wheel, rim &amp; tire treatment
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Interior &amp; exterior glass polish
+            </div>
+            <div class="pc-item">
+              <div class="pc-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Air freshener &amp; finishing touches
+            </div>
+          </div>
+          <button class="pc-btn pc-btn-solid" onclick="openInquiry('Full Detail','$130+')">Get a Quote</button>
+        </div>
+      </div>
+
+    </div><!-- /pricing-cards -->
+
+    <!-- Size callout -->
+    <div class="pricing-callout">
+      <div class="pricing-callout-ico">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="pricing-callout-text">
+        <strong>Pricing depends on vehicle size &amp; condition.</strong> Large SUVs, trucks, vans, and heavily soiled or pet-hair-filled vehicles are priced higher. We always confirm the exact price with you before starting — no surprises. Send an inquiry or give us a call and we'll get you a quick quote.
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <!-- ══ WHY US ══ -->
 <div id="why">
@@ -1611,83 +1935,6 @@ footer::before{
 </div>
 
 <!-- ══ GALLERY PREVIEW ══ -->
-<style>
-/* ── CAROUSEL ── */
-.carousel-section{background:var(--dk);padding:0 0 40px;}
-.carousel-sh{
-  display:flex;align-items:center;gap:16px;
-  padding:44px 28px 20px;
-  max-width:1320px;margin:0 auto;
-}
-.carousel-sl{flex:1;height:1.5px;background:linear-gradient(90deg,var(--gg),transparent);}
-.carousel-sl.r{background:linear-gradient(90deg,transparent,var(--gg));}
-.carousel-sh h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.1rem,2.6vw,1.7rem);letter-spacing:0.24em;color:var(--gg);white-space:nowrap;}
-
-.carousel-outer{
-  position:relative;overflow:hidden;
-  /* fade edges */
-  -webkit-mask:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);
-  mask:linear-gradient(90deg,transparent,black 8%,black 92%,transparent);
-}
-.carousel-track{
-  display:flex;gap:12px;
-  width:max-content;
-  animation:carouselScroll 36s linear infinite;
-}
-.carousel-track:hover{animation-play-state:paused;}
-@keyframes carouselScroll{
-  0%{transform:translateX(0);}
-  100%{transform:translateX(-50%);}
-}
-.carousel-card{
-  flex-shrink:0;width:240px;height:180px;
-  border-radius:10px;overflow:hidden;
-  position:relative;cursor:pointer;background:#1a1a1a;
-}
-.carousel-card img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s cubic-bezier(.22,1,.36,1);
-  opacity:0;transition:opacity .5s ease, transform .4s cubic-bezier(.22,1,.36,1);
-}
-.carousel-card img.ld{opacity:1;}
-.carousel-card:hover img.ld{transform:scale(1.06);}
-.carousel-card video{
-  width:100%;height:100%;object-fit:cover;
-}
-.carousel-card .skel{
-  position:absolute;inset:0;
-  background:linear-gradient(90deg,#1a1a1a 25%,#262626 50%,#1a1a1a 75%);
-  background-size:200% 100%;
-  animation:csk 1.4s infinite;border-radius:10px;
-}
-@keyframes csk{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
-.carousel-card .ctag{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:24px 10px 8px;
-  background:linear-gradient(transparent,rgba(0,0,0,0.7));
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--gg);
-}
-
-.carousel-link{
-  text-align:center;margin-top:24px;
-}
-.carousel-link a{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'Bebas Neue',sans-serif;font-size:0.92rem;
-  letter-spacing:0.2em;color:var(--gg);
-  border:1.5px solid rgba(111,217,82,0.3);
-  padding:11px 28px;border-radius:7px;transition:all .2s;
-}
-.carousel-link a:hover{background:rgba(111,217,82,0.08);border-color:rgba(111,217,82,0.6);}
-@media(min-width:768px){
-  .carousel-sh{padding:44px 60px 20px;}
-  .carousel-card{width:300px;height:210px;}
-  .carousel-track{gap:16px;}
-}
-</style>
-
 <div id="gallery-preview" class="carousel-section">
   <div class="carousel-sh">
     <div class="carousel-sl"></div>
@@ -1696,8 +1943,6 @@ footer::before{
   </div>
   <div class="carousel-outer">
     <div class="carousel-track" id="carousel-track">
-      <!-- Real cards — duplicated below for seamless loop -->
-
       <div class="carousel-card">
         <div class="skel"></div>
         <img src="./Photos/Exterior/PhotoWeb1.jpg" alt="Lexus IS" loading="lazy" onload="this.classList.add('ld');this.previousElementSibling.style.display='none'">
@@ -1739,8 +1984,7 @@ footer::before{
         </video>
         <div class="ctag">Exterior</div>
       </div>
-
-      <!-- DUPLICATE SET for seamless infinite loop -->
+      <!-- DUPLICATE SET for seamless loop -->
       <div class="carousel-card">
         <div class="skel"></div>
         <img src="./Photos/Exterior/PhotoWeb1.jpg" alt="" loading="lazy" onload="this.classList.add('ld');this.previousElementSibling.style.display='none'">
@@ -1834,39 +2078,35 @@ footer::before{
       <!-- LEFT: Inquiry form -->
       <div class="booking-steps">
         <div class="book-step" style="border:none;padding:0;">
-
-          <!-- Intro note -->
           <div style="background:rgba(72,184,43,0.06);border:1px solid rgba(72,184,43,0.16);border-radius:10px;padding:16px 18px;margin-bottom:22px;">
             <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gg);margin-bottom:6px;">How It Works</div>
             <div style="font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.6;">Fill out the form below and we'll reach out within 24 hours to schedule your appointment and confirm pricing. All bookings are handled personally by Dao.</div>
           </div>
 
-          <!-- Service interest -->
           <div style="margin-bottom:18px;">
             <div class="step-title" style="margin-bottom:12px;">Service Interested In</div>
             <div class="svc-select-grid" id="inq-svc-grid">
-              <div class="svc-opt" data-svc="Exterior Wash" data-price="$60" onclick="selectInqSvc(this)">
+              <div class="svc-opt" data-svc="Exterior Wash" data-price="$100" onclick="selectInqSvc(this)">
                 <div class="svc-opt-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 <div class="svc-opt-name">Exterior Wash</div>
-                <div class="svc-opt-price">$60</div>
+                <div class="svc-opt-price">$100</div>
                 <div class="svc-opt-sub">Starting</div>
               </div>
-              <div class="svc-opt" data-svc="Interior Detail" data-price="$75" onclick="selectInqSvc(this)">
+              <div class="svc-opt" data-svc="Interior Detail" data-price="$110" onclick="selectInqSvc(this)">
                 <div class="svc-opt-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 <div class="svc-opt-name">Interior Detail</div>
-                <div class="svc-opt-price">$75</div>
+                <div class="svc-opt-price">$110</div>
                 <div class="svc-opt-sub">Starting</div>
               </div>
-              <div class="svc-opt" data-svc="Full Detail" data-price="$120" onclick="selectInqSvc(this)">
+              <div class="svc-opt" data-svc="Full Detail" data-price="$130+" onclick="selectInqSvc(this)">
                 <div class="svc-opt-check"><svg viewBox="0 0 10 8"><path d="M1 4l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
                 <div class="svc-opt-name">Full Detail</div>
-                <div class="svc-opt-price">$120</div>
+                <div class="svc-opt-price">$130+</div>
                 <div class="svc-opt-sub">Best Value</div>
               </div>
             </div>
           </div>
 
-          <!-- Contact fields -->
           <div class="step-title" style="margin-bottom:12px;">Your Information</div>
           <div class="field-row">
             <div class="field-group">
@@ -1902,7 +2142,6 @@ footer::before{
               <textarea class="field-input field-textarea" id="iq-notes" placeholder="Pet hair, specific stains, car condition, any questions..."></textarea>
             </div>
           </div>
-          <!-- Firebase error fallback -->
           <div id="inq-firebase-err" style="display:none;margin-top:14px;background:rgba(232,54,74,0.1);border:1px solid rgba(232,54,74,0.25);border-radius:8px;padding:12px 16px;font-size:0.8rem;color:#f87f8c;line-height:1.5;">
             Something went wrong submitting your inquiry. Please call us directly at <strong>(202) 699-0209</strong>.
           </div>
@@ -1951,7 +2190,7 @@ footer::before{
             (202) 699-0209
           </a>
         </div>
-        <div class="summary-note" style="margin-top:14px;">All bookings are confirmed personally. We'll never leave you without a response.</div>
+        <div class="summary-note">All bookings are confirmed personally. We'll never leave you without a response.</div>
       </div>
 
     </div>
@@ -2005,42 +2244,29 @@ footer::before{
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════
-     NO Firebase keys here — all handled server-side
-     via Netlify Function in netlify/functions/submit-inquiry.js
-════════════════════════════════════════════════ -->
 <script>
 /* ── HERO SLIDESHOW ── */
 (function(){
   const slides = document.querySelectorAll('.hero-slide');
   const dotsEl = document.getElementById('hero-dots');
   if(!slides.length || !dotsEl) return;
-
   let cur = 0;
-
-  // Build dots
   slides.forEach((_,i)=>{
     const d = document.createElement('div');
     d.className = 'hero-dot' + (i===0?' active':'');
     d.onclick = ()=>goSlide(i);
     dotsEl.appendChild(d);
   });
-
   function goSlide(n){
     slides[cur].classList.remove('active');
     dotsEl.children[cur].classList.remove('active');
     cur = n;
     slides[cur].classList.add('active');
     dotsEl.children[cur].classList.add('active');
-    // Play video if this slide has one
     const vid = slides[cur].querySelector('video');
     if(vid){ vid.currentTime=0; vid.play().catch(()=>{}); }
   }
-
-  // Auto-advance: images every 5s, but skip quickly past already-playing videos
-  setInterval(()=>{
-    goSlide((cur+1) % slides.length);
-  }, 5000);
+  setInterval(()=>{ goSlide((cur+1) % slides.length); }, 5000);
 })();
 
 /* ── LAYOUT ── */
@@ -2055,7 +2281,7 @@ layout();
 window.addEventListener('resize', layout);
 
 /* ── ACTIVE NAV ── */
-const navIds = ['services','why','reviews','booking','contact'];
+const navIds = ['services','pricing','why','reviews','booking','contact'];
 const mLinks = document.querySelectorAll('.mnav a');
 const dLinks = document.querySelectorAll('.dnav .dnav-links a');
 function setActive(){
@@ -2079,7 +2305,6 @@ function selectInqSvc(el){
   el.classList.add('selected');
   inqSvc   = el.dataset.svc;
   inqPrice = el.dataset.price;
-  /* Clear red outline if it was shown */
   const grid = document.getElementById('inq-svc-grid');
   if(grid) grid.style.outline = '';
 }
@@ -2093,7 +2318,7 @@ function openInquiry(svc){
   }, 400);
 }
 
-/* ── FIELD VALIDATION HELPER ── */
+/* ── FIELD VALIDATION ── */
 function markError(id, msg){
   const el = document.getElementById(id);
   if(!el) return;
@@ -2116,7 +2341,7 @@ function showErr(msg){
   setTimeout(() => { box.style.display = 'none'; }, 7000);
 }
 
-/* ── SUBMIT INQUIRY → Netlify Function → Firestore ── */
+/* ── SUBMIT INQUIRY ── */
 async function submitInquiry(){
   const first   = document.getElementById('iq-first').value.trim();
   const last    = document.getElementById('iq-last').value.trim();
@@ -2154,15 +2379,11 @@ async function submitInquiry(){
         notes:    document.getElementById('iq-notes').value.trim(),
       }),
     });
-
     const json = await res.json();
-
     if(!res.ok || !json.success){
       showErr(json.error || 'Something went wrong. Please call (202) 699-0209.');
       return;
     }
-
-    /* Success */
     document.getElementById('inq-detail').innerHTML = `
       <div><strong>Service:</strong> ${inqSvc} &mdash; ${inqPrice}</div>
       <div><strong>Name:</strong> ${first} ${last}</div>
@@ -2170,7 +2391,6 @@ async function submitInquiry(){
       <div><strong>Vehicle:</strong> ${vehicle}</div>
     `;
     document.getElementById('inq-overlay').classList.add('show');
-
   } catch(err){
     console.error('Submit error:', err);
     showErr('Could not connect. Please call us at (202) 699-0209.');
