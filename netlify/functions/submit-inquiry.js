@@ -36,6 +36,6 @@ exports.handler = async (event) => {
     return ok({ success: true, id: ref.id });
   } catch (e) {
     console.error('submit-inquiry error:', e);
-    return err(500, 'Failed to save. Please call (202) 699-0209.');
+    return err(500, 'Failed to save. Please call (202) 699-0209 or text (202) 870-4817.');
   }
 };

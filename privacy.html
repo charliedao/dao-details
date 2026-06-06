@@ -3,264 +3,146 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy – Dao Detailing</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Privacy Policy | DAO Detailing, Rockville MD</title>
+<meta name="description" content="Privacy policy for DAO Detailing, mobile auto detailing in Rockville MD, Bethesda, Silver Spring, Gaithersburg and Montgomery County. How we collect, use, and protect your inquiry data.">
+<meta name="keywords" content="DAO Detailing privacy, mobile auto detailing Rockville MD, car detailing data policy">
+<meta name="geo.region" content="US-MD">
+<meta name="geo.placename" content="Rockville, Maryland">
+<link rel="canonical" href="https://daodetails.netlify.app/privacy.html">
+<link rel="icon" href="./favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="./Photos/logo.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="./Photos/logo.png">
+<link rel="shortcut icon" href="./favicon.png" type="image/png">
+<meta name="theme-color" content="#141414">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://daodetails.netlify.app/privacy.html">
+<meta property="og:title" content="Privacy Policy | DAO Detailing, Rockville MD">
+<meta property="og:description" content="How DAO Detailing collects, uses, and protects your information when you request mobile auto detailing in the DMV.">
+<meta property="og:image" content="https://daodetails.netlify.app/Photos/logo.png">
+<meta property="og:site_name" content="DAO Detailing">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://daodetails.netlify.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://daodetails.netlify.app/privacy.html"}
+  ]
+}
+</script>
 <style>
 :root{
-  --g:#2a7a18;--gl:#48b82b;--gg:#6fd952;
-  --w:#ffffff;--ow:#f1f3f0;
-  --dk:#0b0b0b;--d2:#141414;
-  --mu:#5a5a5a;
-  --r:10px;
+  --white:#fff;--off-white:#f8f8f8;--silver:#d4d4d4;
+  --chrome:linear-gradient(135deg,#f0f0f0 0%,#c8c8c8 35%,#a0a0a0 50%,#c8c8c8 65%,#e8e8e8 100%);
+  --grey:#999;--grey-dark:#555;--grey-darker:#333;--black:#000;
+  --bg:#141414;--bg2:#1e1e1e;--bg3:#282828;
+  --border:rgba(255,255,255,0.14);--border-bright:rgba(255,255,255,0.28);
+  --text:rgba(255,255,255,0.94);--text-muted:rgba(255,255,255,0.62);--glow:0 0 60px rgba(255,255,255,0.06);--r:10px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Barlow',sans-serif;background:var(--w);color:#2a2a2a;line-height:1.7;}
-a{color:var(--g);text-decoration:none;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+a{color:var(--silver);text-decoration:none;}
 a:hover{text-decoration:underline;}
 
-/* ── NAV ── */
 .nav{
-  background:var(--dk);
-  padding:18px 28px;
+  background:rgba(20,20,20,0.85);padding:16px 40px;
   display:flex;align-items:center;justify-content:space-between;
-  border-bottom:2px solid rgba(72,184,43,0.2);
-  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
 }
-.nav-logo img{
-  height:40px;object-fit:contain;
-  filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(72,184,43,0.3));
-}
+.nav-logo{display:flex;align-items:center;background:transparent;transition:opacity .2s,transform .2s;}
+.nav-logo:hover{opacity:.92;transform:scale(1.02);text-decoration:none;}
+.nav-logo img{height:100px;width:auto;background:transparent;object-fit:contain;}
 .nav-back{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.72rem;letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.5);
-  display:flex;align-items:center;gap:7px;
-  transition:color .18s;
+  font-family:'Oswald',sans-serif;font-size:.68rem;font-weight:400;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-muted);display:flex;align-items:center;gap:7px;transition:color .18s;
 }
-.nav-back:hover{color:var(--gg);text-decoration:none;}
+.nav-back:hover{color:var(--white);text-decoration:none;}
 .nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 
-/* ── HERO ── */
-.hero{
-  background:var(--dk);
-  padding:52px 28px 44px;
-  text-align:center;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 100%,rgba(42,122,24,0.12),transparent 60%);
-  pointer-events:none;
-}
-.hero::after{
-  content:'';position:absolute;
-  bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gl) 30%,var(--gg) 70%,transparent);
-}
-.hero-kicker{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:0.64rem;letter-spacing:0.32em;
-  text-transform:uppercase;color:var(--gl);
-  margin-bottom:12px;
-}
-.hero h1{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(2.4rem,6vw,4rem);
-  color:var(--w);letter-spacing:0.06em;
-  margin-bottom:10px;position:relative;
-}
-.hero-sub{
-  font-size:0.82rem;color:rgba(255,255,255,0.38);
-  letter-spacing:0.06em;position:relative;
-}
+.hero{background:var(--bg);padding:52px 28px 44px;text-align:center;border-bottom:1px solid var(--border);}
+.hero-kicker{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--silver);margin-bottom:12px;}
+.hero h1{font-family:'Oswald',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:500;color:var(--white);letter-spacing:.04em;margin-bottom:10px;}
+.hero-sub{font-size:.82rem;color:var(--text-muted);letter-spacing:.04em;}
 
-/* ── CONTENT ── */
-.content{
-  max-width:780px;margin:0 auto;
-  padding:52px 28px 80px;
-}
-
+.content{max-width:780px;margin:0 auto;padding:52px 28px 80px;}
 .last-updated{
-  display:inline-block;
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:600;font-size:0.64rem;letter-spacing:0.18em;
-  text-transform:uppercase;
-  color:var(--g);
-  background:rgba(42,122,24,0.08);
-  border:1px solid rgba(42,122,24,0.18);
-  border-radius:4px;padding:4px 12px;
-  margin-bottom:36px;
+  display:inline-block;font-family:'Oswald',sans-serif;font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--grey);
+  background:var(--bg2);border:1px solid var(--border);border-radius:3px;
+  padding:4px 12px;margin-bottom:36px;
 }
+.section{margin-bottom:40px;}
+.section-num{font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.2em;color:var(--grey);margin-bottom:6px;}
+.section h2{font-family:'Oswald',sans-serif;font-weight:500;font-size:1.2rem;letter-spacing:.04em;color:var(--white);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.section p{font-size:.88rem;color:var(--text-muted);margin-bottom:12px;}
+.section ul{margin:10px 0 12px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:7px;}
+.section ul li{font-size:.88rem;color:var(--text-muted);display:flex;align-items:flex-start;gap:10px;line-height:1.6;}
+.section ul li::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--silver);flex-shrink:0;margin-top:9px;}
+.highlight-box{background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--grey-dark);border-radius:var(--r);padding:16px 18px;margin:16px 0;}
+.highlight-box p{font-size:.84rem;color:var(--text-muted);margin:0;}
 
-.section{
-  margin-bottom:40px;
-}
-
-.section-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:0.72rem;letter-spacing:0.24em;
-  color:var(--gl);margin-bottom:6px;
-}
-
-.section h2{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:700;font-size:1.3rem;letter-spacing:0.04em;
-  color:#111;margin-bottom:12px;
-  padding-bottom:10px;
-  border-bottom:1.5px solid var(--ow);
-}
-
-.section p{
-  font-size:0.88rem;color:#444;
-  margin-bottom:12px;font-weight:400;
-}
-
-.section ul{
-  margin:10px 0 12px 0;
-  padding-left:0;
-  list-style:none;
-  display:flex;flex-direction:column;gap:7px;
-}
-
-.section ul li{
-  font-size:0.88rem;color:#444;
-  display:flex;align-items:flex-start;gap:10px;
-  line-height:1.6;
-}
-
-.section ul li::before{
-  content:'';
-  display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--gl);
-  flex-shrink:0;margin-top:8px;
-}
-
-.highlight-box{
-  background:rgba(42,122,24,0.05);
-  border:1px solid rgba(42,122,24,0.14);
-  border-left:3px solid var(--gl);
-  border-radius:var(--r);
-  padding:16px 18px;
-  margin:16px 0;
-}
-
-.highlight-box p{
-  font-size:0.84rem;color:#3a3a3a;margin:0;
-}
-
-/* ── CONTACT CARD ── */
-.contact-card{
-  background:var(--dk);
-  border-radius:14px;
-  padding:32px 28px;
-  text-align:center;
-  margin-top:48px;
-  position:relative;overflow:hidden;
-}
-.contact-card::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 50% 0%,rgba(42,122,24,0.12),transparent 60%);
-  pointer-events:none;
-}
-.contact-card::after{
-  content:'';position:absolute;
-  top:0;left:10%;right:10%;height:1.5px;
-  background:linear-gradient(90deg,transparent,var(--gl),transparent);
-}
-.contact-card h3{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.4rem;letter-spacing:0.1em;
-  color:var(--w);margin-bottom:6px;position:relative;
-}
-.contact-card p{
-  font-size:0.8rem;color:rgba(255,255,255,0.4);
-  margin-bottom:16px;position:relative;
-}
+.contact-card{background:var(--bg2);border-radius:10px;padding:32px 28px;text-align:center;margin-top:48px;border:1px solid var(--border-bright);box-shadow:0 0 60px rgba(255,255,255,0.04);}
+.contact-card h3{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:500;letter-spacing:.08em;color:var(--white);margin-bottom:6px;}
+.contact-card p{font-size:.8rem;color:var(--text-muted);margin-bottom:16px;}
 .contact-card a.btn{
-  display:inline-block;
-  font-family:'Bebas Neue',sans-serif;
-  font-size:0.92rem;letter-spacing:0.2em;
-  color:var(--w);background:var(--g);
-  padding:12px 30px;border-radius:7px;
-  box-shadow:0 4px 18px rgba(42,122,24,0.38);
-  transition:background .18s,transform .15s;
-  position:relative;
+  display:inline-block;font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--bg);background:var(--white);
+  padding:12px 30px;border-radius:2px;transition:opacity .18s;
 }
-.contact-card a.btn:hover{
-  background:#34991d;transform:translateY(-1px);
-  text-decoration:none;
-}
+.contact-card a.btn:hover{opacity:.9;text-decoration:none;}
+.contact-card-alt{font-size:.72rem;color:var(--grey);margin-top:12px;line-height:1.5;}
+.contact-card-alt a{color:var(--grey);text-decoration:underline;text-underline-offset:3px;}
+.contact-card-alt a:hover{color:var(--silver);}
+.phone-alt-line{font-size:.8rem;color:var(--grey);margin-top:4px;}
 
-/* ── FOOTER ── */
-footer{
-  background:var(--dk);
-  padding:28px;text-align:center;
-  border-top:1px solid rgba(72,184,43,0.1);
-}
-.footer-links{
-  display:flex;justify-content:center;gap:24px;
-  margin-bottom:12px;flex-wrap:wrap;
-}
-.footer-links a{
-  font-family:'Barlow Condensed',sans-serif;
-  font-weight:600;font-size:0.68rem;letter-spacing:0.16em;
-  text-transform:uppercase;color:rgba(255,255,255,0.35);
-  transition:color .15s;
-}
-.footer-links a:hover{color:var(--gg);text-decoration:none;}
-.footer-copy{
-  font-size:0.58rem;color:rgba(255,255,255,0.2);
-  letter-spacing:0.1em;text-transform:uppercase;
-}
+footer{background:var(--black);padding:28px;text-align:center;border-top:1px solid var(--border);}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:12px;flex-wrap:wrap;}
+.footer-links a{font-family:'Oswald',sans-serif;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);transition:color .15s;}
+.footer-links a:hover{color:var(--white);text-decoration:none;}
+.footer-copy{font-size:.56rem;color:var(--grey-dark);letter-spacing:.1em;text-transform:uppercase;}
 
-@media(min-width:768px){
-  .nav{padding:18px 60px;}
-  .hero{padding:72px 60px 56px;}
-  .content{padding:60px 28px 100px;}
-}
+@media(max-width:900px){.nav{padding:12px 20px;}.nav-logo img{height:80px;}}
+@media(max-width:520px){.nav{padding:10px 16px;}.nav-logo img{height:64px;}}
+@media(min-width:768px){.nav{padding:16px 60px;}.hero{padding:72px 60px 56px;}.content{padding:60px 28px 100px;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo">
-    <img src="./Photos/dao_detailing_banner.png" alt="Dao Detailing">
-  </div>
+  <a href="/" class="nav-logo" aria-label="DAO Detailing home"><img src="./Photos/logo.png" alt="DAO Detailing, mobile auto detailing Rockville MD"></a>
   <a href="index.html" class="nav-back">
     <svg viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Back to Site
   </a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-kicker">Legal</div>
   <h1>Privacy Policy</h1>
-  <div class="hero-sub">Dao Detailing &middot; daodetails.netlify.app</div>
+  <div class="hero-sub">DAO Detailing &middot; Rockville, MD &middot; daodetails.netlify.app</div>
 </div>
 
-<!-- CONTENT -->
 <div class="content">
 
   <div class="last-updated">Last Updated: March 2025</div>
 
-  <!-- 1 -->
   <div class="section">
     <div class="section-num">01</div>
     <h2>Who We Are</h2>
-    <p>Dao Detailing is a mobile auto detailing service operating in the DMV area (Washington DC, Maryland, Virginia). We can be reached at:</p>
+    <p>DAO Detailing is a <a href="index.html#services">mobile auto detailing</a> service based in <address style="font-style:normal;display:inline;">Rockville, Maryland</address>, serving Montgomery County and the greater DMV area (Washington DC, Maryland, Virginia). We can be reached at:</p>
     <div class="highlight-box">
-      <p><strong>Phone:</strong> (202) 699-0209<br>
-      <strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="65060d0417090c004b01040a16250208040c094b060a08">[email&#160;protected]</a><br>
-      <strong>Website:</strong> daodetails.netlify.app</p>
+      <p><strong>Phone:</strong> <a href="tel:2026990209">(202) 699-0209</a><br>
+      <span class="phone-alt-line">Can't reach us? Text <a href="tel:2028704817">(202) 870-4817</a><br></span>
+      <strong>Website:</strong> <a href="https://daodetails.netlify.app">daodetails.netlify.app</a><br>
+      <strong>Service Area:</strong> Rockville, Bethesda, Silver Spring, Gaithersburg, Montgomery County &amp; DMV<br>
+      <strong>Services:</strong> <a href="index.html#pricing">Exterior wash from $100</a> · <a href="index.html#pricing">Interior detail from $110</a> · <a href="index.html#pricing">Full detail from $130+</a></p>
     </div>
   </div>
 
-  <!-- 2 -->
   <div class="section">
     <div class="section-num">02</div>
     <h2>What Information We Collect</h2>
@@ -277,7 +159,6 @@ footer{
     <p>We do not collect payment information, government IDs, or any sensitive personal data through our website.</p>
   </div>
 
-  <!-- 3 -->
   <div class="section">
     <div class="section-num">03</div>
     <h2>How We Use Your Information</h2>
@@ -291,38 +172,34 @@ footer{
     <p>We do not use your information for marketing, advertising, or any automated decision-making.</p>
   </div>
 
-  <!-- 4 -->
   <div class="section">
     <div class="section-num">04</div>
     <h2>How We Store Your Information</h2>
     <p>Your inquiry data is stored securely using Google Firebase (Firestore), a cloud database service provided by Google LLC. Firebase is protected by Google's enterprise-grade security infrastructure.</p>
     <div class="highlight-box">
-      <p>Your data is only accessible to authorized Dao Detailing staff. It is not stored in any publicly accessible location and is never sold or rented to third parties.</p>
+      <p>Your data is only accessible to authorized DAO Detailing staff. It is not stored in any publicly accessible location and is never sold or rented to third parties.</p>
     </div>
     <p>You can read more about Google Firebase's security and privacy practices at <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">firebase.google.com/support/privacy</a>.</p>
   </div>
 
-  <!-- 5 -->
   <div class="section">
     <div class="section-num">05</div>
     <h2>Who We Share Your Information With</h2>
     <p>We do not sell, trade, or share your personal information with any third parties, advertisers, or data brokers.</p>
     <p>The only parties who may access your information are:</p>
     <ul>
-      <li>Dao Detailing staff directly involved in your appointment</li>
+      <li>DAO Detailing staff directly involved in your appointment</li>
       <li>Google Firebase (as our secure data storage provider)</li>
     </ul>
   </div>
 
-  <!-- 6 -->
   <div class="section">
     <div class="section-num">06</div>
-    <h2>Cookies & Tracking</h2>
+    <h2>Cookies &amp; Tracking</h2>
     <p>Our website does not use cookies, tracking pixels, analytics scripts, or any third-party tracking tools. We do not track your browsing behavior on our site.</p>
     <p>We do not use Google Analytics, Facebook Pixel, or any similar services.</p>
   </div>
 
-  <!-- 7 -->
   <div class="section">
     <div class="section-num">07</div>
     <h2>Your Rights</h2>
@@ -333,45 +210,47 @@ footer{
       <li>Request that we delete your information from our records</li>
       <li>Withdraw consent for us to contact you at any time</li>
     </ul>
-    <p>To exercise any of these rights, contact us by phone or email and we will respond within 5 business days.</p>
+    <p>To exercise any of these rights, contact us by phone and we will respond within 5 business days.</p>
   </div>
 
-  <!-- 8 -->
   <div class="section">
     <div class="section-num">08</div>
     <h2>Data Retention</h2>
     <p>We retain your inquiry and booking information for as long as is necessary to provide our services and maintain business records. If you request deletion of your data, we will remove it from our systems within 14 days.</p>
   </div>
 
-  <!-- 9 -->
   <div class="section">
     <div class="section-num">09</div>
     <h2>Children's Privacy</h2>
     <p>Our services and website are not directed at children under the age of 13. We do not knowingly collect personal information from anyone under 13. If you believe we have inadvertently collected such information, please contact us immediately and we will delete it.</p>
   </div>
 
-  <!-- 10 -->
   <div class="section">
     <div class="section-num">10</div>
     <h2>Changes to This Policy</h2>
     <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date at the top. Continued use of our website after changes are posted constitutes your acceptance of the updated policy.</p>
   </div>
 
-  <!-- Contact card -->
   <div class="contact-card">
     <h3>Questions About Your Privacy?</h3>
     <p>Contact us directly and we'll respond within 1 business day.</p>
     <a href="tel:2026990209" class="btn">Call (202) 699-0209</a>
+    <p class="contact-card-alt">If the line is busy, text <a href="tel:2028704817">(202) 870-4817</a></p>
   </div>
 
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-links">
     <a href="index.html">Home</a>
-    <a href="index.html#services">Services</a>
+    <a href="index.html#services">Mobile Detailing Services</a>
+    <a href="gallery.html">Detailing Gallery</a>
     <a href="index.html#booking">Get a Quote</a>
+    <a href="index.html#faq">FAQ</a>
     <a href="privacy.html">Privacy Policy</a>
   </div>
-  <div c
+  <div class="footer-copy">&copy; 2025 DAO Detailing &middot; Rockville MD &middot; All Rights Reserved</div>
+</footer>
+
+</body>
+</html>

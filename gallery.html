@@ -3,331 +3,227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gallery – Dao Detailing</title>
+<title>Gallery | DAO Detailing, Auto Detailing Rockville MD &amp; DMV</title>
+<meta name="description" content="DAO Detailing gallery. Before-and-after mobile auto detailing in Rockville MD, Bethesda, Silver Spring, Gaithersburg and Montgomery County. Exterior washes, interior details and full details.">
+<meta name="keywords" content="auto detailing gallery Rockville MD, car detailing photos Bethesda, mobile detailing results Silver Spring, Gaithersburg car wash gallery, Montgomery County detailing">
+<meta name="geo.region" content="US-MD">
+<meta name="geo.placename" content="Rockville, Maryland">
+<link rel="canonical" href="https://daodetails.netlify.app/gallery.html">
+<link rel="icon" href="./favicon.png" type="image/png" sizes="32x32">
+<link rel="icon" href="./Photos/logo.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="./Photos/logo.png">
+<link rel="shortcut icon" href="./favicon.png" type="image/png">
+<meta name="theme-color" content="#141414">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://daodetails.netlify.app/gallery.html">
+<meta property="og:title" content="Gallery | DAO Detailing, Mobile Auto Detailing Rockville MD">
+<meta property="og:description" content="Real cars. Real details. Browse mobile auto detailing results across Rockville, Bethesda, Silver Spring, Gaithersburg &amp; the DMV.">
+<meta property="og:image" content="https://daodetails.netlify.app/Photos/logo.png">
+<meta property="og:image:alt" content="DAO Detailing mobile auto detailing gallery">
+<meta property="og:site_name" content="DAO Detailing">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://daodetails.netlify.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Auto Detailing Gallery", "item": "https://daodetails.netlify.app/gallery.html"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#2a7a18;--gm:#34991d;--gl:#48b82b;--gg:#6fd952;
-  --w:#fff;--dk:#0b0b0b;--d2:#141414;--d3:#1c1c1c;
-  --r:12px;
+  --white:#fff;--off-white:#f8f8f8;--silver:#d4d4d4;
+  --chrome:linear-gradient(135deg,#f0f0f0 0%,#c8c8c8 35%,#a0a0a0 50%,#c8c8c8 65%,#e8e8e8 100%);
+  --grey:#999;--grey-dark:#555;--grey-darker:#333;--black:#000;
+  --bg:#141414;--bg2:#1e1e1e;--bg3:#282828;
+  --border:rgba(255,255,255,0.14);--border-bright:rgba(255,255,255,0.28);
+  --text:rgba(255,255,255,0.94);--text-muted:rgba(255,255,255,0.62);
+  --glow:0 0 60px rgba(255,255,255,0.06);--r:10px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{font-family:'Barlow',sans-serif;background:var(--dk);color:#e0e0e0;overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
 img,video{display:block;}
 a{text-decoration:none;color:inherit;}
 
-/* ── NAV ── */
 .nav{
-  height:70px;background:rgba(8,8,8,0.97);
+  height:96px;background:rgba(20,20,20,0.72);
   backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(72,184,43,0.18);
+  border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;position:sticky;top:0;z-index:200;
+  padding:0 40px;position:sticky;top:0;z-index:200;
 }
-.nav-logo img{height:44px;filter:brightness(0) invert(1) drop-shadow(0 0 6px rgba(72,184,43,0.3));}
+.nav-logo{display:flex;align-items:center;background:transparent;transition:opacity .2s,transform .2s;}
+.nav-logo:hover{opacity:.92;transform:scale(1.02);}
+.nav-logo img{height:100px;width:auto;background:transparent;object-fit:contain;}
 .nav-links{display:flex;align-items:center;gap:24px;}
-.nav-links a{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);transition:color .18s;}
-.nav-links a:hover{color:var(--w);}
-.nav-links a.active{color:var(--gg);}
-.nav-cta{color:var(--w)!important;background:var(--g);padding:9px 22px;border-radius:6px;box-shadow:0 4px 16px rgba(42,122,24,0.35);transition:background .18s!important;}
-.nav-cta:hover{background:var(--gm)!important;}
+.nav-links a{font-family:'Oswald',sans-serif;font-size:.68rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);transition:color .18s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.active{color:var(--white);}
+.nav-cta{color:var(--black)!important;background:var(--white)!important;padding:9px 20px;border-radius:4px;box-shadow:0 4px 24px rgba(255,255,255,0.15)!important;transition:transform .2s!important;}
+.nav-cta:hover{transform:translateY(-1px)!important;}
 
-/* ── VIDEO HERO ── */
 .video-hero{
-  position:relative;height:70vh;min-height:400px;
-  overflow:hidden;background:var(--dk);
+  position:relative;height:58vh;min-height:360px;
+  overflow:hidden;background:var(--bg);
   display:flex;align-items:center;justify-content:center;
 }
-.video-hero video{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;opacity:0.45;
-  transition:opacity 1s ease;
-}
-.video-hero video.loaded{opacity:0.45;}
-.video-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(11,11,11,0.6) 100%);
-}
-.video-glow{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gl) 25%,var(--gg) 75%,transparent);}
-.video-content{position:relative;text-align:center;padding:0 24px;}
-.video-kicker{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.68rem;letter-spacing:0.34em;text-transform:uppercase;color:var(--gl);margin-bottom:14px;}
-.video-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,8vw,5.5rem);color:var(--w);letter-spacing:0.06em;line-height:0.92;margin-bottom:12px;}
-.video-h1 em{color:var(--gl);font-style:normal;}
-.video-sub{font-size:0.88rem;color:rgba(255,255,255,0.5);}
+.video-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.video-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.45) 50%,rgba(0,0,0,0.7) 100%);}
+.video-content{position:relative;text-align:center;padding:0 24px;max-width:800px;}
+.video-kicker{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--silver);margin-bottom:14px;}
+.video-h1{font-family:'Oswald',sans-serif;font-size:clamp(2.8rem,8vw,5rem);font-weight:500;color:var(--white);letter-spacing:-.01em;line-height:.95;margin-bottom:12px;text-shadow:0 2px 40px rgba(0,0,0,0.5);}
+.video-h1 em{background:var(--chrome);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal;}
+.video-sub{font-size:.92rem;color:var(--text-muted);}
 
-/* ── FILTER ── */
-.filter-bar{
-  display:flex;align-items:center;justify-content:center;
-  gap:10px;flex-wrap:wrap;padding:32px 24px 0;
-}
+.filter-bar{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:32px 24px 0;}
 .fb{
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.66rem;
-  letter-spacing:0.16em;text-transform:uppercase;
-  padding:9px 20px;border-radius:30px;
-  border:1.5px solid rgba(72,184,43,0.2);
-  background:transparent;color:rgba(255,255,255,0.45);
-  cursor:pointer;transition:all .2s;
+  font-family:'Oswald',sans-serif;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 20px;border-radius:2px;border:1px solid var(--border);
+  background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s;
 }
-.fb:hover{border-color:rgba(72,184,43,0.5);color:var(--w);}
-.fb.active{background:var(--g);border-color:var(--gl);color:var(--w);box-shadow:0 4px 16px rgba(42,122,24,0.3);}
+.fb:hover{border-color:var(--grey);color:var(--white);}
+.fb.active{background:var(--white);border-color:var(--white);color:var(--black);box-shadow:var(--glow);}
 
-/* ── GALLERY GRID ── */
-.gallery-wrap{max-width:1300px;margin:0 auto;padding:28px 16px 64px;}
-
-/* Masonry via CSS columns */
-.gallery-grid{columns:2;column-gap:12px;}
+.gallery-wrap{max-width:1440px;margin:0 auto;padding:32px 20px 72px;}
+.gallery-grid{columns:2;column-gap:14px;}
 @media(min-width:640px){.gallery-grid{columns:3;}}
 @media(min-width:960px){.gallery-grid{columns:4;}}
 
-.g-item{
-  break-inside:avoid;margin-bottom:12px;
-  border-radius:var(--r);overflow:hidden;
-  position:relative;cursor:pointer;
-  background:#1a1a1a;
-}
-
-/* ── SKELETON LOADER ── */
-.g-item .skel{
-  width:100%;background:linear-gradient(90deg,#1a1a1a 25%,#242424 50%,#1a1a1a 75%);
-  background-size:200% 100%;
-  animation:shimmer 1.4s infinite;
-}
+.g-item{break-inside:avoid;margin-bottom:14px;border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;background:var(--bg3);border:1px solid var(--border);transition:transform .35s,border-color .35s,box-shadow .35s;}
+.g-item:hover{transform:translateY(-4px);border-color:var(--border-bright);box-shadow:var(--glow);}
+.g-item .skel{width:100%;background:linear-gradient(90deg,var(--bg3) 25%,var(--grey-darker) 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
 @keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
-
-/* Image wrapper — reserves height before image loads */
-.g-item .img-wrap{
-  position:relative;width:100%;overflow:hidden;
-}
-.g-item img{
-  width:100%;height:auto;display:block;
-  opacity:0;transition:opacity .5s ease, transform .4s cubic-bezier(.22,1,.36,1);
-  transform:scale(1.02);
-}
-.g-item img.loaded{opacity:1;transform:scale(1);}
-.g-item:hover img.loaded{transform:scale(1.05);}
-
-/* Overlay on hover */
-.g-item .ov{
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,0.78) 100%);
-  opacity:0;transition:opacity .3s;
-  display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
-}
+.g-item .img-wrap{position:relative;width:100%;overflow:hidden;}
+.g-item img{width:100%;height:auto;display:block;opacity:1;transition:opacity .5s ease,transform .4s ease;}
+.g-item img.loading{opacity:0;}
+.g-item img.loaded{opacity:1;}
+.g-item:hover img.loaded{transform:scale(1.04);}
+.g-item .shine-sweep{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.14) 50%,transparent 60%);transform:translateX(-120%);transition:transform .65s ease;}
+.g-item:hover .shine-sweep{transform:translateX(120%);}
+.g-item .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,0.8) 100%);opacity:0;transition:opacity .3s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;z-index:3;}
 .g-item:hover .ov{opacity:1;}
-.ov-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gg);margin-bottom:3px;}
-.ov-cap{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;color:var(--w);}
-
-/* Expand icon */
-.g-item .expand-ico{
-  position:absolute;top:10px;right:10px;
-  width:28px;height:28px;border-radius:6px;
-  background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.15);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transition:opacity .25s;
-}
+.ov-tag{font-family:'Oswald',sans-serif;font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--silver);margin-bottom:3px;}
+.ov-cap{font-family:'Oswald',sans-serif;font-size:.78rem;font-weight:500;color:var(--white);}
+.g-item .expand-ico{position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:4px;background:rgba(0,0,0,0.55);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s;}
 .g-item:hover .expand-ico{opacity:1;}
 .expand-ico svg{width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;}
-
-/* Video item */
-.g-item.vid-item .vid-badge{
-  position:absolute;top:10px;left:10px;
-  font-family:'Barlow Condensed',sans-serif;font-weight:700;
-  font-size:0.56rem;letter-spacing:0.14em;text-transform:uppercase;
-  background:rgba(42,122,24,0.85);color:var(--w);
-  padding:3px 9px;border-radius:3px;z-index:2;
-}
+.g-item.vid-item .vid-badge{position:absolute;top:10px;left:10px;font-family:'Oswald',sans-serif;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(0,0,0,0.7);border:1px solid var(--border);color:var(--white);padding:3px 9px;border-radius:2px;z-index:2;}
 .g-item video{width:100%;height:auto;display:block;}
-
-/* Hidden items for filter */
 .g-item.hidden{display:none;}
 
-/* ── LIGHTBOX ── */
-.lb{
-  display:none;position:fixed;inset:0;z-index:1000;
-  background:rgba(0,0,0,0.94);backdrop-filter:blur(16px);
-  align-items:center;justify-content:center;padding:20px;
-}
+.lb{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.94);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px;}
 .lb.show{display:flex;}
 .lb-inner{position:relative;max-width:92vw;max-height:92vh;display:flex;flex-direction:column;align-items:center;}
-.lb-img{max-width:100%;max-height:82vh;border-radius:10px;object-fit:contain;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
-.lb-close{position:absolute;top:-16px;right:-16px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:var(--w);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;}
-.lb-close:hover{background:rgba(232,54,74,0.35);}
-.lb-cap{margin-top:12px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.76rem;letter-spacing:0.1em;color:rgba(255,255,255,0.45);text-align:center;}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:var(--w);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;}
-.lb-nav:hover{background:rgba(72,184,43,0.2);border-color:var(--gl);}
+.lb-img{max-width:100%;max-height:82vh;border-radius:6px;object-fit:contain;border:1px solid var(--border);}
+.lb-close{position:absolute;top:-16px;right:-16px;width:34px;height:34px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--white);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.lb-close:hover{background:var(--grey-darker);}
+.lb-cap{margin-top:12px;font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.1em;color:var(--text-muted);text-align:center;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);color:var(--white);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s;}
+.lb-nav:hover{background:var(--grey-darker);}
 .lb-prev{left:-58px;}.lb-next{right:-58px;}
 @media(max-width:600px){.lb-prev{left:-6px;}.lb-next{right:-6px;}}
-.lb-counter{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);font-family:'Barlow Condensed',sans-serif;font-size:0.66rem;letter-spacing:0.14em;color:rgba(255,255,255,0.28);}
+.lb-counter{position:absolute;bottom:-32px;left:50%;transform:translateX(-50%);font-family:'Oswald',sans-serif;font-size:.64rem;letter-spacing:.12em;color:var(--grey);}
 
-/* ── CTA ── */
-.cta{background:linear-gradient(135deg,var(--g),#163f0d);padding:48px 28px;text-align:center;position:relative;overflow:hidden;}
-.cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:linear-gradient(90deg,transparent,var(--gl),transparent);}
-.cta h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,4vw,3rem);letter-spacing:0.08em;color:var(--w);margin-bottom:8px;}
-.cta p{font-size:0.82rem;color:rgba(255,255,255,0.6);margin-bottom:22px;}
-.cta a{display:inline-block;background:var(--w);color:var(--g);font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.2em;padding:13px 36px;border-radius:8px;box-shadow:0 6px 24px rgba(0,0,0,0.25);transition:transform .15s,box-shadow .15s;}
-.cta a:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,0.32);}
+.cta{background:var(--bg2);border-top:1px solid var(--border-bright);padding:56px 28px;text-align:center;position:relative;overflow:hidden;}
+.cta::before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,0.08) 50%,transparent 60%);animation:shine 6s ease-in-out infinite;}
+@keyframes shine{0%,100%{transform:translateX(-100%);}50%{transform:translateX(100%);}}
+.cta>*{position:relative;z-index:1;}
+.cta h3{font-family:'Oswald',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;letter-spacing:-.01em;color:var(--white);margin-bottom:10px;}
+.cta p{font-size:.86rem;color:var(--text-muted);margin-bottom:24px;}
+.cta a{display:inline-block;background:var(--white);color:var(--black);font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:14px 36px;border-radius:4px;transition:transform .2s,box-shadow .2s;}
+.cta a:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,255,255,0.2);}
 
-/* ── FOOTER ── */
-footer{background:var(--dk);padding:30px 28px;text-align:center;border-top:1px solid rgba(72,184,43,0.1);}
+footer{background:var(--black);padding:30px 28px;text-align:center;border-top:1px solid var(--border);}
 .fl{display:flex;justify-content:center;gap:22px;margin-bottom:10px;flex-wrap:wrap;}
-.fl a{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.66rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.3);transition:color .15s;}
-.fl a:hover{color:var(--gg);}
-.fc{font-size:0.58rem;color:rgba(255,255,255,0.18);letter-spacing:0.1em;text-transform:uppercase;}
+.fl a{font-family:'Oswald',sans-serif;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);transition:color .15s;}
+.fl a:hover{color:var(--white);}
+.fc{font-size:.56rem;color:var(--grey-dark);letter-spacing:.1em;text-transform:uppercase;}
 
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal.d1{transition-delay:.08s;}.reveal.d2{transition-delay:.16s;}.reveal.d3{transition-delay:.24s;}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.video-kicker,.video-h1,.video-sub{opacity:0;animation:heroFadeUp .8s ease forwards;}
+.video-h1{animation-delay:.15s;}.video-sub{animation-delay:.3s;}
+
+@media(max-width:900px){.nav{height:80px;padding:0 20px;}.nav-logo img{height:80px;}}
+@media(max-width:520px){.nav{height:68px;}.nav-logo img{height:64px;}}
 @media(min-width:768px){.nav{padding:0 60px;}.gallery-wrap{padding:32px 28px 80px;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-  <div class="nav-logo"><img src="./Photos/dao_detailing_banner.png" alt="Dao Detailing"></div>
+  <a href="/" class="nav-logo" aria-label="DAO Detailing home"><img src="./Photos/logo.png" alt="DAO Detailing, mobile auto detailing Rockville MD"></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="index.html#services">Services</a>
+    <a href="index.html#services">Mobile Detailing Services</a>
+    <a href="index.html#pricing">Pricing</a>
     <a href="gallery.html" class="active">Gallery</a>
     <a href="index.html#booking" class="nav-cta">Get a Quote</a>
   </div>
 </nav>
 
-<!-- VIDEO HERO — exterior video as background -->
 <div class="video-hero">
-  <video autoplay muted loop playsinline preload="metadata" poster="./Photos/Exterior/IMG_6829.jpg">
+  <video autoplay muted loop playsinline preload="metadata" poster="./Photos/Exterior/lexusrc.jpg">
     <source src="./Photos/Exterior/Blurred2025.mp4" type="video/mp4">
   </video>
   <div class="video-overlay"></div>
   <div class="video-content">
-    <div class="video-kicker">Our Work</div>
-    <h1 class="video-h1">THE <em>RESULTS</em></h1>
-    <div class="video-sub">Real cars. Real details. See what we can do for yours.</div>
+    <div class="video-kicker">Our Work · Rockville MD &amp; DMV</div>
+    <h1 class="video-h1">MOBILE DETAILING <em>RESULTS</em></h1>
+    <div class="video-sub">Real cars, real details. Mobile across the DMV, or drop off in Rockville.</div>
   </div>
-  <div class="video-glow"></div>
 </div>
 
-<!-- FILTER -->
 <div class="filter-bar">
   <button class="fb active" onclick="filter('all',this)">All</button>
   <button class="fb" onclick="filter('interior',this)">Interior</button>
   <button class="fb" onclick="filter('exterior',this)">Exterior</button>
 </div>
 
-<!-- GALLERY -->
 <div class="gallery-wrap">
   <div class="gallery-grid" id="grid">
-
-    <!-- INTERIOR VIDEO -->
     <div class="g-item vid-item" data-cat="interior">
       <div class="vid-badge">Video</div>
-      <video autoplay muted loop playsinline preload="metadata" style="border-radius:12px;">
+      <video autoplay muted loop playsinline preload="metadata" style="border-radius:8px;">
         <source src="./Photos/Interior/IMG_6821.MOV" type="video/quicktime">
         <source src="./Photos/Interior/IMG_6821.MOV" type="video/mp4">
       </video>
       <div class="ov"><div class="ov-tag">Interior</div><div class="ov-cap">Interior Detail</div></div>
     </div>
-
-    <!-- PhotoWeb4 — Honda front interior -->
-    <div class="g-item" data-cat="interior" data-src="./Photos/Interior/PhotoWeb4.jpg" data-cap="Toyota Camry — Interior Detail" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:260px;border-radius:12px;"></div>
-        <img src="./Photos/Interior/PhotoWeb4.jpg" alt="Honda Interior Detail" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Interior</div><div class="ov-cap">Toyota Camry — Interior Detail</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- PhotoWeb3 — Infiniti rear -->
-    <div class="g-item" data-cat="interior" data-src="./Photos/Interior/PhotoWeb3.jpg" data-cap="Infiniti QX60 — Rear Leather Detail" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:300px;border-radius:12px;"></div>
-        <img src="./Photos/Interior/PhotoWeb3.jpg" alt="Infiniti Interior Detail" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Interior</div><div class="ov-cap">Toyota Camry — Rear Leather</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- IMG_6816 — rear seats -->
-    <div class="g-item" data-cat="interior" data-src="./Photos/Interior/IMG_6816.jpg" data-cap="Rear Seats — Deep Clean" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:280px;border-radius:12px;"></div>
-        <img src="./Photos/Interior/IMG_6816.jpg" alt="Rear Seats Detail" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Interior</div><div class="ov-cap">Rear Seats — Deep Clean</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- IMG_6819 — Toyota dashboard -->
-    <div class="g-item" data-cat="interior" data-src="./Photos/Interior/IMG_6819.jpg" data-cap="Honda Pilot Elite — Dashboard Detail" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:300px;border-radius:12px;"></div>
-        <img src="./Photos/Interior/IMG_6819.jpg" alt="Toyota Dashboard Detail" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Interior</div><div class="ov-cap">Toyota Camry — Dashboard</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- EXTERIOR VIDEO -->
     <div class="g-item vid-item" data-cat="exterior">
       <div class="vid-badge">Video</div>
-      <video autoplay muted loop playsinline preload="metadata" style="border-radius:12px;">
+      <video autoplay muted loop playsinline preload="metadata" style="border-radius:8px;">
         <source src="./Photos/Exterior/Blurred2025.mp4" type="video/mp4">
       </video>
       <div class="ov"><div class="ov-tag">Exterior</div><div class="ov-cap">Exterior Detail</div></div>
     </div>
-
-    <!-- IMG_6829 — Honda Passport -->
-    <div class="g-item" data-cat="exterior" data-src="./Photos/Exterior/IMG_6829.jpg" data-cap="Honda Passport Elite — Exterior Detail" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:240px;border-radius:12px;"></div>
-        <img src="./Photos/Exterior/IMG_6829.jpg" alt="Honda Passport Exterior" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Exterior</div><div class="ov-cap">Honda Passport Elite</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- PhotoWeb1 — Lexus shine -->
-    <div class="g-item" data-cat="exterior" data-src="./Photos/Exterior/PhotoWeb1.jpg" data-cap="Lexus IS F Sport — Mirror Shine" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:260px;border-radius:12px;"></div>
-        <img src="./Photos/Exterior/PhotoWeb1.jpg" alt="Lexus Exterior Detail" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Exterior</div><div class="ov-cap">Lexus IS F Sport — Mirror Shine</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
-    <!-- PhotoWeb2 — foam cannon -->
-    <div class="g-item" data-cat="exterior" data-src="./Photos/Exterior/PhotoWeb2.jpg" data-cap="Lexus IS — Foam Cannon Wash" onclick="openLb(this)">
-      <div class="img-wrap">
-        <div class="skel" style="height:300px;border-radius:12px;"></div>
-        <img src="./Photos/Exterior/PhotoWeb2.jpg" alt="Foam Cannon Wash" loading="lazy" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
-      </div>
-      <div class="ov"><div class="ov-tag">Exterior</div><div class="ov-cap">Lexus IS — Foam Cannon Wash</div></div>
-      <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
-    </div>
-
   </div>
 </div>
 
-<!-- CTA -->
 <div class="cta">
   <h3>Want Results Like These?</h3>
-  <p>Get in touch and we'll schedule your detail.</p>
-  <a href="index.html#booking">Request a Quote</a>
+  <p>Mobile detailing across the DMV, or drop off in Rockville. Bethesda, Silver Spring, Gaithersburg and Montgomery County.</p>
+  <a href="index.html#booking">Request a Free Quote</a>
 </div>
 
-<!-- FOOTER -->
 <footer>
   <div class="fl">
     <a href="index.html">Home</a>
-    <a href="index.html#services">Services</a>
-    <a href="gallery.html">Gallery</a>
+    <a href="index.html#services">Mobile Detailing Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="gallery.html">Detailing Gallery</a>
+    <a href="index.html#faq">FAQ</a>
     <a href="privacy.html">Privacy Policy</a>
   </div>
-  <div class="fc">&copy; 2025 Dao Detailing &middot; All Rights Reserved &middot; DMV Area</div>
+  <div class="fc">Mobile detailing across the DMV, or drop off in Rockville.</div>
 </footer>
 
-<!-- LIGHTBOX -->
 <div class="lb" id="lb" onclick="lbBgClick(event)">
   <div class="lb-inner">
     <button class="lb-close" onclick="closeLb()">&times;</button>
@@ -339,77 +235,72 @@ footer{background:var(--dk);padding:30px 28px;text-align:center;border-top:1px s
   </div>
 </div>
 
+<script src="./photos.js"></script>
 <script>
-/* ── IMAGE LOAD ── */
-function imgLoaded(img){
-  img.classList.add('loaded');
-  const skel = img.previousElementSibling;
-  if(skel && skel.classList.contains('skel')){
-    skel.style.display='none';
+function imgLoaded(img){if(!img)return;img.classList.remove('loading');img.classList.add('loaded');const skel=img.previousElementSibling;if(skel&&skel.classList.contains('skel'))skel.style.display='none';}
+function observeReveals(){
+  const revealEls=document.querySelectorAll('.reveal:not(.visible)');
+  const revealObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+  revealEls.forEach(el=>revealObs.observe(el));
+}
+observeReveals();
+
+function buildGalleryItem(p,i){
+  const heights=[260,300,280,240,260,300,280,240];
+  const h=heights[i%heights.length];
+  const delay=i%4===0?'':` d${i%4}`;
+  const el=document.createElement('div');
+  el.className='g-item reveal'+delay;
+  el.dataset.cat=p.category;
+  el.dataset.src=p.src;
+  el.dataset.cap=p.caption;
+  el.onclick=function(){openLb(this);};
+  const tag=p.category==='interior'?'Interior':'Exterior';
+  el.innerHTML=`<span class="shine-sweep" aria-hidden="true"></span>
+    <div class="img-wrap">
+      <div class="skel" style="height:${h}px;border-radius:8px;"></div>
+      <img class="loading" src="${p.src}" alt="${p.alt.replace(/"/g,'&quot;')}" loading="lazy" decoding="async" onload="imgLoaded(this)" onerror="this.parentElement.parentElement.style.display='none'">
+    </div>
+    <div class="ov"><div class="ov-tag">${tag}</div><div class="ov-cap">${p.caption}</div></div>
+    <div class="expand-ico"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>`;
+  return el;
+}
+
+async function loadGalleryPhotos(){
+  try{
+    const data=await DAO_PHOTOS.load();
+    const grid=document.getElementById('grid');
+    const extVid=grid.querySelector('.g-item.vid-item[data-cat="exterior"]');
+    const mixed=DAO_PHOTOS.interleave(data.exterior,data.interior);
+    mixed.forEach((p,i)=>{
+      const item=buildGalleryItem(p,i);
+      grid.insertBefore(item,extVid);
+    });
+    observeReveals();
+    buildLbList();
+  }catch(e){
+    console.warn('Gallery photo load failed:',e);
+    const data=DAO_PHOTOS.normalize(DAO_PHOTOS.FALLBACK);
+    const grid=document.getElementById('grid');
+    const extVid=grid.querySelector('.g-item.vid-item[data-cat="exterior"]');
+    DAO_PHOTOS.interleave(data.exterior,data.interior).forEach((p,i)=>{
+      grid.insertBefore(buildGalleryItem(p,i),extVid);
+    });
+    observeReveals();
+    buildLbList();
   }
 }
-
-/* ── FILTER ── */
-let _activeFilter = 'all';
-function filter(cat, btn){
-  _activeFilter = cat;
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.g-item').forEach(item=>{
-    if(cat==='all' || item.dataset.cat===cat){
-      item.classList.remove('hidden');
-    } else {
-      item.classList.add('hidden');
-    }
-  });
-  buildLbList();
-}
-
-/* ── LIGHTBOX ── */
-let _lbItems = [];
-let _lbIdx   = 0;
-
-function buildLbList(){
-  _lbItems = [...document.querySelectorAll(`.g-item[data-src]:not(.hidden)`)];
-}
-buildLbList();
-
-function openLb(el){
-  _lbIdx = _lbItems.indexOf(el);
-  if(_lbIdx < 0){ _lbIdx = 0; }
-  showLbItem();
-  document.getElementById('lb').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-
-function showLbItem(){
-  const item = _lbItems[_lbIdx];
-  if(!item) return;
-  document.getElementById('lb-img').src = item.dataset.src || '';
-  document.getElementById('lb-cap').textContent = item.dataset.cap || '';
-  document.getElementById('lb-counter').textContent = `${_lbIdx+1} / ${_lbItems.length}`;
-}
-
-function lbNav(dir){
-  _lbIdx = (_lbIdx + dir + _lbItems.length) % _lbItems.length;
-  showLbItem();
-}
-
-function closeLb(){
-  document.getElementById('lb').classList.remove('show');
-  document.body.style.overflow='';
-}
-
-function lbBgClick(e){
-  if(e.target===document.getElementById('lb')) closeLb();
-}
-
-document.addEventListener('keydown', e=>{
-  if(!document.getElementById('lb').classList.contains('show')) return;
-  if(e.key==='ArrowLeft')  lbNav(-1);
-  if(e.key==='ArrowRight') lbNav(1);
-  if(e.key==='Escape')     closeLb();
-});
+loadGalleryPhotos();
+let _activeFilter='all';
+function filter(cat,btn){_activeFilter=cat;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.g-item').forEach(item=>{if(cat==='all'||item.dataset.cat===cat)item.classList.remove('hidden');else item.classList.add('hidden');});buildLbList();}
+let _lbItems=[],_lbIdx=0;
+function buildLbList(){_lbItems=[...document.querySelectorAll('.g-item[data-src]:not(.hidden)')];}
+function openLb(el){_lbIdx=_lbItems.indexOf(el);if(_lbIdx<0)_lbIdx=0;showLbItem();document.getElementById('lb').classList.add('show');document.body.style.overflow='hidden';}
+function showLbItem(){const item=_lbItems[_lbIdx];if(!item)return;document.getElementById('lb-img').src=item.dataset.src||'';document.getElementById('lb-cap').textContent=item.dataset.cap||'';document.getElementById('lb-counter').textContent=`${_lbIdx+1} / ${_lbItems.length}`;}
+function lbNav(dir){_lbIdx=(_lbIdx+dir+_lbItems.length)%_lbItems.length;showLbItem();}
+function closeLb(){document.getElementById('lb').classList.remove('show');document.body.style.overflow='';}
+function lbBgClick(e){if(e.target===document.getElementById('lb'))closeLb();}
+document.addEventListener('keydown',e=>{if(!document.getElementById('lb').classList.contains('show'))return;if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);if(e.key==='Escape')closeLb();});
 </script>
 </body>
 </html>

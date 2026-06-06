@@ -1,0 +1,12 @@
+{
+  "generated": "2026-06-06",
+  "interior": [
+    {"src": "./Photos/Interior/bmwinside.jpg", "file": "bmwinside.jpg", "category": "interior", "caption": "BMW, Interior Detail", "alt": "BMW interior detail, Rockville MD"}
+  ],
+  "exterior": [
+    {"src": "./Photos/Exterior/fit.jpg", "file": "fit.jpg", "category": "exterior", "caption": "Honda Fit, Exterior Detail", "alt": "Honda Fit exterior detail, Gaithersburg MD"},
+    {"src": "./Photos/Exterior/lexusrc.jpg", "file": "lexusrc.jpg", "category": "exterior", "caption": "Lexus RC, Exterior Detail", "alt": "Lexus RC exterior detail, Rockville MD"},
+    {"src": "./Photos/Exterior/trax.jpg", "file": "trax.jpg", "category": "exterior", "caption": "Chevy Trax, Exterior Detail", "alt": "Chevy Trax exterior detail, Silver Spring MD"}
+  ],
+  "count": 4
+}
