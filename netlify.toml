@@ -5,7 +5,7 @@
 
 [build.environment]
   NODE_VERSION             = "18"
-  SECRETS_SCAN_OMIT_KEYS   = "FIREBASE_PROJECT_ID"
+  SECRETS_SCAN_OMIT_KEYS   = "FIREBASE_PROJECT_ID,TELEGRAM_BOT_TOKEN,TELEGRAM_CHAT_IDS"
 
 [functions]
   node_bundler = "esbuild"
