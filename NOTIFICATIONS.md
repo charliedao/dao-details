@@ -18,9 +18,10 @@ When a customer submits the **Get a Quote** form, the site saves the inquiry to 
 
 ## Behavior
 
+- The form saves to Firebase first; the customer sees success as soon as that write completes (Telegram does not block the response).
 - If either env var is missing, Telegram is skipped silently (useful for local/dev).
 - If Firebase saves successfully but Telegram fails, the customer still sees success; errors are logged in Netlify function logs.
-- Messages are plain text with service, contact info, vehicle, preferred date, and notes.
+- Messages are from **Kyro the Dog** — each submission picks a random casual opening line (lowercase, dog emojis 🐕), then a blank line and inquiry details: service, price, name, phone, email, area, vehicle, when, notes.
 
 ## Netlify env vars (required for notifications)
 

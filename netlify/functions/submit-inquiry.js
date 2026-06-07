@@ -5,6 +5,39 @@
 const { getDb, corsHeaders, preflight, ok, err, clean } = require('./_firebase');
 const { FieldValue } = require('firebase-admin/firestore');
 
+const KYRO_OPENINGS = [
+  "What's up Dude it's me 🐕 someone hit us up for a detail.",
+  'Hey im about to go on a walk with Cam but someone hit us up for a detail. give them a call dude 🐕',
+  'I really need a bath but someone hit us up for a detail 🐕',
+  'I need more chicken chips someone hit us up for a detail 🐕',
+  'Im gonna go sleep on the couch someone hit us up for a detail 🐕',
+  'just got back from the yard someone hit us up for a detail 🐕',
+  'woof woof someone hit us up for a detail dude 🐕',
+  'i was napping on the rug but someone hit us up for a detail 🐕',
+  'cam forgot to let me out but someone hit us up for a detail 🐕',
+  'my tail wont stop wagging someone hit us up for a detail 🐕',
+];
+
+function pickKyroOpening() {
+  return KYRO_OPENINGS[Math.floor(Math.random() * KYRO_OPENINGS.length)];
+}
+
+function buildTelegramText(inquiry) {
+  const opening = pickKyroOpening();
+  const details = [
+    `service: ${inquiry.service}`,
+    `price: ${inquiry.price || '—'}`,
+    `name: ${inquiry.name}`,
+    `phone: ${inquiry.phone}`,
+    `email: ${inquiry.email || '—'}`,
+    `area: ${inquiry.area || '—'}`,
+    `vehicle: ${inquiry.vehicle}`,
+    `when: ${inquiry.prefDate || '—'}`,
+    `notes: ${inquiry.notes || '—'}`,
+  ].join('\n');
+  return `${opening}\n\n${details}`;
+}
+
 async function notifyTelegram(inquiry) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatIdsRaw = process.env.TELEGRAM_CHAT_IDS;
@@ -13,20 +46,7 @@ async function notifyTelegram(inquiry) {
   const chatIds = chatIdsRaw.split(',').map((id) => id.trim()).filter(Boolean);
   if (!chatIds.length) return;
 
-  const price = inquiry.price || '';
-  const serviceLine = price ? `${inquiry.service} (${price})` : inquiry.service;
-  const text = [
-    '🚗 New Quote Request — DAO Detailing',
-    '',
-    `Service: ${serviceLine}`,
-    `Name: ${inquiry.name}`,
-    `Phone: ${inquiry.phone}`,
-    `Email: ${inquiry.email || 'N/A'}`,
-    `Area: ${inquiry.area || '—'}`,
-    `Vehicle: ${inquiry.vehicle}`,
-    `When: ${inquiry.prefDate || '—'}`,
-    `Notes: ${inquiry.notes || '—'}`,
-  ].join('\n');
+  const text = buildTelegramText(inquiry);
 
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
@@ -80,7 +100,7 @@ exports.handler = async (event) => {
       submitted: FieldValue.serverTimestamp(),
     });
 
-    await notifyTelegram(inquiry);
+    notifyTelegram(inquiry).catch((e) => console.error('Telegram notification error:', e));
     return ok({ success: true, id: ref.id });
   } catch (e) {
     console.error('submit-inquiry error:', e);
